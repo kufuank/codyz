@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Codyz — Kod-fu'yu öğren · Online AI & kodlama okulu</title>
-<meta name="description" content="Codyz: iki yol, tek ustalık. Kâşif Yolu'nda kodlamayı sıfırdan öğren (Scratch, Roblox, Python). Kurucu Yolu'nda işini yapay zekâyla büyüt (Claude, GPT, Gemini — giriş'ten pro'ya). Su gibi ol — araçlar değişir, usta kalır." />
-<meta property="og:title" content="Codyz — Kod-fu'yu öğren" />
-<meta property="og:description" content="İki yol, tek ustalık. Kodlamayı öğren ya da işini yapay zekâyla büyüt. Beyaz kuşaktan ilk şaheserine." />
+<title>Codyz — İki okul, tek ustalık · Kodlama &amp; Yapay Zeka Okulu</title>
+<meta name="description" content="Codyz: iki okul, tek çatı. Kâşif · Kodlama Okulu'nda çocuğun sıfırdan kodlamayı öğrenir, Kod-fu ustalığına yürür. Kurucu · Yapay Zeka Okulu'nda işini kurumsal seviyede yapay zekâyla büyütürsün. Aile paketinde ikisi birden." />
+<meta property="og:title" content="Codyz — İki okul, tek ustalık" />
+<meta property="og:description" content="Kâşif · Kodlama Okulu (çocuk yaratıcılığı) ve Kurucu · Yapay Zeka Okulu (kurumsal). Su gibi ol — araçlar değişir, usta kalır." />
 <meta property="og:image" content="assets/hero-ink.webp" />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -14,9 +14,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
 /* ============================================================
-   CODYZ — Dark premium landing v2 · ürün-bazlı
-   İki yol: Kâşif (kodlama) + Kurucu (Kod-fu / AI araçları)
-   Şeffaf Higgsfield karakterleri ile gömülü, ödüllü görünüm.
+   CODYZ — Dark premium landing v3 · iki okul
+   Kâşif · Kodlama Okulu (Kod-fu ustalığı) + Kurucu · Yapay Zeka Okulu (kurumsal)
    ============================================================ */
 :root{
   --ink:#15110E;--bg:#0E0B09;--surface:#181410;--surface-2:#211B16;
@@ -30,7 +29,7 @@
   --s1:clamp(1.2rem,1.05rem + .6vw,1.45rem);
   --s2:clamp(1.5rem,1.2rem + 1.4vw,2.3rem);
   --s3:clamp(2.1rem,1.5rem + 3vw,4rem);
-  --s4:clamp(2.8rem,1.7rem + 5.4vw,6.4rem);
+  --s4:clamp(2.6rem,1.6rem + 4.8vw,5.6rem);
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -88,38 +87,51 @@ section{position:relative}
     background:var(--surface);padding:1.2rem var(--gut);gap:1.1rem;border-bottom:1px solid var(--line)}
 }
 
-/* Floating karakter */
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
 .floatimg{filter:drop-shadow(0 30px 50px rgba(0,0,0,.6));animation:float 7s ease-in-out infinite}
 @media (prefers-reduced-motion:reduce){.floatimg{animation:none}}
-.glowwrap{position:relative}
-.glowwrap::before{content:"";position:absolute;inset:8% 8% 4% 8%;z-index:0;border-radius:50%;
-  background:radial-gradient(circle,rgba(124,107,255,.34),rgba(255,106,61,.14) 45%,transparent 70%);filter:blur(22px)}
-.glowwrap img{position:relative;z-index:1}
 
 /* Hero */
-.hero{position:relative;overflow:hidden;padding:clamp(40px,7vh,84px) 0 clamp(48px,8vh,96px)}
+.hero{position:relative;overflow:hidden;padding:clamp(38px,6vh,78px) 0 clamp(46px,8vh,92px)}
 .hero__bg{position:absolute;inset:0;z-index:0}
-.hero__bg img{width:100%;height:100%;object-fit:cover;opacity:.42}
+.hero__bg img{width:100%;height:100%;object-fit:cover;opacity:.4}
 .hero__bg::after{content:"";position:absolute;inset:0;
   background:linear-gradient(180deg,rgba(14,11,9,.55),rgba(14,11,9,.82) 70%,var(--bg)),
     radial-gradient(900px 500px at 18% 40%,transparent,rgba(14,11,9,.5))}
-.hero__in{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(20px,4vw,48px);align-items:center}
-@media(max-width:900px){.hero__in{grid-template-columns:1fr}.hero .hero__art{display:none}}
+.hero__in{position:relative;z-index:2;display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,52px);align-items:center}
+@media(max-width:920px){.hero__in{grid-template-columns:1fr}}
 .hero h1{font-size:var(--s4);font-weight:800;margin:1.1rem 0 0}
 .hero h1 em{font-style:normal;color:var(--coral)}
-.hero__sub{margin-top:1.3rem;font-size:var(--s1);color:var(--tx-2);max-width:42ch;line-height:1.5}
-.hero__cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
-.hero__meta{margin-top:2.4rem;display:flex;gap:2rem;flex-wrap:wrap}
-.hero__meta div b{font-family:'Sora';font-weight:800;font-size:1.5rem;display:block;line-height:1}
+.hero__sub{margin-top:1.3rem;font-size:var(--s1);color:var(--tx-2);max-width:44ch;line-height:1.5}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1.9rem}
+.hero__meta{margin-top:2.2rem;display:flex;gap:2rem;flex-wrap:wrap}
+.hero__meta div b{font-family:'Sora';font-weight:800;font-size:1.4rem;display:block;line-height:1}
 .hero__meta div span{font-size:var(--s-1);color:var(--tx-3)}
-.hero__art{position:relative;display:grid;place-items:center}
-.hero__art img{width:min(100%,420px)}
+
+/* Hero okul kartları (paket pazarlama) */
+.hero__schools{display:flex;flex-direction:column;gap:14px}
+.scard{position:relative;overflow:hidden;display:flex;gap:16px;align-items:center;padding:18px 20px;border-radius:20px;
+  border:1px solid var(--line);background:rgba(24,20,16,.7);backdrop-filter:blur(6px);
+  transition:transform .3s var(--ease),box-shadow .3s,border-color .3s}
+.scard:hover{transform:translateY(-3px);box-shadow:0 24px 50px -28px rgba(0,0,0,.8)}
+.scard__fox{width:78px;height:78px;flex:none;object-fit:contain;filter:drop-shadow(0 8px 14px rgba(0,0,0,.5))}
+.scard__body{min-width:0;flex:1}
+.scard__tag{font-family:'Sora';font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase}
+.scard__name{font-family:'Sora';font-weight:700;font-size:1.12rem;margin:.15rem 0 .25rem}
+.scard__one{color:var(--tx-2);font-size:.86rem;line-height:1.4}
+.scard__chip{display:inline-flex;align-items:center;gap:.4em;margin-top:.6rem;font-family:'Sora';font-weight:600;font-size:.7rem;
+  padding:.25em .7em;border-radius:99px;border:1px solid var(--line-2);color:var(--tx-2)}
+.scard__go{position:absolute;top:18px;right:18px;color:var(--tx-3);transition:transform .25s var(--ease),color .25s}
+.scard:hover .scard__go{transform:translateX(3px)}
+.scard--kodlama{border-color:rgba(255,106,61,.32);background:linear-gradient(120deg,rgba(255,106,61,.13),rgba(24,20,16,.7) 55%)}
+.scard--kodlama .scard__tag{color:var(--coral)}.scard--kodlama:hover .scard__go{color:var(--coral)}
+.scard--ai{border-color:rgba(124,107,255,.34);background:linear-gradient(120deg,rgba(124,107,255,.15),rgba(24,20,16,.7) 55%)}
+.scard--ai .scard__tag{color:var(--violet)}.scard--ai:hover .scard__go{color:var(--violet)}
 
 /* Band */
 .band{padding:clamp(52px,9vh,110px) 0}
 .band--surface{background:var(--surface)}
-.sec-head{max-width:60ch}
+.sec-head{max-width:62ch}
 .sec-head h2{font-size:var(--s3);margin:.7rem 0 0}
 .sec-head .lede{margin-top:1.1rem}
 
@@ -128,45 +140,43 @@ section{position:relative}
 @media(max-width:840px){.water{grid-template-columns:1fr;gap:28px}}
 .water h2{font-size:var(--s3)}.water h2 em{font-style:normal;color:var(--violet)}
 
-/* İki Yol */
+/* İki okul (detay) */
 .paths{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2vw,24px)}
 @media(max-width:820px){.paths{grid-template-columns:1fr}}
 .path{position:relative;overflow:hidden;border-radius:var(--r-lg);padding:clamp(26px,3vw,38px);
-  border:1px solid var(--line);min-height:430px;display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
+  border:1px solid var(--line);min-height:440px;display:flex;flex-direction:column;transition:transform .35s var(--ease),box-shadow .35s,border-color .35s}
 .path:hover{transform:translateY(-5px);box-shadow:0 36px 80px -40px rgba(0,0,0,.8)}
-.path__fox{position:absolute;right:-6%;bottom:-4%;width:54%;max-width:280px;z-index:0;opacity:.96;
-  filter:drop-shadow(0 20px 36px rgba(0,0,0,.5));pointer-events:none}
+.path__fox{position:absolute;right:-6%;bottom:-4%;width:52%;max-width:270px;z-index:0;opacity:.96;filter:drop-shadow(0 20px 36px rgba(0,0,0,.5));pointer-events:none}
 .path > *{position:relative;z-index:1}
-.path__tag{font-family:'Sora';font-weight:600;font-size:var(--s-1);letter-spacing:.14em;text-transform:uppercase}
+.path__tag{font-family:'Sora';font-weight:700;font-size:var(--s-1);letter-spacing:.12em;text-transform:uppercase}
 .path h3{font-size:var(--s2);margin:.5rem 0 .2rem}
 .path__one{font-family:'Sora';font-weight:600;color:var(--tx-2);font-size:1.02rem}
-.path__list{list-style:none;padding:0;margin:1.3rem 0 0;display:flex;flex-direction:column;gap:.6rem;max-width:60%}
+.path__list{list-style:none;padding:0;margin:1.3rem 0 0;display:flex;flex-direction:column;gap:.6rem;max-width:62%}
 .path__list li{display:flex;align-items:center;gap:.6rem;font-size:.92rem;color:var(--tx-2)}
 .path__list li svg{flex:none;color:currentColor}
-.path__link{margin-top:auto;padding-top:1.5rem;font-family:'Sora';font-weight:700;display:inline-flex;align-items:center;gap:.5em}
+.path__badge{display:inline-flex;align-items:center;gap:.4em;margin-top:1.2rem;font-family:'Sora';font-weight:700;font-size:.74rem;padding:.35em .8em;border-radius:99px}
+.path__link{margin-top:auto;padding-top:1.4rem;font-family:'Sora';font-weight:700;display:inline-flex;align-items:center;gap:.5em}
 .path--kasif{background:linear-gradient(160deg,rgba(255,106,61,.16),var(--surface) 60%);border-color:rgba(255,106,61,.3)}
 .path--kasif .path__tag,.path--kasif .path__link,.path--kasif .path__list li svg{color:var(--coral)}
+.path--kasif .path__badge{background:rgba(255,106,61,.16);color:var(--coral)}
 .path--kurucu{background:linear-gradient(160deg,rgba(124,107,255,.18),var(--surface) 60%);border-color:rgba(124,107,255,.32)}
 .path--kurucu .path__tag,.path--kurucu .path__link,.path--kurucu .path__list li svg{color:var(--violet)}
+.path--kurucu .path__badge{background:rgba(124,107,255,.18);color:var(--violet)}
 
-/* Kurslar / katalog */
-.tabs{display:inline-flex;gap:4px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:5px;margin-top:2rem}
-.tabs button{border:none;background:none;color:var(--tx-2);font-family:'Sora';font-weight:600;font-size:.92rem;
-  padding:.6em 1.3em;border-radius:999px;cursor:pointer;transition:background .25s,color .25s;display:inline-flex;align-items:center;gap:.5em}
+/* Kurslar */
+.tabs{display:inline-flex;gap:4px;background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:5px;margin-top:2rem;flex-wrap:wrap}
+.tabs button{border:none;background:none;color:var(--tx-2);font-family:'Sora';font-weight:600;font-size:.92rem;padding:.6em 1.3em;border-radius:999px;cursor:pointer;transition:background .25s,color .25s;display:inline-flex;align-items:center;gap:.5em}
 .tabs button .dot{width:8px;height:8px;border-radius:50%}
 .tabs button[data-on="kasif"] .dot{background:var(--coral)}
 .tabs button[data-on="kurucu"] .dot{background:var(--violet)}
 .tabs button.active{background:var(--bg);color:var(--tx)}
-.catalog{margin-top:2.2rem}
-.catalog[hidden]{display:none}
+.catalog{margin-top:2.2rem}.catalog[hidden]{display:none}
 .courses{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,1.6vw,20px)}
 @media(max-width:900px){.courses{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.courses{grid-template-columns:1fr}}
-.course{position:relative;padding:1.5rem 1.4rem;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--line);
-  transition:transform .3s var(--ease),border-color .3s;display:flex;flex-direction:column;gap:.5rem}
+.course{position:relative;padding:1.5rem 1.4rem;border-radius:var(--r);background:var(--surface-2);border:1px solid var(--line);transition:transform .3s var(--ease),border-color .3s;display:flex;flex-direction:column;gap:.5rem}
 .band--surface .course{background:var(--bg)}
 .course:hover{transform:translateY(-3px);border-color:var(--line-2)}
-.course__top{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
 .course__ico{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:rgba(255,106,61,.12);color:var(--coral);flex:none}
 .kurucu .course__ico{background:rgba(124,107,255,.14);color:var(--violet)}
 .course h4{font-family:'Sora';font-weight:600;font-size:1.04rem}
@@ -176,9 +186,10 @@ section{position:relative}
 .lvl--age{color:var(--coral);border-color:rgba(255,106,61,.4)}
 .lvl--giris{color:var(--violet);border-color:rgba(124,107,255,.42)}
 .lvl--pro{color:var(--gold);border-color:rgba(242,169,59,.42)}
+.lvl--kodfu{color:var(--gold);border-color:rgba(242,169,59,.5);background:rgba(242,169,59,.08)}
 .catalog__note{margin-top:1.6rem;color:var(--tx-3);font-size:.86rem}
 
-/* Steps */
+/* Steps + cards */
 .cards{display:grid;gap:clamp(16px,2vw,22px)}
 .c4{grid-template-columns:repeat(4,1fr)}.c3{grid-template-columns:repeat(3,1fr)}
 @media(max-width:920px){.c4{grid-template-columns:1fr 1fr}}
@@ -224,7 +235,9 @@ section{position:relative}
 .plan{display:flex;flex-direction:column;border-radius:var(--r-lg);padding:clamp(26px,2.8vw,34px);background:var(--surface);border:1px solid var(--line);transition:transform .3s var(--ease),box-shadow .3s}
 .band--surface .plan{background:var(--bg)}
 .plan:hover{transform:translateY(-4px);box-shadow:0 28px 64px -36px rgba(0,0,0,.7)}
-.plan__name{font-family:'Sora';font-weight:700;font-size:var(--s1)}
+.plan__tag{font-family:'Sora';font-weight:700;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3)}
+.plan--kodlama .plan__tag{color:var(--coral)}.plan--ai .plan__tag{color:var(--violet)}
+.plan__name{font-family:'Sora';font-weight:700;font-size:var(--s1);margin-top:.2rem}
 .plan__desc{color:var(--tx-2);margin-top:.7rem;font-size:.96rem;line-height:1.55;flex:1}
 .plan__note{margin-top:1.3rem;font-size:.8rem;color:var(--tx-3)}
 .plan .btn{margin-top:1.3rem;justify-content:center}
@@ -250,9 +263,11 @@ section{position:relative}
 .faq__a p{padding:0 0 1.4rem;color:var(--tx-2);max-width:62ch}
 
 /* Final */
-.final{text-align:center;position:relative;overflow:hidden;border-radius:var(--r-lg);padding:clamp(44px,7vw,90px) var(--gut);background:var(--ink);border:1px solid var(--line)}
+.final{text-align:center;position:relative;overflow:hidden;border-radius:var(--r-lg);padding:clamp(44px,7vw,86px) var(--gut);background:var(--ink);border:1px solid var(--line)}
 .final__bg{position:absolute;inset:0;z-index:0;opacity:.4}
 .final__bg img{width:100%;height:100%;object-fit:cover}
+.final__fox{position:absolute;right:4%;bottom:0;width:min(34%,260px);z-index:1;opacity:.9;filter:drop-shadow(0 20px 36px rgba(0,0,0,.6))}
+@media(max-width:720px){.final__fox{display:none}}
 .final > *{position:relative;z-index:2}
 .final h2{font-size:var(--s4);font-weight:800}
 .final .btn{margin-top:1.8rem}
@@ -284,7 +299,7 @@ section{position:relative}
   <div class="wrap nav__in">
     <a href="#top" class="mark" aria-label="Codyz">Cody<span class="z">z</span></a>
     <nav class="nav__links" id="navlinks" aria-label="Ana menü">
-      <a href="#yollar">İki yol</a>
+      <a href="#okullar">İki okul</a>
       <a href="#kurslar">Kurslar</a>
       <a href="#kusak">Kuşak yolu</a>
       <a href="#paketler">Paketler</a>
@@ -303,21 +318,40 @@ section{position:relative}
   <div class="hero__bg" aria-hidden="true"><img src="assets/hero-ink.webp" alt="" /></div>
   <div class="wrap hero__in">
     <div>
-      <span class="eyebrow">Online AI &amp; kodlama okulu</span>
-      <h1>Kod-fu'yu<br><em>öğren.</em></h1>
-      <p class="hero__sub">İki yol, tek ustalık: kodlamayı sıfırdan öğren ya da işini yapay zekâyla büyüt. İzleyerek değil, gerçek projeler üreterek. 8 yaşından itibaren, ailecek.</p>
+      <span class="eyebrow">Online kodlama &amp; yapay zeka okulu</span>
+      <h1>İki okul,<br><em>tek ustalık.</em></h1>
+      <p class="hero__sub">Çocuğun kodlamayı öğrenip yaratıcılığını kuşansın; sen işini yapay zekâyla kurumsal seviyede büyüt. Tek çatı, iki okul — bir de ikisini birleştiren aile paketi.</p>
       <div class="hero__cta">
         <a href="app/index.html" class="btn">Ücretsiz tanışma dersi al <span class="ar" aria-hidden="true">→</span></a>
-        <a href="#yollar" class="btn btn--ghost">İki yolu keşfet</a>
+        <a href="#paketler" class="btn btn--ghost">Paketleri gör</a>
       </div>
       <div class="hero__meta">
-        <div><b>2 yol</b><span>kodlama &amp; AI</span></div>
-        <div><b>4 kuşak</b><span>beyazdan ustalığa</span></div>
+        <div><b>2 okul</b><span>kodlama &amp; AI</span></div>
+        <div><b>Giriş→Pro</b><span>kuşak kuşak</span></div>
         <div><b>Canlı</b><span>küçük grup · online</span></div>
       </div>
     </div>
-    <div class="hero__art glowwrap" aria-hidden="true">
-      <img class="floatimg" src="assets/fox-master.png" alt="" />
+    <div class="hero__schools">
+      <a href="#kodlama" class="scard scard--kodlama rv">
+        <img class="scard__fox" src="assets/fox-kasif.png" alt="" aria-hidden="true" />
+        <div class="scard__body">
+          <span class="scard__tag">Kâşif · Kodlama Okulu</span>
+          <div class="scard__name">Kodlama eğitim paketleri</div>
+          <p class="scard__one">Çocuk yaratıcılığı · sıfırdan kodlama, Scratch'ten Python'a.</p>
+          <span class="scard__chip">Ustalık derecesi: Kod-fu</span>
+        </div>
+        <span class="scard__go" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
+      <a href="#yapayzeka" class="scard scard--ai rv">
+        <img class="scard__fox" src="assets/fox-kurucu.png" alt="" aria-hidden="true" />
+        <div class="scard__body">
+          <span class="scard__tag">Kurucu · Yapay Zeka Okulu</span>
+          <div class="scard__name">Yapay zeka eğitim paketleri</div>
+          <p class="scard__one">Kurumsal · işini ve ekibini AI araçlarıyla büyüt.</p>
+          <span class="scard__chip">Giriş'ten Pro'ya</span>
+        </div>
+        <span class="scard__go" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      </a>
     </div>
   </div>
 </section>
@@ -333,38 +367,40 @@ section{position:relative}
   </div>
 </section>
 
-<!-- İKİ YOL -->
-<section class="band band--surface" id="yollar">
+<!-- İKİ OKUL (detay) -->
+<section class="band band--surface" id="okullar">
   <div class="wrap">
     <div class="sec-head rv">
-      <span class="eyebrow">İki yol</span>
-      <h2>Hangi ustalığı kuşanacaksın?</h2>
-      <p class="lede">Tek okul, iki yol. Birinde kodlamayı sıfırdan öğrenir üretirsin; diğerinde yapay zekâyı işine gömersin. İkisi de aynı kuşak ritmini paylaşır.</p>
+      <span class="eyebrow">İki okul</span>
+      <h2>Tek çatı, iki okul.</h2>
+      <p class="lede">Biri çocuğun yaratıcılığını kodla büyütür; diğeri işini kurumsal seviyede yapay zekâya taşır. İkisi de aynı kuşak ritmini ve şaheser disiplinini paylaşır.</p>
     </div>
     <div class="paths" style="margin-top:3rem">
-      <article class="path path--kasif rv">
+      <article class="path path--kasif rv" id="kodlama">
         <img class="path__fox" src="assets/fox-kasif.png" alt="" aria-hidden="true" />
-        <span class="path__tag">Kâşif Yolu · kodlama öğren</span>
+        <span class="path__tag">Kâşif · Kodlama Okulu</span>
         <h3>Keşfet, üret,<br>kendi şeyini kur.</h3>
-        <p class="path__one">Sıfırdan kodlama: ilk oyunundan ilk uygulamana.</p>
+        <p class="path__one">Çocuk yaratıcılığı: ilk oyunundan ilk uygulamana, sıfırdan kodlama.</p>
         <ul class="path__list">
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg> Scratch &amp; Roblox ile oyun</li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg> Python ile gerçek programlama</li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg> Web &amp; ilk AI projeleri</li>
         </ul>
-        <a href="#kurslar" class="path__link">Kâşif Yolu kurslarını gör <span aria-hidden="true">→</span></a>
+        <span class="path__badge">★ Ustalık derecesi: Kod-fu</span>
+        <a href="#kurslar" class="path__link">Kodlama kurslarını gör <span aria-hidden="true">→</span></a>
       </article>
-      <article class="path path--kurucu rv">
+      <article class="path path--kurucu rv" id="yapayzeka">
         <img class="path__fox" src="assets/fox-kurucu.png" alt="" aria-hidden="true" />
-        <span class="path__tag">Kurucu Yolu · işini geliştir</span>
+        <span class="path__tag">Kurucu · Yapay Zeka Okulu</span>
         <h3>Yapay zekâyı<br>işine göm.</h3>
-        <p class="path__one">Kod-fu: AI araçlarında giriş'ten pro'ya ustalık.</p>
+        <p class="path__one">Kurumsal: kendini, işini ve ekibini AI araçlarıyla büyüt.</p>
         <ul class="path__list">
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg> Claude · GPT · Gemini</li>
           <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg> Prompt mühendisliği &amp; ajanlar</li>
-          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg> İşine dokunan gerçek çıktı</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 13l4 4L19 7"/></svg> İşine dokunan kurumsal çıktı</li>
         </ul>
-        <a href="#kurslar" class="path__link">Kurucu Yolu kurslarını gör <span aria-hidden="true">→</span></a>
+        <span class="path__badge">⬢ Kurumsal · Giriş→Pro</span>
+        <a href="#kurslar" class="path__link">Yapay zeka kurslarını gör <span aria-hidden="true">→</span></a>
       </article>
     </div>
   </div>
@@ -375,41 +411,41 @@ section{position:relative}
   <div class="wrap">
     <div class="sec-head rv">
       <span class="eyebrow">Kurslar</span>
-      <h2>Pazarlanan ustalıklar.</h2>
-      <p class="lede">Her kurs kohort temelli, canlı ve önce-proje. Yolunu seç, kataloğa göz at.</p>
+      <h2>Pazarladığımız eğitim paketleri.</h2>
+      <p class="lede">Her kurs kohort temelli, canlı ve önce-proje. Okulunu seç, kataloğa göz at.</p>
     </div>
 
-    <div class="tabs rv" role="tablist" aria-label="Kurs yolu seçimi">
-      <button class="active" data-on="kasif" role="tab" aria-selected="true"><span class="dot"></span>Kâşif Yolu · Kodlama</button>
-      <button data-on="kurucu" role="tab" aria-selected="false"><span class="dot"></span>Kurucu Yolu · Kod-fu</button>
+    <div class="tabs rv" role="tablist" aria-label="Okul seçimi">
+      <button class="active" data-on="kasif" role="tab" aria-selected="true"><span class="dot"></span>Kâşif · Kodlama Okulu</button>
+      <button data-on="kurucu" role="tab" aria-selected="false"><span class="dot"></span>Kurucu · Yapay Zeka Okulu</button>
     </div>
 
-    <!-- KÂŞİF: KODLAMA (Kodland tabanlı) -->
+    <!-- KODLAMA OKULU (Kodland tabanlı) -->
     <div class="catalog kasif" id="cat-kasif">
       <div class="courses">
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div></div><h4>FunTech Kâşif</h4><p>İlk dijital adımlar: blok kodlama, animasyon, oyun ve yaratıcılık.</p><div class="course__meta"><span class="lvl lvl--age">5–7 yaş</span><span class="lvl">Blok kodlama</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a5 5 0 0 0-7.4 6.7l-2.6 2.6a2 2 0 1 0 2.7 2.7l2.6-2.6a5 5 0 0 0 6.7-7.4"/></svg></div></div><h4>Scratch ile Oyun</h4><p>Sürükle-bırak bloklarla kendi oyununu ve hikâyeni kur.</p><div class="course__meta"><span class="lvl lvl--age">8–10 yaş</span><span class="lvl">Scratch</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg></div></div><h4>Roblox &amp; Lua</h4><p>Roblox Studio'da Lua ile gerçek oyunlar tasarla ve yayınla.</p><div class="course__meta"><span class="lvl lvl--age">8–14 yaş</span><span class="lvl">Lua · oyun</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2M16 3h2a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2"/></svg></div></div><h4>Python</h4><p>Gerçek metin tabanlı programlama: temel kavramlar ve mantık.</p><div class="course__meta"><span class="lvl lvl--age">13+ yaş</span><span class="lvl">Python</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div></div><h4>Python PRO</h4><p>Web geliştirme ve yapay zekâ/ML'ye giriş — projeyle pekiştir.</p><div class="course__meta"><span class="lvl lvl--age">13+ yaş</span><span class="lvl lvl--pro">PRO · web + AI</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg></div></div><h4>Web Geliştirme</h4><p>HTML, CSS ve JavaScript ile kendi web sitelerini yayına al.</p><div class="course__meta"><span class="lvl lvl--age">14+ yaş</span><span class="lvl">HTML · CSS · JS</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><h4>FunTech Kâşif</h4><p>İlk dijital adımlar: blok kodlama, animasyon, oyun ve yaratıcılık.</p><div class="course__meta"><span class="lvl lvl--age">5–7 yaş</span><span class="lvl">Blok kodlama</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a5 5 0 0 0-7.4 6.7l-2.6 2.6a2 2 0 1 0 2.7 2.7l2.6-2.6a5 5 0 0 0 6.7-7.4"/></svg></div><h4>Scratch ile Oyun</h4><p>Sürükle-bırak bloklarla kendi oyununu ve hikâyeni kur.</p><div class="course__meta"><span class="lvl lvl--age">8–10 yaş</span><span class="lvl">Scratch</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg></div><h4>Roblox &amp; Lua</h4><p>Roblox Studio'da Lua ile gerçek oyunlar tasarla ve yayınla.</p><div class="course__meta"><span class="lvl lvl--age">8–14 yaş</span><span class="lvl">Lua · oyun</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2M16 3h2a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2"/></svg></div><h4>Python</h4><p>Gerçek metin tabanlı programlama: temel kavramlar ve mantık.</p><div class="course__meta"><span class="lvl lvl--age">13+ yaş</span><span class="lvl">Python</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div><h4>Python PRO</h4><p>Web geliştirme ve yapay zekâ/ML'ye giriş — projeyle pekiştir.</p><div class="course__meta"><span class="lvl lvl--age">13+ yaş</span><span class="lvl lvl--pro">PRO · web + AI</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg></div><h4>Web Geliştirme</h4><p>HTML, CSS ve JavaScript ile kendi web sitelerini yayına al.</p><div class="course__meta"><span class="lvl lvl--age">14+ yaş</span><span class="lvl">HTML · CSS · JS</span></div></article>
       </div>
-      <p class="catalog__note">Müfredat mimarisi Kodland kurslarından ilham alır; içerik Codyz tarafından kohort ve şaheser için yeniden yazılır.</p>
+      <p class="catalog__note">Beyaz kuşaktan <strong style="color:var(--gold)">Kod-fu ustalığına</strong> giden yol. Müfredat mimarisi Kodland kurslarından ilham alır; içerik Codyz tarafından kohort ve şaheser için yeniden yazılır.</p>
     </div>
 
-    <!-- KURUCU: KOD-FU / AI ARAÇLARI -->
+    <!-- YAPAY ZEKA OKULU -->
     <div class="catalog kurucu" id="cat-kurucu" hidden>
       <div class="courses">
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div></div><h4>Claude</h4><p>Uzun düşünme, yazma, analiz ve kodlamada güvenli AI ortağın.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 13a4 4 0 0 0 8 0"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/></svg></div></div><h4>ChatGPT</h4><p>Günlük işlerden ileri otomasyona GPT'yi ustaca kullan.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg></div></div><h4>Gemini</h4><p>Google ekosistemiyle çok-modlu üretim ve araştırma.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg></div></div><h4>Genspark</h4><p>Yapay zekâ destekli arama ve ajanlarla hızlı sentez.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 4h13l3 3v13H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div></div><h4>NotebookLM</h4><p>Kendi belgelerinden kaynaklı, güvenilir araştırma asistanı.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg></div></div><h4>Prompt Mühendisliği</h4><p>AI'dan en iyiyi almanın dili: yapı, bağlam, zincirleme.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="10" r="1.4" fill="currentColor"/><circle cx="15" cy="10" r="1.4" fill="currentColor"/><path d="M8 15h8" stroke-linecap="round"/></svg></div></div><h4>AI Ajanları &amp; Otomasyon</h4><p>İşini kendi kendine yürüten ajanlar ve uçtan uca akışlar.</p><div class="course__meta"><span class="lvl lvl--pro">Pro</span></div></article>
-        <article class="course rv"><div class="course__top"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></div></div><h4>Görsel &amp; Video Üretimi</h4><p>Higgsfield, Midjourney, Veo ile marka ve içerik üretimi.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h4>Claude</h4><p>Uzun düşünme, yazma, analiz ve kodlamada güvenli AI ortağın.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 13a4 4 0 0 0 8 0"/><circle cx="9" cy="9" r="1" fill="currentColor"/><circle cx="15" cy="9" r="1" fill="currentColor"/></svg></div><h4>ChatGPT</h4><p>Günlük işlerden ileri otomasyona GPT'yi ustaca kullan.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5z"/></svg></div><h4>Gemini</h4><p>Google ekosistemiyle çok-modlu üretim ve araştırma.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg></div><h4>Genspark</h4><p>Yapay zekâ destekli arama ve ajanlarla hızlı sentez.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 4h13l3 3v13H4z"/><path d="M8 9h8M8 13h8M8 17h5"/></svg></div><h4>NotebookLM</h4><p>Kendi belgelerinden kaynaklı, güvenilir araştırma asistanı.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 17l6-6-6-6M12 19h8"/></svg></div><h4>Prompt Mühendisliği</h4><p>AI'dan en iyiyi almanın dili: yapı, bağlam, zincirleme.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="9" cy="10" r="1.4" fill="currentColor"/><circle cx="15" cy="10" r="1.4" fill="currentColor"/><path d="M8 15h8" stroke-linecap="round"/></svg></div><h4>AI Ajanları &amp; Otomasyon</h4><p>İşini kendi kendine yürüten ajanlar ve uçtan uca akışlar.</p><div class="course__meta"><span class="lvl lvl--pro">Pro</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9l5 3-5 3z" fill="currentColor" stroke="none"/></svg></div><h4>Görsel &amp; Video Üretimi</h4><p>Higgsfield, Midjourney, Veo ile marka ve içerik üretimi.</p><div class="course__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span></div></article>
       </div>
-      <p class="catalog__note">Sektöre özel popüler araçlar dönemsel olarak eklenir — araç değişse de yöntem kalır.</p>
+      <p class="catalog__note">Kurumsal odaklı, sektöre özel popüler araçlar dönemsel eklenir — araç değişse de yöntem kalır.</p>
     </div>
   </div>
 </section>
@@ -431,12 +467,12 @@ section{position:relative}
 <!-- KUŞAK YOLU -->
 <section class="band" id="kusak">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">Kuşak yolu</span><h2>Beyaz kuşaktan ustalığa.</h2><p class="lede">İki yol da aynı kuşakları paylaşır. Beyazdan başlar, mürekkebe iner.</p></div>
+    <div class="sec-head rv"><span class="eyebrow">Kuşak yolu</span><h2>Beyaz kuşaktan ustalığa.</h2><p class="lede">İki okul da aynı kuşakları paylaşır. Beyazdan başlar, mürekkebe iner; Kodlama Okulu'nda zirve Kod-fu ustalığıdır.</p></div>
     <div class="cards c4" style="margin-top:3rem">
       <article class="belt rv"><div class="belt__band" style="background:#E8E2D2"></div><div><span class="belt__k">Kuşak 1</span><span class="belt__stage">İlk temas</span></div><p>İlk küçük şeyini kur; aracı ve mantığı tanı.</p></article>
       <article class="belt rv"><div class="belt__band" style="background:var(--coral)"></div><div><span class="belt__k">Kuşak 2</span><span class="belt__stage">Temel</span></div><p>Gerçek bir şey kur: oyun, mini app ya da ilk agent.</p></article>
       <article class="belt rv"><div class="belt__band" style="background:var(--violet)"></div><div><span class="belt__k">Kuşak 3</span><span class="belt__stage">Derinleşme</span></div><p>İşine ya da oyununa kodu ve AI'ı göm.</p></article>
-      <article class="belt belt--4 rv"><div class="belt__band" style="background:var(--gold)"></div><div><span class="belt__k">Kuşak 4</span><span class="belt__stage">Ustalık</span></div><p>Kendi yolunu çiz, üret, başkasına öğret.</p></article>
+      <article class="belt belt--4 rv"><div class="belt__band" style="background:var(--gold)"></div><div><span class="belt__k">Kuşak 4</span><span class="belt__stage">Ustalık · Kod-fu</span></div><p>Kendi yolunu çiz, üret, başkasına öğret.</p></article>
     </div>
     <p class="rv" style="margin-top:2rem;color:var(--tx-3)">Her kuşağı şaheserinle —aile ve topluluk önünde sunduğun gerçek bir projeyle— atlarsın.</p>
   </div>
@@ -448,7 +484,7 @@ section{position:relative}
     <div class="rv">
       <span class="eyebrow">Şaheser günü</span>
       <h2 style="margin-top:.7rem">Ustalık izlemekle değil,<br>yapmakla gelir.</h2>
-      <p class="lede" style="margin-top:1.2rem">Her dönem mezuniyet bir gösteridir. Kâşifler projelerini ailelerinin önünde sunar; Kurucular o dönemin tüm öğrencilerinin katıldığı online etkinlikte şaheserlerini paylaşır. Sertifikanı alırsın, ama asıl ödülün elindeki gerçek iştir.</p>
+      <p class="lede" style="margin-top:1.2rem">Her dönem mezuniyet bir gösteridir. Kodlama Okulu öğrencileri projelerini ailelerinin önünde sunar; Yapay Zeka Okulu'ndakiler o dönemin tüm öğrencilerinin katıldığı online etkinlikte şaheserlerini paylaşır. Sertifikanı alırsın, ama asıl ödülün elindeki gerçek iştir.</p>
     </div>
     <div class="master__art rv"><img src="assets/masterpiece-burst.webp" alt="Şaheser mürekkep patlaması" /><div class="cap"><small>Demo-day · canlı</small>Sahne senin.</div></div>
   </div>
@@ -470,24 +506,27 @@ section{position:relative}
 <!-- PAKETLER -->
 <section class="band band--surface" id="paketler">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">Paketler</span><h2>Yolunu seç.</h2></div>
+    <div class="sec-head rv"><span class="eyebrow">Paketler</span><h2>Okulunu seç.</h2></div>
     <div class="cards c3" style="margin-top:3rem">
-      <article class="plan rv">
-        <div class="plan__name">Kâşif Paketi</div>
-        <p class="plan__desc">Kodlama yolu · dönemlik · küçük grup · kuşak ilerlemesi. Scratch'ten Python'a, ilk oyununu ve app'ini kur.</p>
+      <article class="plan plan--kodlama rv">
+        <span class="plan__tag">Kâşif · Kodlama Okulu</span>
+        <div class="plan__name">Kodlama Paketi</div>
+        <p class="plan__desc">Çocuk yaratıcılığı · dönemlik · küçük grup · kuşak ilerlemesi. Scratch'ten Python'a, Kod-fu ustalığına giden yol.</p>
         <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
         <a href="app/index.html" class="btn btn--ghost">Tanışma dersi al</a>
       </article>
-      <article class="plan rv">
-        <div class="plan__name">Kurucu Paketi</div>
-        <p class="plan__desc">Kod-fu yolu · AI araçlarında giriş→pro. Claude, GPT, Gemini ve ajanlarla işine dokunan çıktı.</p>
+      <article class="plan plan--ai rv">
+        <span class="plan__tag">Kurucu · Yapay Zeka Okulu</span>
+        <div class="plan__name">Yapay Zeka Paketi</div>
+        <p class="plan__desc">Kurumsal · giriş→pro. Claude, GPT, Gemini ve ajanlarla işine ve ekibine dokunan gerçek çıktı.</p>
         <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
         <a href="app/index.html" class="btn btn--ghost">Tanışma dersi al</a>
       </article>
       <article class="plan plan--feat rv">
-        <span class="plan__badge">En popüler</span>
-        <div class="plan__name">Aile Paketi</div>
-        <p class="plan__desc">Kâşif + Kurucu birlikte · avantajlı paket. Çocuk kodlamayı öğrenirken ebeveyn işini AI'la büyütür.</p>
+        <span class="plan__badge">İki okul bir arada</span>
+        <span class="plan__tag" style="color:var(--gold)">Aile Paketi</span>
+        <div class="plan__name">Hem kurumsal, hem çocuk yaratıcılığı</div>
+        <p class="plan__desc">Çocuk Kodlama Okulu'nda yaratıcılığını kuşanırken, ebeveyn Yapay Zeka Okulu'nda işini kurumsal seviyede büyütür. Avantajlı, ailecek.</p>
         <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
         <a href="app/index.html" class="btn btn--gold">Aile paketini gör</a>
       </article>
@@ -513,11 +552,11 @@ section{position:relative}
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">SSS</span><h2>Merak edilenler.</h2></div>
     <div class="faq" style="margin-top:2.4rem">
-      <div class="faq__item"><button class="faq__q" aria-expanded="false">Hangi yolu seçmeliyim?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Kodlamayı öğrenmek istiyorsan Kâşif Yolu; işini ya da kendini yapay zekâyla geliştirmek istiyorsan Kurucu Yolu. Emin değilsen tanışma dersinde birlikte karar veririz.</p></div></div>
-      <div class="faq__item"><button class="faq__q" aria-expanded="false">AI araçları eğitiminde ne öğreniyorum?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Claude, ChatGPT, Gemini, Genspark, NotebookLM gibi popüler araçları giriş ve pro seviyesinde; ayrıca prompt mühendisliği, AI ajanları ve sektöre özel araçları. Araç değişse de yöntem kalır.</p></div></div>
-      <div class="faq__item"><button class="faq__q" aria-expanded="false">Hiç bilgisi olmayan biri başlayabilir mi?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Evet, beyaz kuşak tam da bunun için. Her iki yol da sıfırdan başlar.</p></div></div>
-      <div class="faq__item"><button class="faq__q" aria-expanded="false">Yaş sınırı?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Kâşif Yolu 5+ (yaşa göre kurs), Kurucu Yolu her yaş. Aile paketinde ikisi birlikte.</p></div></div>
-      <div class="faq__item"><button class="faq__q" aria-expanded="false">Online nasıl yürüyor?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Kendi platformumuzda canlı, küçük gruplarla. Moderasyonlu topluluk, veli görünürlüğü, kapalı ortam.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Hangi okulu seçmeliyim?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Çocuk kodlamayı öğrenip yaratıcılığını büyütecekse <strong style="color:var(--tx)">Kâşif · Kodlama Okulu</strong>; işini ya da ekibini yapay zekâyla kurumsal seviyede geliştirmek istiyorsan <strong style="color:var(--tx)">Kurucu · Yapay Zeka Okulu</strong>. İkisini birden istiyorsan aile paketi.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Kod-fu nedir?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Kod-fu, Kodlama Okulu'nun ustalık derecesidir — kung fu felsefesinden ilham alır: ustalık izleyerek değil, emek ve pratikle, gerçek proje üreterek kazanılır. Beyaz kuşaktan Kod-fu ustalığına yürürsün.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Yapay Zeka Okulu'nda ne öğreniyorum?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Claude, ChatGPT, Gemini, Genspark, NotebookLM gibi popüler araçları giriş ve pro seviyesinde; ayrıca prompt mühendisliği, AI ajanları, otomasyon ve sektöre özel araçları. Kurumsal odaklı, işine dokunan çıktı.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Hiç bilgisi olmayan biri başlayabilir mi?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Evet, beyaz kuşak tam da bunun için. Her iki okul da sıfırdan başlar.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Yaş sınırı?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Kodlama Okulu 5+ (yaşa göre kurs), Yapay Zeka Okulu her yaş — özellikle girişimci ve profesyoneller için. Aile paketinde ikisi birlikte.</p></div></div>
       <div class="faq__item"><button class="faq__q" aria-expanded="false">Sertifika veriyor musunuz?<span class="pm"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Evet, her kuşak için. Ama asıl ödül elindeki şaheser.</p></div></div>
     </div>
   </div>
@@ -528,6 +567,7 @@ section{position:relative}
   <div class="wrap">
     <div class="final rv">
       <div class="final__bg" aria-hidden="true"><img src="assets/hero-ink.webp" alt="" /></div>
+      <img class="final__fox floatimg" src="assets/fox-master.png" alt="" aria-hidden="true" />
       <span class="eyebrow" style="justify-content:center;display:flex;color:var(--tx-3)">Sıra sende</span>
       <h2 style="margin-top:1rem">İlk kuşağını<br>kuşan.</h2>
       <a href="app/index.html" class="btn">Ücretsiz tanışma dersi al <span class="ar" aria-hidden="true">→</span></a>
@@ -542,10 +582,10 @@ section{position:relative}
     <div class="foot__top">
       <div>
         <a href="#top" class="mark">Cody<span class="z">z</span></a>
-        <p class="foot__desc">Online AI &amp; kodlama okulu. İki yol, tek ustalık: kodlamayı öğren ya da işini AI'la büyüt.</p>
+        <p class="foot__desc">Online kodlama &amp; yapay zeka okulu. İki okul, tek ustalık: çocuğun kodlasın, sen işini AI'la büyüt.</p>
       </div>
-      <div><h4>Keşfet</h4><ul><li><a href="#yollar">İki yol</a></li><li><a href="#kurslar">Kurslar</a></li><li><a href="#kusak">Kuşak yolu</a></li><li><a href="#paketler">Paketler</a></li><li><a href="#sss">SSS</a></li></ul></div>
-      <div><h4>Başla</h4><ul><li><a href="app/index.html">Giriş yap</a></li><li><a href="app/index.html">Kayıt ol</a></li><li><a href="#club">Codyz Club</a></li></ul></div>
+      <div><h4>Okullar</h4><ul><li><a href="#kodlama">Kâşif · Kodlama Okulu</a></li><li><a href="#yapayzeka">Kurucu · Yapay Zeka Okulu</a></li><li><a href="#kurslar">Kurslar</a></li><li><a href="#paketler">Paketler</a></li></ul></div>
+      <div><h4>Başla</h4><ul><li><a href="app/index.html">Giriş yap</a></li><li><a href="app/index.html">Kayıt ol</a></li><li><a href="#club">Codyz Club</a></li><li><a href="#sss">SSS</a></li></ul></div>
     </div>
     <div class="foot__bottom">
       <span>© <span id="year"></span> Codyz · Su gibi ol.</span>
@@ -567,16 +607,18 @@ section{position:relative}
   tgl.addEventListener('click',function(){ var o=links.classList.toggle('open'); tgl.setAttribute('aria-expanded',o); });
   links.addEventListener('click',function(e){ if(e.target.tagName==='A'){ links.classList.remove('open'); tgl.setAttribute('aria-expanded','false'); } });
 
-  // Kurs sekmeleri
-  var tabBtns=document.querySelectorAll('.tabs button');
-  tabBtns.forEach(function(b){ b.addEventListener('click',function(){
-    var on=b.dataset.on;
-    tabBtns.forEach(function(x){ x.classList.toggle('active', x===b); x.setAttribute('aria-selected', x===b); });
+  // Kurs sekmeleri (hero okul kartları da tetikler)
+  function showCat(on){
+    document.querySelectorAll('.tabs button').forEach(function(x){ var a=x.dataset.on===on; x.classList.toggle('active',a); x.setAttribute('aria-selected',a); });
     document.getElementById('cat-kasif').hidden = on!=='kasif';
     document.getElementById('cat-kurucu').hidden = on!=='kurucu';
-    // yeni görünen kartları reveal et
     document.querySelectorAll('#cat-'+on+' .rv').forEach(function(el){ el.classList.add('in'); });
-  }); });
+  }
+  document.querySelectorAll('.tabs button').forEach(function(b){ b.addEventListener('click',function(){ showCat(b.dataset.on); }); });
+  // hero kartı tıklayınca ilgili kataloğu da aç
+  var aiCard=document.querySelector('.scard--ai'); if(aiCard) aiCard.addEventListener('click',function(){ showCat('kurucu'); });
+  var kodCard=document.querySelector('.scard--kodlama'); if(kodCard) kodCard.addEventListener('click',function(){ showCat('kasif'); });
+  document.querySelector('#yapayzeka .path__link')?.addEventListener('click',function(){ showCat('kurucu'); });
 
   // Reveal
   var rvs=document.querySelectorAll('.rv');

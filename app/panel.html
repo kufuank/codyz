@@ -175,11 +175,14 @@ import { supabase, requireSession } from './config.js';
 const $ = (id) => document.getElementById(id);
 
 const BELTS = [
-  { stage:'İlk temas', cocuk:'Kâşif',     usta:'Acemi' },
-  { stage:'Kurucu',    cocuk:'Kurucu',    usta:'Pratisyen' },
-  { stage:'Yapan',     cocuk:'Yapımcı',   usta:'Uygulayıcı' },
-  { stage:'Usta',      cocuk:'Genç Usta', usta:'Usta' }
+  { stage:'İlk temas' },
+  { stage:'Temel' },
+  { stage:'Derinleşme' },
+  { stage:'Ustalık' }
 ];
+const SCHOOL = { kasif:'Kodlama Okulu', kurucu:'Yapay Zeka Okulu' };
+const schoolLabel = (t) => SCHOOL[t] || 'Kodlama Okulu';
+const beltStage = (b) => (BELTS[(b||1)-1] || BELTS[0]).stage;
 const MASTER_STEPS = ['Fikir & karakter','Ana mekanik','Üretim','Cila & his','Demo-day provası'];
 const DAYS = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
 
@@ -207,7 +210,7 @@ async function loadProfile(){
   const { data, error } = await supabase.from('profiles').select('*').eq('id', me.id).single();
   if (error || !data){
     // trigger gecikmesi olursa yedek: profili oluştur
-    const fallback = { id: me.id, full_name: me.email.split('@')[0], track:'cocuk' };
+    const fallback = { id: me.id, full_name: me.email.split('@')[0], track:'kasif' };
     await supabase.from('profiles').upsert(fallback, { onConflict:'id' });
     const r = await supabase.from('profiles').select('*').eq('id', me.id).single();
     me = { ...me, ...(r.data||fallback) };
@@ -224,11 +227,6 @@ async function loadTasks(){
 async function loadLonca(){
   const { data } = await supabase.from('leaderboard').select('*').order('rank', { ascending:true }).limit(50);
   renderLonca(data || []);
-}
-
-function beltLabel(){
-  const b = BELTS[(me.belt||1)-1];
-  return me.track === 'usta' ? b.usta : b.cocuk;
 }
 
 function computeProgress(){
@@ -248,13 +246,13 @@ function renderAll(){
   $('sideAvatar').textContent = init;
   $('topAvatar').textContent = init;
   $('sideName').textContent = name;
-  $('sideRank').textContent = `Kuşak ${me.belt} · ${beltLabel()}`;
+  $('sideRank').textContent = `${schoolLabel(me.track)} · Kuşak ${me.belt}`;
   $('navIdmanBadge').textContent = openCount;
   $('topStreak').textContent = me.streak ?? 0;
 
   // hero
   $('heroDay').textContent = `${DAYS[new Date().getDay()]} · iyi idmanlar`;
-  $('heroTitle').innerHTML = `Su gibi ol, ${esc(first)}.<br><em>${esc(beltLabel())} kuşağı</em> %${pct} doldu.`;
+  $('heroTitle').innerHTML = `Su gibi ol, ${esc(first)}.<br><em>${esc(beltStage(me.belt))} kuşağı</em> %${pct} doldu.`;
   $('heroSub').textContent = openCount > 0
     ? `Sırada ${openCount} idman var. Hepsini tamamla, kuşağını şaheserinle kuşan.`
     : `Bu haftanın idmanlarını bitirdin — şaheserine ve demo-day'e hazırlan.`;
@@ -341,7 +339,7 @@ async function toggleTask(id, el){
   setProgress(pct);
   renderMasterSteps(pct);
   const first = (me.full_name||'Öğrenci').split(/\s+/)[0];
-  $('heroTitle').innerHTML = `Su gibi ol, ${esc(first)}.<br><em>${esc(beltLabel())} kuşağı</em> %${pct} doldu.`;
+  $('heroTitle').innerHTML = `Su gibi ol, ${esc(first)}.<br><em>${esc(beltStage(me.belt))} kuşağı</em> %${pct} doldu.`;
   loadLonca();
 }
 
@@ -355,11 +353,10 @@ function renderLonca(rows){
   $('loncaList').innerHTML = html;
 }
 function rankRow(r,i,palette,isMe){
-  const beltLbl = (r.track==='usta'?BELTS[r.belt-1].usta:BELTS[r.belt-1].cocuk);
   return `<div class="rank ${isMe?'me':''}">
     <span class="rank__n ${r.rank===1?'top':''}">${r.rank}</span>
     <span class="rank__av" style="background:${palette[i%palette.length]}">${initials(r.full_name)}</span>
-    <span class="rank__nm">${isMe?'Sen · ':''}${esc(r.full_name)}<small>Kuşak ${r.belt} · ${esc(beltLbl)}</small></span>
+    <span class="rank__nm">${isMe?'Sen · ':''}${esc(r.full_name)}<small>${esc(schoolLabel(r.track))} · Kuşak ${r.belt}</small></span>
     <span class="rank__xp">${(r.xp||0).toLocaleString('tr-TR')}</span>
   </div>`;
 }
