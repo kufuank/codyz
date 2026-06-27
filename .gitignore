@@ -1,0 +1,10 @@
+# İç/strateji dosyaları — public repo'ya ve siteye girmesin
+.claude/
+claude proje bundle/
+HIGGSFIELD_PROMPTLARI.md
+
+# OS / araç döküntüleri
+Thumbs.db
+.DS_Store
+desktop.ini
+*.log

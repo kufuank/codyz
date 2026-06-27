@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Codyz — Kod-fu'yu öğren · Online AI & kodlama okulu</title>
+<meta name="description" content="Codyz, 8 yaşından itibaren herkese açık online AI & kodlama okulu. Kod-fu: izleyerek değil, gerçek projeler üreterek kazanılan ustalık. Su gibi ol — araçlar değişir, usta kalır." />
+<meta property="og:title" content="Codyz — Kod-fu'yu öğren" />
+<meta property="og:description" content="Online AI & kodlama okulu. Beyaz kuşaktan ilk şaheserine. Su gibi ol — araçlar değişir, usta kalır." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   CODYZ — sumi-e ıslak mürekkep × elektrik-AI
+   Tokenlar markadan kilitli. Düz/flat, gradient yok,
+   bol boşluk (ma 間), washi dokusu, rounded yumuşak köşeler.
+   ============================================================ */
+
+:root{
+  /* Marka paleti — KİLİTLİ */
+  --ink:    #15110E;  /* Mürekkep — ana koyu / ustalık */
+  --coral:  #FF6A3D;  /* Mercan — enerji / çocuk */
+  --violet: #5A4BE6;  /* Elektrik moru — AI / köprü */
+  --gold:   #F2A93B;  /* Şaheser altını — ustalık vurgusu */
+  --cream:  #F6F2E9;  /* Krem — zemin */
+  --white-belt:#FBF9F3;
+
+  /* Türevler */
+  --ink-80: rgba(21,17,14,.80);
+  --ink-60: rgba(21,17,14,.58);
+  --ink-40: rgba(21,17,14,.34);
+  --ink-12: rgba(21,17,14,.12);
+  --ink-06: rgba(21,17,14,.06);
+  --paper:  #FFFEFB;
+
+  --maxw: 1180px;
+  --gut: clamp(20px, 5vw, 64px);
+
+  /* Tip ölçeği */
+  --step--1: clamp(.82rem,.78rem + .2vw,.92rem);
+  --step-0:  clamp(1rem,.96rem + .25vw,1.12rem);
+  --step-1:  clamp(1.2rem,1.05rem + .7vw,1.5rem);
+  --step-2:  clamp(1.55rem,1.2rem + 1.6vw,2.4rem);
+  --step-3:  clamp(2.2rem,1.5rem + 3.4vw,4.4rem);
+  --step-4:  clamp(3rem,1.8rem + 6vw,7.2rem);
+
+  --r: 22px;          /* rounded-2xl */
+  --r-sm: 14px;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
+
+body{
+  margin:0;
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  font-size:var(--step-0);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+
+/* Washi kâğıt dokusu — tüm sayfaya çok hafif */
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none; z-index:0;
+  opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  mix-blend-mode:multiply;
+}
+
+h1,h2,h3,.display{font-family:'Sora',sans-serif;font-weight:700;line-height:1.04;letter-spacing:-.02em;margin:0}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut);position:relative;z-index:2}
+section{position:relative;z-index:2}
+
+.eyebrow{
+  font-family:'Sora',sans-serif;font-weight:600;
+  font-size:var(--step--1); letter-spacing:.22em; text-transform:uppercase;
+  color:var(--ink-60);
+  display:inline-flex; align-items:center; gap:.6em;
+}
+.eyebrow::before{
+  content:""; width:26px; height:2px; background:var(--coral); border-radius:2px;
+}
+
+/* Mürekkep işareti (sumi-e enso parça) bölüm başlıklarında */
+.lede{font-size:var(--step-1);color:var(--ink-80);font-weight:400;max-width:54ch;line-height:1.5}
+
+/* Butonlar */
+.btn{
+  --bg:var(--ink); --fg:var(--cream);
+  display:inline-flex;align-items:center;gap:.55em;
+  font-family:'Sora',sans-serif;font-weight:600;font-size:var(--step-0);
+  background:var(--bg);color:var(--fg);
+  padding:.92em 1.5em;border-radius:999px;border:1.5px solid var(--bg);
+  cursor:pointer;transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s var(--ease);
+  position:relative;
+}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0)}
+.btn .arrow{transition:transform .25s var(--ease)}
+.btn:hover .arrow{transform:translateX(4px)}
+.btn--coral{--bg:var(--coral);--fg:var(--ink)}
+.btn--ghost{--bg:transparent;--fg:var(--ink);border-color:var(--ink-12)}
+.btn--ghost:hover{border-color:var(--ink);background:transparent}
+.btn--gold{--bg:var(--gold);--fg:var(--ink)}
+
+:focus-visible{outline:3px solid var(--violet);outline-offset:3px;border-radius:6px}
+
+/* ====================== NAV ====================== */
+.nav{
+  position:sticky;top:0;z-index:50;
+  backdrop-filter:saturate(1.1) blur(8px);
+  background:color-mix(in srgb, var(--cream) 78%, transparent);
+  border-bottom:1px solid transparent;
+  transition:border-color .3s, background .3s;
+}
+.nav.scrolled{border-color:var(--ink-12);background:color-mix(in srgb, var(--cream) 92%, transparent)}
+.nav__in{display:flex;align-items:center;justify-content:space-between;height:72px;gap:1.5rem}
+.wordmark{font-family:'Sora',sans-serif;font-weight:800;font-size:1.5rem;letter-spacing:-.03em;display:inline-flex;align-items:baseline}
+.wordmark .z{color:var(--coral);position:relative;display:inline-block}
+.nav__links{display:flex;gap:1.8rem;align-items:center}
+.nav__links a{font-size:.95rem;color:var(--ink-80);font-weight:500;position:relative;padding:.2em 0}
+.nav__links a::after{content:"";position:absolute;left:0;bottom:-2px;height:2px;width:0;background:var(--coral);transition:width .25s var(--ease)}
+.nav__links a:hover{color:var(--ink)}
+.nav__links a:hover::after{width:100%}
+.nav__cta{display:flex;align-items:center;gap:.8rem}
+.nav__toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+@media(max-width:880px){
+  .nav__links{display:none}
+  .nav__cta .btn--ghost{display:none}
+  .nav__toggle{display:inline-flex}
+  .nav__links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;
+    background:var(--paper);padding:1.2rem var(--gut);gap:1rem;border-bottom:1px solid var(--ink-12)}
+}
+
+/* ====================== HERO ====================== */
+.hero{position:relative;overflow:hidden;padding:clamp(48px,9vh,110px) 0 clamp(60px,10vh,120px)}
+#ink-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.hero__in{position:relative;z-index:3;display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(28px,5vw,72px);align-items:center}
+@media(max-width:900px){.hero__in{grid-template-columns:1fr;gap:36px}}
+
+.hero h1{font-size:var(--step-4);font-weight:800;margin:.5rem 0 .1rem}
+.hero h1 .ink-word{position:relative;display:inline-block}
+/* mürekkep alt çizgisi — fırça hissi */
+.hero h1 .ink-word::after{
+  content:"";position:absolute;left:-.04em;right:-.08em;bottom:.04em;height:.18em;z-index:-1;
+  background:var(--coral);border-radius:40% 60% 55% 45%/60% 50% 50% 40%;
+  transform:rotate(-1.2deg);opacity:.92;
+}
+.hero__sub{margin-top:1.4rem;font-size:var(--step-1);color:var(--ink-80);font-weight:400;line-height:1.5;max-width:30ch}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.85rem;margin-top:2rem}
+.hero__meta{margin-top:2.4rem;display:flex;gap:1.6rem;flex-wrap:wrap;font-size:var(--step--1);color:var(--ink-60)}
+.hero__meta b{font-family:'Sora',sans-serif;color:var(--ink);font-weight:700;font-size:1.05rem;display:block;line-height:1}
+.hero__meta div{display:flex;flex-direction:column;gap:.25rem}
+
+/* Hero sağ — enso (mürekkep daire) + "su gibi" kaligrafi kartı */
+.enso-card{position:relative;aspect-ratio:1/1;display:grid;place-items:center}
+.enso-card svg{width:100%;height:100%}
+.enso-quote{position:absolute;text-align:center;max-width:64%}
+.enso-quote .kanji{font-family:'Sora';font-weight:700;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.02em}
+.enso-quote small{display:block;margin-top:.5rem;color:var(--ink-60);font-size:var(--step--1);letter-spacing:.04em}
+
+/* ====================== Genel bölüm ====================== */
+.band{padding:clamp(64px,11vh,128px) 0}
+.band--ink{background:var(--ink);color:var(--cream)}
+.band--ink .eyebrow{color:rgba(246,242,233,.62)}
+.band--ink .lede{color:rgba(246,242,233,.78)}
+.section-head{max-width:62ch}
+.section-head h2{font-size:var(--step-3);margin:.7rem 0 0}
+.section-head .lede{margin-top:1.1rem}
+
+/* ====================== SU GİBİ OL ====================== */
+.water{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:center}
+@media(max-width:840px){.water{grid-template-columns:1fr;gap:32px}}
+.water__big{font-family:'Sora';font-weight:800;font-size:var(--step-3);line-height:1.02}
+.water__big .drift{color:var(--violet)}
+.tool-cycle{margin-top:1.4rem;display:inline-flex;align-items:center;gap:.6em;font-size:var(--step-0);color:var(--ink-60);font-family:'Sora';font-weight:600}
+.tool-cycle .slot{position:relative;display:inline-block;min-width:8.5ch;height:1.3em;overflow:hidden;vertical-align:bottom}
+.tool-cycle .slot span{position:absolute;left:0;top:0;width:100%;color:var(--ink);will-change:transform,opacity}
+.tool-cycle .arrow-loop{color:var(--coral)}
+
+/* ====================== İKİ KAPI ====================== */
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:clamp(18px,2.5vw,28px)}
+@media(max-width:820px){.doors{grid-template-columns:1fr}}
+.door{position:relative;overflow:hidden;border-radius:var(--r);padding:clamp(28px,3.5vw,44px);min-height:340px;
+  display:flex;flex-direction:column;justify-content:flex-end;border:1.5px solid var(--ink-12);
+  transition:transform .35s var(--ease), box-shadow .35s var(--ease), border-color .35s var(--ease);isolation:isolate}
+.door:hover{transform:translateY(-4px);box-shadow:0 24px 60px -28px rgba(21,17,14,.45)}
+.door__tag{font-family:'Sora';font-weight:600;font-size:var(--step--1);letter-spacing:.16em;text-transform:uppercase}
+.door h3{font-size:var(--step-2);margin:.6rem 0 .7rem}
+.door p{font-size:var(--step-0);line-height:1.55;max-width:42ch}
+.door__link{margin-top:1.4rem;font-family:'Sora';font-weight:600;display:inline-flex;align-items:center;gap:.5em}
+.door__ink{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.0;transition:opacity .5s var(--ease)}
+.door:hover .door__ink{opacity:1}
+/* Çocuk kapısı — mercan/sıcak */
+.door--child{background:linear-gradient(0deg,#FFF2EC,#FFF7F2)}
+.door--child .door__tag{color:var(--coral)}
+.door--child .door__link{color:var(--coral)}
+/* Yetişkin kapısı — mürekkep/premium */
+.door--master{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.door--master .door__tag{color:var(--gold)}
+.door--master p{color:rgba(246,242,233,.8)}
+.door--master .door__link{color:var(--gold)}
+
+/* ====================== NASIL İŞLER — 4 adım ====================== */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,22px);margin-top:3rem}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.step{position:relative;padding:1.6rem 1.4rem 1.7rem;border-radius:var(--r-sm);background:var(--paper);border:1px solid var(--ink-12);
+  transition:transform .3s var(--ease),border-color .3s var(--ease)}
+.step:hover{transform:translateY(-3px);border-color:var(--ink-40)}
+.step__n{font-family:'Sora';font-weight:800;font-size:1rem;color:var(--coral);letter-spacing:.05em}
+.step__ico{margin:1rem 0 1.1rem;color:var(--ink)}
+.step h3{font-size:var(--step-1);margin-bottom:.5rem}
+.step p{font-size:.96rem;color:var(--ink-60);line-height:1.5}
+
+/* ====================== KUŞAK YOLU — fırça omurgası ====================== */
+.path{position:relative;display:grid;grid-template-columns:120px 1fr;gap:clamp(20px,4vw,56px)}
+@media(max-width:760px){.path{grid-template-columns:64px 1fr;gap:20px}}
+.path__brush{position:relative}
+.path__brush svg{position:sticky;top:120px;height:min(620px,72vh);width:100%}
+.belts{display:flex;flex-direction:column;gap:clamp(16px,2.4vw,28px)}
+.belt{position:relative;padding:clamp(22px,2.6vw,32px);border-radius:var(--r);background:var(--paper);border:1px solid var(--ink-12);
+  opacity:0;transform:translateY(26px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.belt.in{opacity:1;transform:none}
+.belt__band{height:8px;width:64px;border-radius:99px;margin-bottom:1.1rem}
+.belt__row{display:flex;align-items:baseline;gap:.8rem;flex-wrap:wrap}
+.belt__k{font-family:'Sora';font-weight:800;font-size:var(--step-2)}
+.belt__stage{font-family:'Sora';font-weight:600;color:var(--ink-60);font-size:var(--step-0)}
+.belt__persona{margin-top:.5rem;font-family:'Sora';font-weight:600;letter-spacing:.04em;font-size:.95rem}
+.belt p{margin-top:.7rem;color:var(--ink-80);max-width:52ch}
+.belt--4{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.belt--4 .belt__stage{color:rgba(246,242,233,.6)}
+.belt--4 p{color:rgba(246,242,233,.8)}
+.belt--4 .belt__persona{color:var(--gold)}
+.belt--4 .belt__k{border-bottom:3px solid var(--gold);display:inline-block;padding-bottom:2px}
+.path__note{margin-top:2.2rem;color:var(--ink-60);font-size:var(--step-0)}
+
+/* ====================== ŞAHESER GÜNÜ (ink band) ====================== */
+.masterpiece{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(28px,5vw,72px);align-items:center}
+@media(max-width:840px){.masterpiece{grid-template-columns:1fr;gap:32px}}
+.masterpiece h2{font-size:var(--step-3)}
+.masterpiece .lede{margin-top:1.2rem}
+.stage-card{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid rgba(246,242,233,.14);
+  background:rgba(246,242,233,.04);padding:clamp(26px,3vw,40px);min-height:280px;display:flex;flex-direction:column;justify-content:flex-end}
+.stage-card .spot{position:absolute;width:280px;height:280px;border-radius:50%;
+  background:radial-gradient(circle,rgba(242,169,59,.30),transparent 65%);top:-60px;right:-40px;filter:blur(6px)}
+.stage-card__label{font-family:'Sora';font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:var(--step--1);color:var(--gold);position:relative}
+.stage-card h3{font-size:var(--step-1);margin:.6rem 0;position:relative}
+.stage-card p{color:rgba(246,242,233,.74);position:relative;font-size:.96rem}
+
+/* ====================== USTALAR ====================== */
+.masters{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,64px);align-items:center}
+@media(max-width:820px){.masters{grid-template-columns:1fr;gap:28px}}
+.masters__pts{display:flex;flex-direction:column;gap:1.1rem;margin-top:.5rem}
+.masters__pt{display:flex;gap:1rem;align-items:flex-start;padding-bottom:1.1rem;border-bottom:1px solid var(--ink-12)}
+.masters__pt:last-child{border-bottom:none}
+.masters__pt svg{flex:none;color:var(--violet);margin-top:2px}
+.masters__pt b{font-family:'Sora';font-weight:600;display:block;margin-bottom:.15rem}
+.masters__pt span{color:var(--ink-60);font-size:.96rem}
+
+/* ====================== PAKETLER ====================== */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,24px);margin-top:3rem;align-items:stretch}
+@media(max-width:900px){.plans{grid-template-columns:1fr;max-width:460px;margin-inline:auto}}
+.plan{position:relative;display:flex;flex-direction:column;border-radius:var(--r);padding:clamp(26px,2.8vw,36px);
+  background:var(--paper);border:1.5px solid var(--ink-12);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.plan:hover{transform:translateY(-4px);box-shadow:0 26px 60px -34px rgba(21,17,14,.4)}
+.plan__name{font-family:'Sora';font-weight:700;font-size:var(--step-1)}
+.plan__desc{color:var(--ink-60);margin-top:.7rem;font-size:.98rem;line-height:1.55;flex:1}
+.plan__note{margin-top:1.4rem;font-size:.82rem;color:var(--ink-40)}
+.plan .btn{margin-top:1.4rem;width:100%;justify-content:center}
+.plan--feature{background:var(--ink);color:var(--cream);border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+.plan--feature .plan__desc{color:rgba(246,242,233,.78)}
+.plan--feature .plan__note{color:rgba(246,242,233,.5)}
+.plan__badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--ink);
+  font-family:'Sora';font-weight:700;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;padding:.4em 1em;border-radius:99px;white-space:nowrap}
+.plan__studios{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.9rem}
+.plan__studios span{font-size:.78rem;font-family:'Sora';font-weight:600;padding:.28em .7em;border-radius:99px;border:1px solid var(--ink-12);color:var(--ink-60)}
+.plan--feature .plan__studios span{border-color:rgba(246,242,233,.2);color:rgba(246,242,233,.7)}
+
+/* ====================== CLUB ====================== */
+.club{position:relative;border-radius:calc(var(--r) + 6px);overflow:hidden;padding:clamp(40px,6vw,80px);
+  background:var(--violet);color:var(--cream);text-align:center}
+.club h2{font-size:var(--step-3)}
+.club p{max-width:46ch;margin:1.2rem auto 0;color:rgba(246,242,233,.85)}
+.club .btn{margin-top:2rem}
+.club__seats{margin-top:1.6rem;display:inline-flex;align-items:center;gap:.6em;font-size:var(--step--1);
+  color:rgba(246,242,233,.8);font-family:'Sora';font-weight:600;letter-spacing:.04em}
+.club__dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 0 rgba(242,169,59,.6);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(242,169,59,.55)}70%{box-shadow:0 0 0 10px rgba(242,169,59,0)}100%{box-shadow:0 0 0 0 rgba(242,169,59,0)}}
+.club__ink{position:absolute;inset:0;opacity:.18;mix-blend-mode:soft-light;pointer-events:none}
+
+/* ====================== SSS ====================== */
+.faq{max-width:820px}
+.faq__item{border-bottom:1px solid var(--ink-12)}
+.faq__q{width:100%;text-align:left;background:none;border:none;cursor:pointer;
+  padding:1.3rem 0;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+  font-family:'Sora';font-weight:600;font-size:var(--step-1);color:var(--ink)}
+.faq__q .pm{flex:none;width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink-12);
+  display:grid;place-items:center;transition:background .25s,border-color .25s,transform .3s var(--ease)}
+.faq__item.open .pm{background:var(--coral);border-color:var(--coral);transform:rotate(45deg)}
+.faq__a{max-height:0;overflow:hidden;transition:max-height .35s var(--ease)}
+.faq__a p{padding:0 0 1.4rem;color:var(--ink-80);max-width:60ch}
+
+/* ====================== FINAL CTA ====================== */
+.final{text-align:center;position:relative;overflow:hidden}
+.final h2{font-size:var(--step-4);font-weight:800}
+.final .btn{margin-top:2rem}
+.final__line{margin-top:1.6rem;font-family:'Sora';font-weight:500;color:rgba(246,242,233,.7);letter-spacing:.02em}
+
+/* ====================== FOOTER ====================== */
+.foot{padding:clamp(48px,7vh,80px) 0 40px;background:var(--ink);color:rgba(246,242,233,.7)}
+.foot__top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem}
+@media(max-width:720px){.foot__top{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.foot__top{grid-template-columns:1fr}}
+.foot .wordmark{color:var(--cream)}
+.foot__desc{margin-top:1rem;max-width:34ch;font-size:.94rem;line-height:1.55}
+.foot h4{font-family:'Sora';font-weight:600;color:var(--cream);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin:0 0 1rem}
+.foot ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.7rem}
+.foot a:hover{color:var(--cream)}
+.foot__bottom{margin-top:3rem;padding-top:1.5rem;border-top:1px solid rgba(246,242,233,.12);
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.85rem}
+.foot__social{display:flex;gap:.8rem}
+.foot__social a{width:40px;height:40px;border-radius:50%;border:1px solid rgba(246,242,233,.18);display:grid;place-items:center;transition:background .25s,border-color .25s}
+.foot__social a:hover{background:var(--coral);border-color:var(--coral);color:var(--ink)}
+
+/* Reveal yardımcı */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  .reveal,.belt{opacity:1!important;transform:none!important;transition:none!important}
+  .club__dot{animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ====================== NAV ====================== -->
+<header class="nav" id="nav">
+  <div class="wrap nav__in">
+    <a href="#top" class="wordmark" aria-label="Codyz ana sayfa">Cody<span class="z">z</span></a>
+    <nav class="nav__links" id="navlinks" aria-label="Ana menü">
+      <a href="#nasil">Nasıl çalışır</a>
+      <a href="#kapilar">İki kapı</a>
+      <a href="#kusak">Kuşak yolu</a>
+      <a href="#paketler">Paketler</a>
+      <a href="#sss">SSS</a>
+    </nav>
+    <div class="nav__cta">
+      <a href="#final" class="btn btn--ghost">Giriş</a>
+      <a href="#final" class="btn btn--coral">Ücretsiz tanışma dersi</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Menüyü aç" aria-expanded="false">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ====================== HERO ====================== -->
+<section class="hero" id="top">
+  <canvas id="ink-canvas" aria-hidden="true"></canvas>
+  <div class="wrap hero__in">
+    <div class="hero__copy">
+      <span class="eyebrow">Online AI &amp; kodlama okulu</span>
+      <h1>Kod-fu'yu<br><span class="ink-word">öğren.</span></h1>
+      <p class="hero__sub">Kung fu dövüş değildir — emekle kazanılan ustalıktır. Kod-fu da AI çağının ustalığı: izleyerek değil, gerçek projeler üreterek. 8 yaşından itibaren, ailecek.</p>
+      <div class="hero__cta">
+        <a href="#final" class="btn btn--coral">Ücretsiz tanışma dersi al <span class="arrow" aria-hidden="true">→</span></a>
+        <a href="#nasil" class="btn btn--ghost">Kod-fu nasıl işler?</a>
+      </div>
+      <div class="hero__meta">
+        <div><b>8+</b><span>çocuktan ustaya</span></div>
+        <div><b>4 kuşak</b><span>beyazdan ustalığa</span></div>
+        <div><b>Canlı</b><span>küçük grup · online</span></div>
+      </div>
+    </div>
+    <div class="enso-card" aria-hidden="true">
+      <svg viewBox="0 0 400 400" role="img" aria-label="Sumi-e mürekkep dairesi">
+        <defs>
+          <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency="0.018" numOctaves="3" seed="7" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="14"/></filter>
+        </defs>
+        <path id="ensoPath" d="M200,52 C310,52 360,140 360,210 C360,300 290,352 200,352 C110,352 44,300 44,210 C44,128 104,60 196,54"
+          fill="none" stroke="var(--ink)" stroke-width="20" stroke-linecap="round" filter="url(#rough)"/>
+      </svg>
+      <div class="enso-quote">
+        <span class="kanji">Su gibi ol</span>
+        <small>Araçlar değişir, usta kalır.</small>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== SU GİBİ OL ====================== -->
+<section class="band" id="su">
+  <div class="wrap water">
+    <div class="reveal">
+      <span class="eyebrow">Kuzey yıldızı</span>
+      <p class="water__big" style="margin-top:1rem">Araçlar değişir,<br><span class="drift">usta kalır.</span></p>
+      <div class="tool-cycle" aria-hidden="true">
+        <span>Bugünün aracı:</span>
+        <span class="slot" id="toolSlot"></span>
+        <span class="arrow-loop">↻</span>
+      </div>
+    </div>
+    <div class="reveal">
+      <p class="lede">AI araçları her altı ayda değişiyor; bugün öğrendiğin tool yarın eskiyor. Biz tool ezberletmiyoruz — <strong style="color:var(--ink)">AI ile düşünmeyi</strong> öğretiyoruz. Su gibi: hangi araç gelirse gelsin, sen uyum sağlarsın. Her dönem elinde gerçek bir iş çıkar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== İKİ KAPI ====================== -->
+<section class="band" id="kapilar">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">İki kapı</span>
+      <h2>Aynı yol, iki kuşak.</h2>
+      <p class="lede">Tek okul, iki sıcaklık. Çocuk için macera, usta için felsefe — ama aynı Kod-fu ritmi.</p>
+    </div>
+    <div class="doors" style="margin-top:3rem">
+      <article class="door door--child reveal">
+        <svg class="door__ink" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="480" cy="80" r="200" fill="var(--coral)" opacity=".10"/><circle cx="120" cy="360" r="160" fill="var(--gold)" opacity=".10"/></svg>
+        <span class="door__tag">Çocuğun için · 8–17</span>
+        <h3>Tüketen değil,<br>üreten bir çocuk.</h3>
+        <p>Güvenli bir toplulukta, arkadaşlarıyla, kuşak kuşak ilerleyerek ilk oyununu, uygulamasını, AI projesini kurar.</p>
+        <a href="#final" class="door__link">Çocuk yolunu keşfet <span aria-hidden="true">→</span></a>
+      </article>
+      <article class="door door--master reveal">
+        <svg class="door__ink" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="120" cy="100" r="200" fill="var(--violet)" opacity=".22"/><circle cx="500" cy="360" r="170" fill="var(--gold)" opacity=".14"/></svg>
+        <span class="door__tag">Kendin için · girişimci &amp; ebeveyn</span>
+        <h3>Diploma değil,<br>bugün dokunan beceri.</h3>
+        <p>İlk dersten çıktı: işini büyüten bir agent, bir app, bir içerik motoru ya da bir AI film.</p>
+        <a href="#final" class="door__link">Usta yolunu keşfet <span aria-hidden="true">→</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== NASIL İŞLER — 4 adım ====================== -->
+<section class="band" id="nasil" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Kod-fu nasıl işler</span>
+      <h2>Dört adım, tek ritim.</h2>
+    </div>
+    <div class="steps">
+      <article class="step reveal">
+        <div class="step__n">01</div>
+        <div class="step__ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7l10-4 10 4-10 4L2 7z"/><path d="M6 9.5V15c0 1.5 3 3 6 3s6-1.5 6-3V9.5"/></svg></div>
+        <h3>Öğren</h3>
+        <p>Canlı derste, AI'a hâkim Ustalarla, küçük grupta.</p>
+      </article>
+      <article class="step reveal">
+        <div class="step__n">02</div>
+        <div class="step__ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.5l5 5"/><path d="M3 21l4-1 11.5-11.5a2.1 2.1 0 0 0-3-3L4 17l-1 4z"/></svg></div>
+        <h3>İdman</h3>
+        <p>Her hafta projenin bir parçasını kurarsın; ezber değil pratik.</p>
+      </article>
+      <article class="step reveal">
+        <div class="step__n">03</div>
+        <div class="step__ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.5 6.5L21 9l-5 4.5L17.5 21 12 17l-5.5 4L8 13.5 3 9l6.5-.5L12 2z"/></svg></div>
+        <h3>Şaheser</h3>
+        <p>Dönem sonunda gerçek bir iş çıkarırsın.</p>
+      </article>
+      <article class="step reveal">
+        <div class="step__n">04</div>
+        <div class="step__ico"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/><path d="M3 18.5h18"/></svg></div>
+        <h3>Kuşak atla</h3>
+        <p>Şaheserini topluluk önünde sunar, üst kuşağa geçersin.</p>
+      </article>
+    </div>
+    <p class="path__note reveal" style="margin-top:2rem">Hepsi kendi platformumuzda, tamamen online.</p>
+  </div>
+</section>
+
+<!-- ====================== KUŞAK YOLU — fırça omurgası ====================== -->
+<section class="band" id="kusak">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:3rem">
+      <span class="eyebrow">Kuşak yolu</span>
+      <h2>Beyaz kuşaktan ustalığa.</h2>
+      <p class="lede">Tek bir fırça darbesi gibi — beyazdan başlar, mürekkebe iner. Her kuşağı şaheserinle atlarsın.</p>
+    </div>
+    <div class="path">
+      <div class="path__brush" aria-hidden="true">
+        <svg viewBox="0 0 80 800" preserveAspectRatio="xMidYMin meet">
+          <defs>
+            <filter id="brushRough"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.05" numOctaves="2" seed="3" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="9"/></filter>
+          </defs>
+          <!-- arka iz -->
+          <path d="M40 8 C 22 180, 58 360, 40 540 C 28 660, 46 740, 40 792" fill="none" stroke="var(--ink-06)" stroke-width="26" stroke-linecap="round"/>
+          <!-- çizilen omurga (4 segment, flat solid renk) -->
+          <path class="brush-seg" data-seg="0" d="M40 8 C 22 180, 58 360, 40 540 C 28 660, 46 740, 40 792" fill="none" stroke="var(--ink)" stroke-width="16" stroke-linecap="round" filter="url(#brushRough)"/>
+        </svg>
+      </div>
+      <div class="belts">
+        <article class="belt" data-belt="1">
+          <div class="belt__band" style="background:#E8E2D2;box-shadow:inset 0 0 0 1px var(--ink-12)"></div>
+          <div class="belt__row"><span class="belt__k">Kuşak 1</span><span class="belt__stage">İlk temas</span></div>
+          <div class="belt__persona" style="color:var(--ink-60)">Kâşif · Acemi</div>
+          <p>AI ile tanış, ilk küçük şeyini kur.</p>
+        </article>
+        <article class="belt" data-belt="2">
+          <div class="belt__band" style="background:var(--coral)"></div>
+          <div class="belt__row"><span class="belt__k">Kuşak 2</span><span class="belt__stage">Kurucu</span></div>
+          <div class="belt__persona" style="color:var(--coral)">Kurucu · Pratisyen</div>
+          <p>Gerçek bir şey kur: oyun, mini app, ilk agent.</p>
+        </article>
+        <article class="belt" data-belt="3">
+          <div class="belt__band" style="background:var(--violet)"></div>
+          <div class="belt__row"><span class="belt__k">Kuşak 3</span><span class="belt__stage">Yapan</span></div>
+          <div class="belt__persona" style="color:var(--violet)">Yapımcı · Uygulayıcı</div>
+          <p>İşine ya da oyununa AI'ı göm.</p>
+        </article>
+        <article class="belt belt--4" data-belt="4">
+          <div class="belt__band" style="background:var(--gold)"></div>
+          <div class="belt__row"><span class="belt__k">Kuşak 4</span><span class="belt__stage">Usta</span></div>
+          <div class="belt__persona">Genç Usta · Usta</div>
+          <p>Kendi yolunu çiz, üret, başkasına öğret.</p>
+        </article>
+        <p class="path__note">Her kuşağı şaheserinle —aile ve topluluk önünde sunduğun gerçek bir projeyle— atlarsın.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== ŞAHESER GÜNÜ ====================== -->
+<section class="band band--ink" id="saheser">
+  <div class="wrap masterpiece">
+    <div class="reveal">
+      <span class="eyebrow">Şaheser günü</span>
+      <h2>Ustalık izlemekle değil,<br>yapmakla gelir.</h2>
+      <p class="lede">Her dönem mezuniyet bir gösteridir. Çocuklar projelerini ailelerinin önünde sunar; yetişkinler o dönemin tüm öğrencilerinin katıldığı online etkinlikte şaheserlerini paylaşır. Sertifikanı alırsın, ama asıl ödülün elindeki gerçek iştir.</p>
+    </div>
+    <div class="stage-card reveal">
+      <div class="spot" aria-hidden="true"></div>
+      <span class="stage-card__label">Demo-day · canlı</span>
+      <h3>Sahne senin.</h3>
+      <p>Bir dönem boyunca parça parça büyüttüğün proje, topluluğun önünde ilk kez nefes alır. İşte o an kuşağını kuşanırsın.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== USTALAR ====================== -->
+<section class="band" id="ustalar">
+  <div class="wrap masters">
+    <div class="reveal">
+      <span class="eyebrow">Ustalar</span>
+      <h2 style="font-size:var(--step-3);margin-top:.7rem">Senseiler değil —<br>Ustalar.</h2>
+    </div>
+    <div class="masters__pts reveal">
+      <p class="lede" style="margin-bottom:.6rem">Eğitmenlerimiz AI'ı sadece anlatmaz, kullanır.</p>
+      <div class="masters__pt">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 19c.6-3.2 3.2-5 6.5-5s5.9 1.8 6.5 5"/><circle cx="18" cy="9" r="2.4"/><path d="M16 14.6c2.6.2 4.4 1.7 5 4.4"/></svg>
+        <div><b>Küçük gruplar</b><span>Herkesin görüldüğü kadar küçük, akran öğrenmesi olduğu kadar büyük.</span></div>
+      </div>
+      <div class="masters__pt">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        <div><b>Canlı dersler</b><span>Kayıt izleme değil; o an, birlikte, gerçek zamanlı pratik.</span></div>
+      </div>
+      <div class="masters__pt">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4.5 8-11V5l-8-3-8 3v6c0 6.5 8 11 8 11z"/><path d="M9 12l2 2 4-4"/></svg>
+        <div><b>Ders dışı destek</b><span>Takıldığın yerde yalnız değilsin; ulaşılabilir bir usta hep var.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== PAKETLER ====================== -->
+<section class="band" id="paketler" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Paketler</span>
+      <h2>Yolunu seç.</h2>
+    </div>
+    <div class="plans">
+      <article class="plan reveal">
+        <div class="plan__name">Çocuk Kuşağı</div>
+        <p class="plan__desc">Dönemlik · küçük grup · kuşak ilerlemesi. İlk oyununu, app'ini, AI projeni arkadaşlarınla kur.</p>
+        <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
+        <a href="#final" class="btn btn--ghost">Tanışma dersi al</a>
+      </article>
+      <article class="plan reveal">
+        <div class="plan__name">Usta Yolu</div>
+        <p class="plan__desc">Stüdyo seçimli — işine bugün dokunan beceri. Hangi çıktıyı istersen onun üstüne çalış.</p>
+        <div class="plan__studios"><span>Agent</span><span>App</span><span>İçerik</span><span>Film</span></div>
+        <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
+        <a href="#final" class="btn btn--ghost">Tanışma dersi al</a>
+      </article>
+      <article class="plan plan--feature reveal">
+        <span class="plan__badge">En popüler</span>
+        <div class="plan__name">Aile Kuşağı</div>
+        <p class="plan__desc">Çocuk + ebeveyn birlikte · avantajlı paket. Ailecek Kod-fu: aynı yolu yan yana yürüyün.</p>
+        <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
+        <a href="#final" class="btn btn--gold">Aile paketini gör</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== CLUB ====================== -->
+<section class="band" id="club">
+  <div class="wrap">
+    <div class="club reveal">
+      <svg class="club__ink" viewBox="0 0 800 400" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><circle cx="650" cy="80" r="240" fill="#fff"/><circle cx="120" cy="340" r="200" fill="var(--gold)"/></svg>
+      <span class="eyebrow" style="color:rgba(246,242,233,.7);justify-content:center;display:flex">Codyz Club</span>
+      <h2 style="margin-top:1rem">İlk loncamıza katıl.</h2>
+      <p>Yeni başlıyoruz; ilk kuşağın kurucu üyeleri sınırlı kontenjanla alınır. Kod-fu'yu bilenlerin kulübüne erkenden gir.</p>
+      <div class="club__seats"><span class="club__dot" aria-hidden="true"></span> İlk kuşak · kurucu üye kontenjanı açık</div>
+      <br>
+      <a href="#final" class="btn btn--gold">Kontenjanı yakala <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== SSS ====================== -->
+<section class="band" id="sss" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">SSS</span>
+      <h2>Merak edilenler.</h2>
+    </div>
+    <div class="faq" style="margin-top:2.4rem">
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Hiç bilgisi olmayan biri başlayabilir mi?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Evet, beyaz kuşak tam da bunun için.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Yaş sınırı?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Çocuk tarafı 8+, yetişkin tarafı her yaş.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Online nasıl yürüyor?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Kendi platformumuzda canlı, küçük gruplarla.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">İngilizce gerekir mi?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Hayır; Türkçe öğretiyoruz, araç-İngilizcesini işin içinde veriyoruz.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Çocuğum güvende mi?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Moderasyonlu topluluk, veli görünürlüğü, kapalı ortam.</p></div></div>
+      <div class="faq__item"><button class="faq__q" aria-expanded="false">Sertifika veriyor musunuz?<span class="pm" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="7" y1="1.5" x2="7" y2="12.5"/><line x1="1.5" y1="7" x2="12.5" y2="7"/></svg></span></button><div class="faq__a"><p>Evet, her kuşak için.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================== FINAL CTA ====================== -->
+<section class="band band--ink final" id="final">
+  <canvas id="ink-canvas-2" aria-hidden="true" style="position:absolute;inset:0;z-index:1;pointer-events:none"></canvas>
+  <div class="wrap" style="position:relative;z-index:3">
+    <span class="eyebrow" style="justify-content:center;display:flex;color:rgba(246,242,233,.7)">Sıra sende</span>
+    <h2 style="margin-top:1rem">İlk kuşağını<br>kuşan.</h2>
+    <a href="#" class="btn btn--coral" id="ctaFinal">Ücretsiz tanışma dersi al <span class="arrow" aria-hidden="true">→</span></a>
+    <p class="final__line">Su gibi ol. Araçlar değişir, usta kalır.</p>
+  </div>
+</section>
+
+<!-- ====================== FOOTER ====================== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__top">
+      <div>
+        <a href="#top" class="wordmark">Cody<span class="z">z</span></a>
+        <p class="foot__desc">Online AI &amp; kodlama okulu. Kod-fu'yu öğret, gerçek proje üret. Beyaz kuşaktan ilk şaheserine.</p>
+      </div>
+      <div>
+        <h4>Keşfet</h4>
+        <ul>
+          <li><a href="#nasil">Nasıl çalışır</a></li>
+          <li><a href="#kapilar">İki kapı</a></li>
+          <li><a href="#kusak">Kuşak yolu</a></li>
+          <li><a href="#paketler">Paketler</a></li>
+          <li><a href="#sss">SSS</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Codyz Club</h4>
+        <ul>
+          <li><a href="#club">Kurucu üyelik</a></li>
+          <li><a href="#final">Tanışma dersi</a></li>
+          <li><a href="#saheser">Şaheser günü</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© <span id="year"></span> Codyz · Su gibi ol.</span>
+      <div class="foot__social">
+        <a href="#" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Yıl ---------- */
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  /* ---------- Nav: scrolled + mobil toggle ---------- */
+  var nav = document.getElementById('nav');
+  var onScroll = function(){ nav.classList.toggle('scrolled', window.scrollY > 12); };
+  onScroll(); window.addEventListener('scroll', onScroll, {passive:true});
+  var toggle = document.getElementById('navToggle'), links = document.getElementById('navlinks');
+  toggle.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.addEventListener('click', function(e){ if(e.target.tagName==='A'){ links.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); } });
+
+  /* ---------- Reveal gözlemcisi ---------- */
+  var revs = document.querySelectorAll('.reveal, .belt');
+  if(reduce){ revs.forEach(function(el){ el.classList.add('in'); }); }
+  else {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, {threshold:.18, rootMargin:'0px 0px -8% 0px'});
+    revs.forEach(function(el){ io.observe(el); });
+  }
+
+  /* ---------- Kuşak fırça omurgası: scroll'la çizilir ---------- */
+  var seg = document.querySelector('.brush-seg');
+  var kusak = document.getElementById('kusak');
+  if(seg && kusak){
+    var len = seg.getTotalLength();
+    seg.style.strokeDasharray = len;
+    seg.style.strokeDashoffset = reduce ? 0 : len;
+    if(!reduce){
+      var drawBrush = function(){
+        var r = kusak.getBoundingClientRect();
+        var vh = window.innerHeight;
+        // bölüm ekranı geçerken 0→1
+        var p = (vh*0.85 - r.top) / (r.height*0.8);
+        p = Math.max(0, Math.min(1, p));
+        seg.style.strokeDashoffset = len * (1 - p);
+      };
+      drawBrush();
+      window.addEventListener('scroll', drawBrush, {passive:true});
+      window.addEventListener('resize', drawBrush);
+    }
+  }
+
+  /* ---------- "Bugünün aracı" döngüsü ---------- */
+  var slot = document.getElementById('toolSlot');
+  if(slot && !reduce){
+    var tools = ['ChatGPT','Midjourney','Claude','Cursor','Veo','?'];
+    var i = 0;
+    var el = document.createElement('span'); el.textContent = tools[0]; slot.appendChild(el);
+    setInterval(function(){
+      var nextTxt = tools[(i+1)%tools.length];
+      var cur = slot.firstChild;
+      var nx = document.createElement('span');
+      nx.textContent = nextTxt; nx.style.transform='translateY(110%)'; nx.style.opacity='0';
+      slot.appendChild(nx);
+      requestAnimationFrame(function(){
+        cur.style.transition='transform .5s cubic-bezier(.22,.61,.36,1),opacity .5s';
+        nx.style.transition='transform .5s cubic-bezier(.22,.61,.36,1),opacity .5s';
+        cur.style.transform='translateY(-110%)'; cur.style.opacity='0';
+        nx.style.transform='translateY(0)'; nx.style.opacity='1';
+      });
+      setTimeout(function(){ if(cur.parentNode) cur.parentNode.removeChild(cur); }, 560);
+      i = (i+1)%tools.length;
+      // son aracı vurgula: '?' = mor
+      nx.style.color = (nextTxt==='?') ? 'var(--violet)' : 'var(--ink)';
+    }, 1900);
+  } else if(slot){ slot.textContent = 'her ne gelirse'; }
+
+  /* ---------- SSS accordion ---------- */
+  document.querySelectorAll('.faq__item').forEach(function(item){
+    var q = item.querySelector('.faq__q'), a = item.querySelector('.faq__a');
+    q.addEventListener('click', function(){
+      var open = item.classList.toggle('open');
+      q.setAttribute('aria-expanded', open);
+      a.style.maxHeight = open ? a.scrollHeight + 'px' : 0;
+    });
+  });
+
+  /* ---------- Final CTA: gerçek hedef yok, demo uyarısı ---------- */
+  var ctaFinal = document.getElementById('ctaFinal');
+  if(ctaFinal){ ctaFinal.addEventListener('click', function(e){ e.preventDefault(); }); }
+
+  /* ---------- Islak mürekkep canvas (su gibi ol) ---------- */
+  function inkCanvas(canvas, opt){
+    if(!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var dpr = Math.min(window.devicePixelRatio||1, 2);
+    var W, H, drops = [], running = false, raf = null;
+    var pointer = {x:-999, y:-999, active:false};
+    var bg = opt.bg, inks = opt.inks;
+
+    function size(){
+      var r = canvas.getBoundingClientRect();
+      W = canvas.width = Math.max(1, r.width*dpr);
+      H = canvas.height = Math.max(1, r.height*dpr);
+    }
+    size();
+    window.addEventListener('resize', function(){ size(); });
+
+    function deposit(x, y, rad, alpha, col){
+      var g = ctx.createRadialGradient(x,y,0,x,y,rad);
+      g.addColorStop(0, col.replace('ALPHA', alpha));
+      g.addColorStop(.6, col.replace('ALPHA', alpha*0.5));
+      g.addColorStop(1, col.replace('ALPHA', 0));
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(x,y,rad,0,Math.PI*2); ctx.fill();
+    }
+
+    // ambient drift seeds — sade, sadece zemin nefesi
+    var seeds = [];
+    for(var s=0;s<3;s++){ seeds.push({x:.2+Math.random()*.6, y:.2+Math.random()*.6, a:Math.random()*Math.PI*2, sp:.0005+Math.random()*.0006}); }
+
+    function frame(){
+      // fade (su yayılması hissi) — temiz kalsın diye biraz güçlü
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = bg.replace('ALPHA', 0.085);
+      ctx.fillRect(0,0,W,H);
+      ctx.globalCompositeOperation = 'multiply';
+
+      // ambient ink breathing — yumuşak, tek-iki ton
+      seeds.forEach(function(sd, idx){
+        sd.a += sd.sp*16;
+        var x = (sd.x*W) + Math.cos(sd.a)*W*0.05;
+        var y = (sd.y*H) + Math.sin(sd.a*1.3)*H*0.05;
+        deposit(x, y, Math.min(W,H)*0.13, 0.006, inks[idx % 2]);
+      });
+
+      // pointer ink bleed — su gibi yayılma
+      if(pointer.active){
+        for(var k=0;k<3;k++){
+          var jx = pointer.x + (Math.random()-.5)*24*dpr;
+          var jy = pointer.y + (Math.random()-.5)*24*dpr;
+          deposit(jx, jy, (38+Math.random()*48)*dpr, 0.045, inks[(Math.random()*inks.length)|0]);
+        }
+      }
+      raf = requestAnimationFrame(frame);
+    }
+
+    function start(){ if(running||reduce) return; running=true; raf=requestAnimationFrame(frame); }
+    function stop(){ running=false; if(raf) cancelAnimationFrame(raf); }
+
+    // pointer
+    function move(e){
+      var r = canvas.getBoundingClientRect();
+      var cx = (e.touches? e.touches[0].clientX : e.clientX);
+      var cy = (e.touches? e.touches[0].clientY : e.clientY);
+      pointer.x = (cx - r.left)*dpr; pointer.y = (cy - r.top)*dpr; pointer.active = true;
+    }
+    var host = canvas.parentElement;
+    host.addEventListener('mousemove', move, {passive:true});
+    host.addEventListener('touchmove', move, {passive:true});
+    host.addEventListener('mouseleave', function(){ pointer.active=false; });
+
+    // sadece görünürken çalış
+    var vio = new IntersectionObserver(function(ents){
+      ents.forEach(function(en){ en.isIntersecting ? start() : stop(); });
+    }, {threshold:.05});
+    vio.observe(canvas);
+
+    // reduced motion: tek statik mürekkep yıkaması
+    if(reduce){
+      deposit(W*0.5, H*0.5, Math.min(W,H)*0.45, 0.05, inks[0]);
+    }
+  }
+
+  // hero: krem zemin, mürekkep+mercan damla
+  inkCanvas(document.getElementById('ink-canvas'), {
+    bg:'rgba(246,242,233,ALPHA)',
+    inks:['rgba(21,17,14,ALPHA)','rgba(255,106,61,ALPHA)','rgba(90,75,230,ALPHA)']
+  });
+  // final: mürekkep zemin, altın+mercan damla
+  inkCanvas(document.getElementById('ink-canvas-2'), {
+    bg:'rgba(21,17,14,ALPHA)',
+    inks:['rgba(242,169,59,ALPHA)','rgba(255,106,61,ALPHA)','rgba(246,242,233,ALPHA)']
+  });
+})();
+</script>
+</body>
+</html>
+
+
