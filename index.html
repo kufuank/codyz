@@ -290,6 +290,53 @@ section{position:relative}
 .rv{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.rv{opacity:1!important;transform:none!important}.club__dot{animation:none}}
+
+/* ===== Giriş/Kayıt pop-up (buzlu cam) ===== */
+body.modal-open{overflow:hidden}
+.modal{position:fixed;inset:0;z-index:200;display:none;align-items:center;justify-content:center;padding:18px}
+.modal.open{display:flex}
+.modal__bd{position:absolute;inset:0;background:rgba(10,8,6,.5);
+  backdrop-filter:blur(16px) saturate(1.05);-webkit-backdrop-filter:blur(16px) saturate(1.05);animation:bdin .3s ease;cursor:pointer}
+@keyframes bdin{from{opacity:0}to{opacity:1}}
+.modal__card{position:relative;z-index:2;width:100%;max-width:430px;background:var(--surface);border:1px solid var(--line-2);
+  border-radius:24px;padding:clamp(24px,4vw,36px);box-shadow:0 50px 130px -40px rgba(0,0,0,.95);max-height:94vh;overflow-y:auto;animation:cardin .35s var(--ease)}
+@keyframes cardin{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.modal__close{position:absolute;top:14px;right:14px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--tx-2);display:grid;place-items:center;cursor:pointer;transition:color .2s,border-color .2s}
+.modal__close:hover{color:var(--coral);border-color:rgba(255,106,61,.4)}
+.modal .mmark{font-family:'Sora';font-weight:800;font-size:1.45rem;letter-spacing:-.03em}
+.modal .mmark .z{color:var(--coral)}
+.mtabs{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:4px;margin:18px 0 20px}
+.mtabs button{flex:1;border:none;background:none;color:var(--tx-2);font-family:'Sora';font-weight:600;font-size:.9rem;padding:9px;border-radius:99px;cursor:pointer;transition:background .2s,color .2s}
+.mtabs button.active{background:var(--surface-2);color:var(--tx)}
+.modal h3{font-size:1.4rem;font-weight:700}
+.modal .msub{color:var(--tx-3);font-size:.88rem;margin:6px 0 18px}
+.mfield{margin-bottom:14px}
+.mfield label{display:block;font-family:'Sora';font-weight:600;font-size:.78rem;color:var(--tx-2);margin-bottom:7px}
+.mfield input{width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:12px;padding:12px 14px;color:var(--tx);font-size:.94rem;outline:none;transition:border-color .2s,box-shadow .2s}
+.mfield input:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(124,107,255,.18)}
+.mfield input::placeholder{color:var(--tx-3)}
+.mtrack{display:none;gap:10px;margin-bottom:14px}
+.mtrack.show{display:flex}
+.mtrack label{flex:1;cursor:pointer;position:relative}
+.mtrack input{position:absolute;opacity:0;pointer-events:none}
+.mtrack .opt{display:block;height:100%;border:1px solid var(--line-2);border-radius:12px;padding:11px;text-align:center;transition:border-color .2s,background .2s}
+.mtrack .opt b{font-family:'Sora';font-weight:600;font-size:.84rem;display:block}
+.mtrack .opt small{color:var(--tx-3);font-size:.7rem}
+.mtrack input:checked + .opt{border-color:var(--coral);background:rgba(255,106,61,.08)}
+.mtrack label:last-child input:checked + .opt{border-color:var(--violet);background:rgba(124,107,255,.1)}
+.mbtn{margin-top:6px;width:100%;border:none;cursor:pointer;font-family:'Sora';font-weight:700;font-size:.96rem;background:var(--coral);color:var(--ink);padding:13px;border-radius:12px;transition:transform .15s var(--ease),opacity .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.mbtn:hover{transform:translateY(-1px)}
+.mbtn:disabled{opacity:.6;cursor:wait;transform:none}
+.mspin{width:16px;height:16px;border:2px solid rgba(21,17,14,.4);border-top-color:var(--ink);border-radius:50%;animation:msp .7s linear infinite;display:none}
+.mbtn.loading .mspin{display:block}.mbtn.loading .mlbl{opacity:.7}
+@keyframes msp{to{transform:rotate(360deg)}}
+.mmsg{margin-top:14px;padding:11px 14px;border-radius:12px;font-size:.84rem;display:none;line-height:1.4}
+.mmsg.show{display:block}
+.mmsg.err{background:rgba(255,106,61,.12);border:1px solid rgba(255,106,61,.4);color:#ffb69e}
+.mmsg.ok{background:rgba(95,191,142,.12);border:1px solid rgba(95,191,142,.4);color:#a6e0c4}
+.mfoot{margin-top:18px;color:var(--tx-3);font-size:.8rem;text-align:center}
+@media (prefers-reduced-motion:reduce){.modal__bd,.modal__card{animation:none}.mspin{animation:none}}
 </style>
 </head>
 <body>
@@ -593,6 +640,115 @@ section{position:relative}
     </div>
   </div>
 </footer>
+
+<!-- GİRİŞ / KAYIT POP-UP -->
+<div class="modal" id="authModal" role="dialog" aria-modal="true" aria-label="Giriş ve kayıt" aria-hidden="true">
+  <div class="modal__bd" id="authBd" aria-hidden="true"></div>
+  <div class="modal__card">
+    <button class="modal__close" id="authClose" aria-label="Kapat"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="5" y1="5" x2="19" y2="19"/><line x1="19" y1="5" x2="5" y2="19"/></svg></button>
+    <div class="mmark">Cody<span class="z">z</span></div>
+    <div class="mtabs" role="tablist">
+      <button id="mTabLogin" class="active" role="tab">Giriş</button>
+      <button id="mTabSignup" role="tab">Kayıt ol</button>
+    </div>
+    <h3 id="mTitle">Tekrar hoş geldin</h3>
+    <p class="msub" id="mSub">İdmanların kaldığın yerden devam ediyor.</p>
+    <form id="mForm" novalidate>
+      <div class="mfield" id="mNameField" style="display:none">
+        <label for="mName">Ad</label>
+        <input id="mName" type="text" autocomplete="name" placeholder="Adın" />
+      </div>
+      <div class="mtrack" id="mTrack">
+        <label><input type="radio" name="mtrack" value="kasif" checked /><span class="opt"><b>Kodlama Okulu</b><small>Kâşif · çocuk yaratıcılığı</small></span></label>
+        <label><input type="radio" name="mtrack" value="kurucu" /><span class="opt"><b>Yapay Zeka Okulu</b><small>Kurucu · kurumsal</small></span></label>
+      </div>
+      <div class="mfield">
+        <label for="mEmail">E-posta</label>
+        <input id="mEmail" type="email" autocomplete="email" inputmode="email" placeholder="ornek@codyz.club" required />
+      </div>
+      <div class="mfield">
+        <label for="mPassword">Şifre</label>
+        <input id="mPassword" type="password" autocomplete="current-password" placeholder="En az 6 karakter" minlength="6" required />
+      </div>
+      <button class="mbtn" id="mSubmit" type="submit"><span class="mspin"></span><span class="mlbl">Giriş yap</span></button>
+      <div class="mmsg" id="mMsg" role="alert" aria-live="polite"></div>
+    </form>
+    <p class="mfoot">Devam ederek Codyz Club topluluk kurallarını kabul edersin.</p>
+  </div>
+</div>
+
+<script type="module">
+import { supabase } from './app/config.js';
+const $=function(id){return document.getElementById(id);};
+const modal=$('authModal');
+let mMode='login', hasSession=false;
+
+// Oturum varsa CTA'lar doğrudan panele götürür
+supabase.auth.getSession().then(function(res){ hasSession = !!(res.data && res.data.session); });
+
+function openAuth(mode){
+  if(hasSession){ location.href='app/panel.html'; return; }
+  setMMode(mode||'login');
+  modal.classList.add('open'); modal.setAttribute('aria-hidden','false'); document.body.classList.add('modal-open');
+  setTimeout(function(){ $('mEmail').focus(); }, 60);
+}
+function closeAuth(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); document.body.classList.remove('modal-open'); mHide(); }
+window.openAuth=openAuth;
+
+function setMMode(m){
+  mMode=m; var s=m==='signup';
+  $('mTabLogin').classList.toggle('active',!s); $('mTabSignup').classList.toggle('active',s);
+  $('mTitle').textContent = s?'Yola çık':'Tekrar hoş geldin';
+  $('mSub').textContent = s?'Hesabını oluştur, beyaz kuşağını kuşan.':'İdmanların kaldığın yerden devam ediyor.';
+  $('mNameField').style.display = s?'block':'none';
+  $('mTrack').classList.toggle('show',s);
+  $('mPassword').autocomplete = s?'new-password':'current-password';
+  $('mSubmit').querySelector('.mlbl').textContent = s?'Hesabımı oluştur':'Giriş yap';
+  mHide();
+}
+$('mTabLogin').onclick=function(){ setMMode('login'); };
+$('mTabSignup').onclick=function(){ setMMode('signup'); };
+
+function mShow(t,k){ var m=$('mMsg'); m.textContent=t; m.className='mmsg show '+k; }
+function mHide(){ $('mMsg').className='mmsg'; }
+function mLoad(on){ var b=$('mSubmit'); b.disabled=on; b.classList.toggle('loading',on); }
+
+// Kapatma: backdrop, X, Esc
+$('authBd').addEventListener('click', closeAuth);
+$('authClose').addEventListener('click', closeAuth);
+document.addEventListener('keydown', function(e){ if(e.key==='Escape' && modal.classList.contains('open')) closeAuth(); });
+
+// CTA linklerini yakala (app/index.html -> modal)
+document.querySelectorAll('a[href="app/index.html"]').forEach(function(a){
+  var login = a.textContent.trim()==='Giriş' || a.textContent.trim()==='Giriş yap';
+  a.addEventListener('click', function(e){ e.preventDefault(); openAuth(login?'login':'signup'); });
+});
+
+// Form gönderimi
+$('mForm').addEventListener('submit', async function(e){
+  e.preventDefault(); mHide();
+  var email=$('mEmail').value.trim(), password=$('mPassword').value;
+  if(!email || password.length<6){ mShow('E-posta ve en az 6 karakterlik şifre gerekli.','err'); return; }
+  mLoad(true);
+  try{
+    if(mMode==='signup'){
+      var full_name=$('mName').value.trim() || email.split('@')[0];
+      var track=document.querySelector('input[name="mtrack"]:checked').value;
+      var r=await supabase.auth.signUp({ email, password, options:{ data:{ full_name, track } } });
+      if(r.error) throw r.error;
+      if(r.data.session){ location.href='app/panel.html'; }
+      else { mShow('Hesabın oluşturuldu. E-postandaki onay bağlantısına tıkla, sonra giriş yap.','ok'); setTimeout(function(){ setMMode('login'); }, 400); mLoad(false); }
+    } else {
+      var l=await supabase.auth.signInWithPassword({ email, password });
+      if(l.error) throw l.error;
+      location.href='app/panel.html';
+    }
+  } catch(err){
+    var map={'Invalid login credentials':'E-posta ya da şifre hatalı.','User already registered':'Bu e-posta zaten kayıtlı. Giriş yapmayı dene.','Email not confirmed':'E-postan henüz onaylanmadı.'};
+    mShow(map[err.message] || ('Bir şey ters gitti: '+err.message),'err'); mLoad(false);
+  }
+});
+</script>
 
 <script>
 (function(){
