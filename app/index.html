@@ -23,7 +23,6 @@ h1,h2,.dsp{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em}
 a{color:var(--coral)}
 .wrap{width:100%;max-width:880px;display:grid;grid-template-columns:1.05fr .95fr;border:1px solid var(--line);
   border-radius:24px;overflow:hidden;background:var(--surface);box-shadow:0 40px 120px -50px rgba(0,0,0,.8)}
-@media(max-width:740px){.wrap{grid-template-columns:1fr;max-width:440px}.aside{display:none}}
 
 /* sol görsel panel */
 .aside{position:relative;background:var(--ink);padding:34px;display:flex;flex-direction:column;justify-content:space-between;min-height:520px;overflow:hidden}
@@ -75,6 +74,12 @@ a{color:var(--coral)}
 .msg.ok{background:rgba(95,191,142,.12);border:1px solid rgba(95,191,142,.4);color:#a6e0c4}
 .foot{margin-top:22px;color:var(--tx-3);font-size:.82rem;text-align:center}
 :focus-visible{outline:2.5px solid var(--violet);outline-offset:2px}
+
+/* Responsive — temel kurallardan SONRA gelmeli ki ezebilsin */
+@media(max-width:740px){
+  .wrap{grid-template-columns:1fr;max-width:440px}
+  .aside{display:none}
+}
 </style>
 </head>
 <body>
