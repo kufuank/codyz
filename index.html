@@ -244,6 +244,31 @@ section{position:relative}
 .plan--feat{position:relative;border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
 .plan__badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--ink);font-family:'Sora';font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;padding:.35em 1em;border-radius:99px;white-space:nowrap}
 
+/* Kuşak kurdelesi (Higgsfield banner) */
+.ribbon{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);margin-top:2.4rem;position:relative}
+.ribbon img{width:100%;height:clamp(130px,20vw,220px);object-fit:cover;display:block}
+.ribbon::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 60px rgba(14,11,9,.55);pointer-events:none}
+
+/* Paket vitrini v2 — asimetrik, aile odaklı */
+.pkg-grid{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(16px,2vw,24px);margin-top:3rem;align-items:stretch}
+@media(max-width:880px){.pkg-grid{grid-template-columns:1fr}}
+.pkg-col{display:flex;flex-direction:column;gap:clamp(16px,2vw,24px)}
+.pkg{position:relative;overflow:hidden;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--bg);
+  padding:clamp(24px,2.6vw,32px);display:flex;flex-direction:column;flex:1;transition:transform .3s var(--ease),box-shadow .3s}
+.pkg:hover{transform:translateY(-4px);box-shadow:0 28px 64px -36px rgba(0,0,0,.75)}
+.pkg__belt{position:absolute;top:0;left:0;right:0;height:6px}
+.pkg__meta{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.95rem}
+.pkg--family{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset;
+  background:linear-gradient(165deg,rgba(242,169,59,.12),var(--bg) 55%);min-height:540px}
+.pkg--family:hover{box-shadow:0 0 0 1px var(--gold) inset,0 32px 72px -38px rgba(0,0,0,.8)}
+.pkg--family .fox{position:absolute;right:-3%;bottom:-1%;width:min(60%,330px);z-index:0;
+  filter:drop-shadow(0 24px 40px rgba(0,0,0,.6));pointer-events:none}
+.pkg--family > *:not(.fox){position:relative;z-index:1}
+.pkg__schools{display:flex;flex-direction:column;gap:.6rem;margin-top:1.1rem;max-width:60%}
+.pkg__school{display:flex;gap:.6rem;align-items:flex-start;font-size:.9rem;color:var(--tx-2);line-height:1.4}
+.pkg__school i{width:9px;height:9px;border-radius:50%;flex:none;margin-top:.42em}
+@media(max-width:520px){.pkg--family{min-height:0;padding-bottom:56%}.pkg--family .fox{width:74%}.pkg__schools{max-width:100%}}
+
 /* Club */
 .club{position:relative;border-radius:var(--r-lg);overflow:hidden;padding:clamp(38px,6vw,76px);text-align:center;background:linear-gradient(160deg,var(--violet-deep),#3b2fa6);border:1px solid rgba(124,107,255,.4)}
 .club h2{font-size:var(--s3)}
@@ -472,8 +497,8 @@ body.modal-open{overflow:hidden}
       <div class="courses">
         <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg></div><h4>FunTech Kâşif</h4><p>İlk dijital adımlar: blok kodlama, animasyon, oyun ve yaratıcılık.</p><div class="course__meta"><span class="lvl lvl--age">5–7 yaş</span><span class="lvl">Blok kodlama</span></div></article>
         <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a5 5 0 0 0-7.4 6.7l-2.6 2.6a2 2 0 1 0 2.7 2.7l2.6-2.6a5 5 0 0 0 6.7-7.4"/></svg></div><h4>Scratch ile Oyun</h4><p>Sürükle-bırak bloklarla kendi oyununu ve hikâyeni kur.</p><div class="course__meta"><span class="lvl lvl--age">8–10 yaş</span><span class="lvl">Scratch</span></div></article>
-        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg></div><h4>Roblox &amp; Lua</h4><p>Roblox Studio'da Lua ile gerçek oyunlar tasarla ve yayınla.</p><div class="course__meta"><span class="lvl lvl--age">8–14 yaş</span><span class="lvl">Lua · oyun</span></div></article>
-        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2M16 3h2a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2"/></svg></div><h4>Python</h4><p>Gerçek metin tabanlı programlama: temel kavramlar ve mantık.</p><div class="course__meta"><span class="lvl lvl--age">13+ yaş</span><span class="lvl">Python</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg></div><h4>Roblox &amp; Lua</h4><p>Roblox Studio'da Lua ile 10 oyun kur, yayınla, sat: obby'den yarışa, dükkandan Game Pass'e.</p><div class="course__meta"><span class="lvl lvl--age">8–14 yaş</span><span class="lvl">40 ders · 60 dk</span><span class="lvl">Lua · oyun</span></div></article>
+        <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H6a2 2 0 0 0-2 2v4a2 2 0 0 1-2 2 2 2 0 0 1 2 2v4a2 2 0 0 0 2 2h2M16 3h2a2 2 0 0 1 2 2v4a2 2 0 0 0 2 2 2 2 0 0 0-2 2v4a2 2 0 0 1-2 2h-2"/></svg></div><h4>Python</h4><p>Gerçek metin tabanlı programlama: oyundan sanal asistana 10 proje.</p><div class="course__meta"><span class="lvl lvl--age">13+ yaş</span><span class="lvl">40 ders · 10 modül</span><span class="lvl">Python</span></div></article>
         <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg></div><h4>Python PRO</h4><p>Web geliştirme ve yapay zekâ/ML'ye giriş — projeyle pekiştir.</p><div class="course__meta"><span class="lvl lvl--age">13+ yaş</span><span class="lvl lvl--pro">PRO · web + AI</span></div></article>
         <article class="course rv"><div class="course__ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg></div><h4>Web Geliştirme</h4><p>HTML, CSS ve JavaScript ile kendi web sitelerini yayına al.</p><div class="course__meta"><span class="lvl lvl--age">14+ yaş</span><span class="lvl">HTML · CSS · JS</span></div></article>
       </div>
@@ -515,7 +540,8 @@ body.modal-open{overflow:hidden}
 <section class="band" id="kusak">
   <div class="wrap">
     <div class="sec-head rv"><span class="eyebrow">Kuşak yolu</span><h2>Beyaz kuşaktan ustalığa.</h2><p class="lede">İki okul da aynı kuşakları paylaşır. Beyazdan başlar, mürekkebe iner; Kodlama Okulu'nda zirve Kod-fu ustalığıdır.</p></div>
-    <div class="cards c4" style="margin-top:3rem">
+    <div class="ribbon rv" aria-hidden="true"><img src="assets/belt-ribbon-dark.webp" alt="" /></div>
+    <div class="cards c4" style="margin-top:1.6rem">
       <article class="belt rv"><div class="belt__band" style="background:#E8E2D2"></div><div><span class="belt__k">Kuşak 1</span><span class="belt__stage">İlk temas</span></div><p>İlk küçük şeyini kur; aracı ve mantığı tanı.</p></article>
       <article class="belt rv"><div class="belt__band" style="background:var(--coral)"></div><div><span class="belt__k">Kuşak 2</span><span class="belt__stage">Temel</span></div><p>Gerçek bir şey kur: oyun, mini app ya da ilk agent.</p></article>
       <article class="belt rv"><div class="belt__band" style="background:var(--violet)"></div><div><span class="belt__k">Kuşak 3</span><span class="belt__stage">Derinleşme</span></div><p>İşine ya da oyununa kodu ve AI'ı göm.</p></article>
@@ -553,29 +579,43 @@ body.modal-open{overflow:hidden}
 <!-- PAKETLER -->
 <section class="band band--surface" id="paketler">
   <div class="wrap">
-    <div class="sec-head rv"><span class="eyebrow">Paketler</span><h2>Okulunu seç.</h2></div>
-    <div class="cards c3" style="margin-top:3rem">
-      <article class="plan plan--kodlama rv">
-        <span class="plan__tag">Kâşif · Kodlama Okulu</span>
-        <div class="plan__name">Kodlama Paketi</div>
-        <p class="plan__desc">Çocuk yaratıcılığı · dönemlik · küçük grup · kuşak ilerlemesi. Scratch'ten Python'a, Kod-fu ustalığına giden yol.</p>
-        <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
-        <a href="app/index.html" class="btn btn--ghost">Tanışma dersi al</a>
-      </article>
-      <article class="plan plan--ai rv">
-        <span class="plan__tag">Kurucu · Yapay Zeka Okulu</span>
-        <div class="plan__name">Yapay Zeka Paketi</div>
-        <p class="plan__desc">Kurumsal · giriş→pro. Claude, GPT, Gemini ve ajanlarla işine ve ekibine dokunan gerçek çıktı.</p>
-        <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
-        <a href="app/index.html" class="btn btn--ghost">Tanışma dersi al</a>
-      </article>
-      <article class="plan plan--feat rv">
+    <div class="sec-head rv"><span class="eyebrow">Paketler</span><h2>Okulunu seç.</h2><p class="lede">Kohort temelli, canlı ve önce-proje. Her paket kuşak ilerlemesi ve şaheserle gelir.</p></div>
+    <div class="pkg-grid">
+      <div class="pkg-col">
+        <article class="pkg rv">
+          <span class="pkg__belt" style="background:linear-gradient(90deg,var(--coral),transparent 70%)"></span>
+          <span class="plan__tag" style="color:var(--coral)">Kâşif · Kodlama Okulu</span>
+          <div class="plan__name">Kodlama Paketi</div>
+          <p class="plan__desc">Çocuk yaratıcılığı: Scratch'ten Python'a, Roblox'tan web'e. Kuşak kuşak ilerler, Kod-fu ustalığına yürür.</p>
+          <div class="pkg__meta"><span class="lvl lvl--age">5–17 yaş</span><span class="lvl">40 ders / kur</span><span class="lvl">60 dk canlı</span><span class="lvl">küçük grup</span></div>
+          <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
+          <a href="app/index.html" class="btn btn--ghost" style="margin-top:1.2rem;justify-content:center">Tanışma dersi al</a>
+        </article>
+        <article class="pkg rv">
+          <span class="pkg__belt" style="background:linear-gradient(90deg,var(--violet),transparent 70%)"></span>
+          <span class="plan__tag" style="color:var(--violet)">Kurucu · Yapay Zeka Okulu</span>
+          <div class="plan__name">Yapay Zeka Paketi</div>
+          <p class="plan__desc">Kurumsal: Claude, GPT, Gemini ve ajanlarla işine ve ekibine dokunan gerçek çıktı.</p>
+          <div class="pkg__meta"><span class="lvl lvl--giris">Giriş</span><span class="lvl lvl--pro">Pro</span><span class="lvl">8+ araç</span><span class="lvl">sektöre özel</span></div>
+          <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
+          <a href="app/index.html" class="btn btn--ghost" style="margin-top:1.2rem;justify-content:center">Tanışma dersi al</a>
+        </article>
+      </div>
+      <article class="pkg pkg--family rv">
         <span class="plan__badge">İki okul bir arada</span>
+        <span class="pkg__belt" style="background:linear-gradient(90deg,var(--coral),var(--violet) 50%,var(--gold))"></span>
         <span class="plan__tag" style="color:var(--gold)">Aile Paketi</span>
-        <div class="plan__name">Hem kurumsal, hem çocuk yaratıcılığı</div>
-        <p class="plan__desc">Çocuk Kodlama Okulu'nda yaratıcılığını kuşanırken, ebeveyn Yapay Zeka Okulu'nda işini kurumsal seviyede büyütür. Avantajlı, ailecek.</p>
+        <div class="plan__name" style="font-size:var(--s2);line-height:1.08">Ailecek<br>ustalık.</div>
+        <p class="plan__desc" style="flex:0 0 auto;max-width:62%">Çocuk Kodlama Okulu'nda yaratıcılığını kuşanır; ebeveyn Yapay Zeka Okulu'nda işini büyütür. Aynı ritim, aynı sahne.</p>
+        <div class="pkg__schools">
+          <div class="pkg__school"><i style="background:var(--coral)"></i>Çocuğa: Kodlama Okulu · tam kur</div>
+          <div class="pkg__school"><i style="background:var(--violet)"></i>Ebeveyne: Yapay Zeka Okulu · Giriş→Pro</div>
+          <div class="pkg__school"><i style="background:var(--gold)"></i>Ortak: Codyz Club + aile demo-day'i</div>
+        </div>
+        <div class="pkg__meta"><span class="lvl lvl--pro">Avantajlı paket</span><span class="lvl">2 kayıt · 1 aile</span></div>
         <p class="plan__note">Fiyat ve taksit için tanışma dersinde.</p>
-        <a href="app/index.html" class="btn btn--gold">Aile paketini gör</a>
+        <a href="app/index.html" class="btn btn--gold" style="margin-top:1.2rem;align-self:flex-start">Aile paketini gör <span class="ar" aria-hidden="true">→</span></a>
+        <img class="fox" src="assets/fox-family.png" alt="" aria-hidden="true" />
       </article>
     </div>
   </div>
