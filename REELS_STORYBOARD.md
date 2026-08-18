@@ -1,6 +1,6 @@
 # Kodjitsu Reels Reklamı — Storyboard v1
 
-> Kaynak: `C:\Users\Renee\Desktop\kodyz\*_9x16.png` (Higgsfield / GPT Image 2 ile 9:16'ya genişletildi)
+> Kaynak: `C:\Users\Renee\Desktop\kodjitsu\*_9x16.png` (Higgsfield / GPT Image 2 ile 9:16'ya genişletildi)
 > Hedef: Instagram Reels · 1080×1920 · ~24 sn · müzik odaklı, VO yok
 > Üretim zinciri: Higgsfield MCP → Kling 3.0 image-to-video (her sahne kendi kapağından başlar) → kurgu (CapCut/Premiere)
 
@@ -21,7 +21,7 @@
 | 4 | 10.5–14.0 | **BLENDER** | Turuncu enerji şeritleri akar, donut & Suzanne yavaşça yörüngede döner, node panelleri parıldar | — |
 | 5 | 14.0–17.5 | **C#** | Mor/macenta enerji döner, # ve .NET altıgenleri yukarı süzülür, parşömenler dalgalanır | — |
 | 6 | 17.5–21.0 | **MATEMATİK** | Altın/mavi sayı çemberleri döner, π ve ∞ nabız atar, abaküs taneleri kayar | — |
-| 7 | 21.0–24.0 | **KAPANIŞ** (Python karesi devam) | Kamera butona yaklaşır, "Ustanı Bul" butonu kalp atışı gibi parlar, ışıltılar butona toplanır | "İlk ders ücretsiz → kodyz.com" |
+| 7 | 21.0–24.0 | **KAPANIŞ** (Python karesi devam) | Kamera butona yaklaşır, "Ustanı Bul" butonu kalp atışı gibi parlar, ışıltılar butona toplanır | "İlk ders ücretsiz → profildeki link" |
 
 ## Kling 3.0 prompt'ları (üretime hazır)
 
@@ -39,12 +39,32 @@ Ortak son ek (her prompt'un sonuna eklenir):
 ## Üretim — TAMAMLANDI (2026-08-14)
 - Model: **Kling 3.0** (`kling3_0`) · mode `std` · 4 sn · 9:16 · ses kapalı · 7 klip · 6 kredi/klip = **42 kredi**
 - Çıktı çözünürlüğü: **720×1280** (std mod). Kurguda 1080×1920'ye upscale edilecek; daha keskin master isteniyorsa aynı prompt'lar `mode: "pro"` ile tekrarlanabilir.
-- Klipler: `C:\Users\Renee\Desktop\kodyz\reels\` → `1_python.mp4`, `2_roblox.mp4`, `3_unity.mp4`, `4_blender.mp4`, `5_csharp.mp4`, `6_matematik.mp4`, `7_kapanis.mp4`
+- Klipler: `C:\Users\Renee\Desktop\kodjitsu\reels\` → `1_python.mp4`, `2_roblox.mp4`, `3_unity.mp4`, `4_blender.mp4`, `5_csharp.mp4`, `6_matematik.mp4`, `7_kapanis.mp4`
 
 ### Kurgu adımları (CapCut / Premiere — elle)
 1. Klipleri yukarıdaki sıraya diz, her birini ~3.5 sn'ye kırp (baş/son 0.25 sn at).
 2. Geçiş: beat üstünde smash cut + 2 kare beyaz flaş.
 3. Müzik: taiko + trap hibrit, ~132 BPM; geçişlerde whoosh SFX.
-4. Overlay metinler: 0.3 sn'de "Kod dojosuna hoş geldin 🥋", 21. sn'de "İlk ders ücretsiz → kodyz.com".
+4. Overlay metinler: 0.3 sn'de "Kod dojosuna hoş geldin 🥋", 21. sn'de "İlk ders ücretsiz → profildeki link".
 5. Her klipte %3 dijital zoom drift; kapak karesi (cover) Python sahnesi.
 6. Export: 1080×1920, 30 fps, H.264, ≤30 sn.
+
+---
+
+## Wide (16:9) sürüm — site hero reel'i · 18 Ağustos 2026
+Aynı 6 paket, web için yeniden üretildi: kare kapaklar önce 16:9'a genişletildi (GPT Image 2, 4 kredi/görsel),
+sonra bu wide kapaklardan 5 sn'lik klipler üretildi (Kling 3.0 std, sessiz, 6 kredi/klip) — toplam **60 kredi**.
+
+| Sıra | Paket | Repo yolu | Poster |
+|---|---|---|---|
+| 1 | Roblox & Lua | `assets/video/roblox.mp4` | `assets/kurslar/roblox-16x9.webp` |
+| 2 | Python | `assets/video/python.mp4` | `assets/kurslar/python-16x9.webp` |
+| 3 | Unity | `assets/video/unity.mp4` | `assets/kurslar/unity-16x9.webp` |
+| 4 | Blender | `assets/video/blender.mp4` | `assets/kurslar/blender-16x9.webp` |
+| 5 | C# & .NET | `assets/video/csharp.mp4` | `assets/kurslar/csharp-16x9.webp` |
+| 6 | Kodlayarak Matematik | `assets/video/matematik.mp4` | `assets/kurslar/matematik-16x9.webp` |
+
+Sitede kullanım: `index.html` → `.reel` bölümü. Scroll ilerlemesi segmentlere bölünür,
+segment içi konum videonun `currentTime` değerine yazılır (ileri/geri sarma). Ayrıntı: README.
+
+> Not: klipler 1280×720 (std mod). Daha keskin master gerekirse aynı prompt'lar `mode: "pro"` ile tekrarlanır.

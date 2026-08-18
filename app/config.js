@@ -1,4 +1,4 @@
-// Codyz MVP — Supabase istemci yapılandırması
+// Kodjitsu MVP — Supabase istemci yapılandırması
 // NOT: publishable (anon) anahtar tarayıcıda güvenlidir; veriyi RLS korur.
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
