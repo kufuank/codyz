@@ -3,6 +3,10 @@
 > **Marka notu:** Proje Ağustos 2026'da **Codyz → Kodjitsu** olarak yeniden adlandırıldı.
 > Ad, tüm görsel/video varlıklardaki "Kodjitsu Eğitimi" başlığıyla hizalıdır. Ayrıntı: [MARKA_GECISI.md](MARKA_GECISI.md)
 
+**Canlı önizleme:** https://kufuank.github.io/codyz/
+> GitHub Pages şu an `reels-storyboard` dalından yayınlanıyor (PR #1 henüz birleşmedi).
+> PR main'e birleşince Pages kaynağı `main` olarak geri alınmalı; aksi halde dal silinirse site düşer.
+
 Statik site + öğrenci paneli MVP. Build adımı yok; saf HTML/CSS/JS + Supabase.
 
 ## Yapı
