@@ -38,7 +38,7 @@ Videolar `Range` istekleriyle sarıldığı için yayın ortamı **206 Partial C
 
 ## Pazarlama
 Şu an odak **Instagram**: sayfa kurulumu, içerik takvimi ve reklam planı → [INSTAGRAM_PLANI.md](INSTAGRAM_PLANI.md)
-Reels kurgu planı → [REELS_STORYBOARD.md](REELS_STORYBOARD.md) · Görsel üretim promptları → [HIGGSFIELD_PROMPTLARI.md](HIGGSFIELD_PROMPTLARI.md)
+Post metinleri → [POST_METINLERI.md](POST_METINLERI.md) · Reels kurgu planı → [REELS_STORYBOARD.md](REELS_STORYBOARD.md) · Görsel üretim promptları → [HIGGSFIELD_PROMPTLARI.md](HIGGSFIELD_PROMPTLARI.md)
 
 ## Backend (Supabase)
 Tablolar: `profiles`, `tasks`; view: `leaderboard`. Kayıtta trigger otomatik profil + 4 idman kurar. Tüm tablolarda RLS açık.
