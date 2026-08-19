@@ -3,6 +3,8 @@
 > Kullanım: her post ilgili kurs kapağıyla (`assets/kurslar/*-9x16.webp`) ya da hero klibiyle paylaşılır.
 > Karakter sınırı 2.200; ilk ~125 karakter "…devamı" öncesi görünen kısımdır — kanca hep orada.
 > **Ders sayıları ve yaş bantları taslaktır**, müfredat kesinleşince güncellenmeli.
+> Kariyer paragrafları bilinçli olarak **maaş, iş garantisi veya uydurma istatistik içermez** —
+> velinin "altın bilezik" içgörüsüne dokunur ama söz vermez. Bu çizgi korunmalı.
 
 ---
 
@@ -13,6 +15,8 @@ Ekran süresini tartışmak yerine yönünü değiştiriyoruz. Roblox Studio'da 
 
 Ne öğreniyor: değişken, döngü, koşul ve olay mantığı — hepsini sevdiği oyunun içinde.
 Ne çıkıyor: yayınlanmış, arkadaşlarının oynayabildiği kendi oyunu.
+
+Yarına ne kalıyor: Bugün oyun kuran çocuk, yarın bunu yapan insanların mesleği olduğunu görüyor — oyun geliştirici, seviye tasarımcısı, yazılımcı. Roblox'un kendi geliştirici ekosistemi var; üretmeye erken başlayan çocuk daha lise çağında yayınlanmış işlerden oluşan bir portföyle geziyor. Eskiler "altın bilezik" derdi; bugünün bileziği kod yazabilmek.
 
 🥋 8–14 yaş · online canlı ders · küçük grup
 👉 Ücretsiz tanışma dersi için profildeki link
@@ -29,6 +33,8 @@ Sürükle-bırak bloklar iyi bir başlangıç, ama bir yerden sonra dar geliyor.
 Ne öğreniyor: metin tabanlı programlama, veri, fonksiyon, kütüphane kullanımı.
 Ne çıkıyor: kendi oyunundan sanal asistanına 10 proje.
 
+Yarına ne kalıyor: Python bugün yapay zekâdan veri analizine, otomasyondan bilimsel araştırmaya kadar en yaygın kullanılan dillerden biri. Yani çocuğunuz tek bir mesleğe değil, birçok mesleğin ortak diline hazırlanıyor — mühendislik de okusa, tıp da, ekonomi de bu beceri yanında gidiyor. Bir zanaat gibi: öğrenildiğinde elde kalıyor.
+
 🥋 13+ yaş · online canlı ders · küçük grup
 👉 Ücretsiz tanışma dersi için profildeki link
 
@@ -43,6 +49,8 @@ Roblox'ta kurmayı öğrenen çocuk, Unity'de profesyonel araca geçiyor. Sahney
 
 Ne öğreniyor: oyun motoru mantığı, 2B/3B sahne kurulumu, fizik ve seviye tasarımı.
 Ne çıkıyor: telefonda ya da bilgisayarda açılabilen kendi oyunu.
+
+Yarına ne kalıyor: Unity yalnız oyunda değil; simülasyon, mimari görselleştirme, eğitim yazılımı ve AR/VR projelerinde de kullanılıyor. Türkiye'de oyun stüdyoları ciddi bir sektör hâline geldi ve bu işte diplomadan önce portföye bakılıyor. Çocuğunuz daha okul sıralarındayken gösterebileceği işler biriktiriyor — kapıyı çalarken elinde bir şey olması demek bu.
 
 🥋 12+ yaş · online canlı ders · küçük grup
 👉 Ücretsiz tanışma dersi için profildeki link
@@ -59,6 +67,8 @@ Blender, sinema ve oyun sektörünün kullandığı ücretsiz 3B tasarım progra
 Ne öğreniyor: 3B modelleme, kaplama ve ışık, temel animasyon, sabırla iterasyon.
 Ne çıkıyor: render alınmış kendi 3B sahnesi ve kısa animasyonu.
 
+Yarına ne kalıyor: 3B tasarım bugün reklamdan mimariye, oyundan ürün görselleştirmeye kadar geniş bir alanda iş üretiyor ve bu işlerin çoğu uzaktan, proje bazlı yapılabiliyor. Yani yeteneğini geliştiren biri kendi işini kurabiliyor, evinden dünyaya iş yapabiliyor. Çizim yeteneği olan çocuk için bu, hobiyi mesleğe çeviren köprü.
+
 🥋 11+ yaş · online canlı ders · küçük grup
 👉 Ücretsiz tanışma dersi için profildeki link
 
@@ -74,6 +84,8 @@ C#, oyun motorlarından kurumsal yazılıma kadar her yerde kullanılan bir dil.
 Ne öğreniyor: nesne yönelimli düşünme, veri yapıları, proje mimarisi, temiz kod.
 Ne çıkıyor: kendi masaüstü uygulaması ya da oyun projesi.
 
+Yarına ne kalıyor: Bu paket doğrudan mesleğe bakan paket. Bankalardan sigortaya, sanayiden kamuya kadar kurumların yazılımları bu tür dillerle yürüyor; üniversitede bilgisayar mühendisliği okuyacak çocuk derslere bir adım önde başlıyor, okumayacak olan ise elinde satılabilir bir beceriyle mezun oluyor. Altın bileziğin bugünkü karşılığı tam olarak bu.
+
 🥋 14+ yaş · online canlı ders · küçük grup
 👉 Ücretsiz tanışma dersi için profildeki link
 
@@ -88,6 +100,8 @@ Denklem soyut kaldığı sürece sıkıcıdır. Burada çocuk her konuyu kodla g
 
 Ne öğreniyor: okul müfredatındaki konuları koda dökerek kavrama, problem çözme alışkanlığı.
 Ne çıkıyor: kendi yazdığı, konuyu anlatan interaktif görselleştirmeler.
+
+Yarına ne kalıyor: Matematik, mühendislikten veri analizine, finanstan yapay zekâya kadar iyi kazandıran mesleklerin tamamının kapısındaki eşik. Bu derste matematikten korkmayı bırakan çocuk yalnız karnesini değil, ileride önüne çıkacak bölüm ve meslek seçeneklerini de genişletiyor. En kalıcı altın bilezik, çözebilme alışkanlığı.
 
 🥋 9–14 yaş · online canlı ders · küçük grup
 👉 Ücretsiz tanışma dersi için profildeki link
