@@ -1,7 +1,18 @@
 # İç/strateji dosyaları — public repo'ya ve siteye girmesin
-.claude/
+.claude/*
+!.claude/skills/
 claude proje bundle/
 HIGGSFIELD_PROMPTLARI.md
+
+# Pazar araştırması ve ticari strateji — rakip analizi, fiyat modeli, birim ekonomi.
+# Yerelde durur, git'e girmez. Yedek almak istersen private repo aç.
+PAZAR_ARASTIRMASI.md
+RAKIP_ANALIZI.md
+FIYATLANDIRMA.md
+GTM_90GUN.md
+INSTAGRAM_KAMPANYASI.md
+FIYAT_MODELI.xlsx
+arastirma-ham/
 
 # OS / araç döküntüleri
 Thumbs.db
