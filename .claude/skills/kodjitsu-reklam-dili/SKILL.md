@@ -11,12 +11,34 @@ bunu bir insanın yazdığını düşünsün, bir kurumun değil.**
 ## Önce oku
 
 Metin yazmadan önce bu dosyaları oku — kaynak burada:
+- **`MARKA_DILI.md`** — sözlük ve yasak kelimeler. **Her şeyden önce bu.**
+- `EGITIM_KATALOGU.md` — programlar, sezonlar, fiyatlar, sertifika
 - `PAZAR_ARASTIRMASI.md` §5 — veli segmentleri, tetikleyiciler, 10 itiraz
 - `RAKIP_ANALIZI.md` §5 — savunulabilir boşluk, beş taahhüt, battlecard
-- `claude proje bundle/02_marka_kimligi_ve_gorsel_sistem.md` — sözlük, iki sıcaklık
 
 Bilmediğin bir rakam kullanma. Fiyat, ders sayısı, grup büyüklüğü, tarih — hepsi
-`FIYATLANDIRMA.md`'den gelir. Uydurma.
+`EGITIM_KATALOGU.md` ve `FIYATLANDIRMA.md`'den gelir. Uydurma.
+
+## Marka dili — 22 Ağustos 2026 kararı
+
+Uzak doğu felsefesi **şirket kültürü** olarak kaldı, **müşteri dili olmaktan çıktı.**
+Çocuk kuşak toplamıyor, bir **meslek kimliği** kuruyor.
+
+| Kullanma | Kullan |
+|---|---|
+| usta | **mentor** |
+| kuşak, beyaz/mor kuşak | **sezon** (1., 2., 3.) |
+| şaheser | **portfolyo işi** |
+| demo günü | **Gösterim Günü** |
+| dönem | **sezon** (12 hafta) |
+| idman | **haftalık iş** |
+| kod-fu, dojo, lonca, "su gibi ol" | — kaldırıldı |
+| Kodjitsu Club | **Kodjitsu Stüdyo** |
+
+Programlar rol adıyla anılır: **Yönetmen · Tasarımcı · İçerik Üreticisi · Yazılımcı ·
+Oyun Yapımcısı · AI Geliştirici · AI Girişimci.** "Kurs" değil "program", "seviye" değil "sezon".
+
+Ana hat: **"Araç değişir, iş kalır."**
 
 ---
 
@@ -69,7 +91,7 @@ satır serbesttir. Koku **başka yerlerden** gelir:
 
 ### İzin verilenler (düzyazı humanizer'ının yasakladığı ama reklamda doğru olanlar)
 
-- Eksiltili cümle: "Ustası değişmez. Hiç."
+- Eksiltili cümle: "Mentoru değişmez. Hiç."
 - Bağlaçla başlayan cümle: "Ama çocuk ekranı bırakmıyor."
 - Tek kelimelik satır: "Bitiriyorlar."
 - Konuşma bağlaçları: "işte", "zaten", "aslında", "hani", "yani"
@@ -94,7 +116,7 @@ Ayrıca: **çocuğu doğrudan satın almaya yönlendirmek hukuken yasak.** "Anne
 | **Kaygılı Yatırımcı** | "İşe yarayacak mı, yoksa moda mı" | Gelecek korkusu satma; çıktıyı göster |
 | **Hamleci Ebeveyn** | "Benim kaçırdığımı kaçırmasın" | Acındırma |
 | **Başarı Odaklı** | Zaman: "haftada 1 saat" | Okul başarısı vaat etme |
-| **Sosyalleşme Arayan** | Grup, akran, demo günü | "Arkadaş edinir" garantisi verme |
+| **Sosyalleşme Arayan** | Grup, akran, Gösterim Günü | "Arkadaş edinir" garantisi verme |
 
 ---
 
@@ -110,7 +132,7 @@ Aşağıdakiler Kodjitsu'nun araştırmasından türetildi — genel formül lis
 > "Deneme dersinden sonra sizi kimse aramayacak."
 
 **3 · Rakam kancası.** Tek, somut, doğrulanabilir rakam.
-> "6 kişilik grup. Ustası 12 hafta boyunca değişmiyor."
+> "6 kişilik grup. Mentoru 12 hafta boyunca değişmiyor."
 
 **4 · Ters kanca.** Beklenenin tersini söyle.
 > "Çocuğunuzun ekran süresini azaltmayacağız."
@@ -130,11 +152,11 @@ Aşağıdakiler Kodjitsu'nun araştırmasından türetildi — genel formül lis
 
 Beş taahhüt — bunlar reklamın omurgası, çünkü rakip bunları veremiyor:
 
-1. Ustası dönem boyunca değişmez
+1. Mentoru sezon boyunca değişmez
 2. Deneme dersinde satış konuşması yok
 3. Fiyat sitede yazıyor
 4. Cayma kesintisiz
-5. Ustanın adı, yüzü, özgeçmişi açık
+5. Mentorun adı, yüzü, özgeçmişi açık
 
 **Söylenmeyecekler (hukuki):**
 - "%100 başarı", "garantili", "en iyi", "Türkiye'nin 1 numaralı"
@@ -195,7 +217,7 @@ Neden kötü: emoji enflasyonu, "sadece X değil aynı zamanda", üçlü liste, 
 > Biz o kırk dakikayı almıyoruz. Yönünü değiştiriyoruz.
 >
 > Çocuk Roblox'ta oynamayı biliyor zaten. Biz oyunu yapmayı öğretiyoruz. 6 kişilik grup,
-> haftada bir saat, ustası 12 hafta boyunca değişmiyor.
+> haftada bir saat, mentoru 12 hafta boyunca değişmiyor.
 >
 > Şubat'ta elinde kendi yaptığı bir oyun olacak.
 >
