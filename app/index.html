@@ -92,8 +92,8 @@ a{color:var(--coral)}
       <div style="color:var(--tx-3);font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;font-family:Sora;font-weight:600;margin-top:4px">Yol · panel</div>
     </div>
     <div>
-      <h2>Su gibi ol.<br><em>İlk kuşağını</em> kuşan.</h2>
-      <p>Hesabını oluştur, beyaz kuşaktan başla. İlk idmanların ve şaheserin seni bekliyor.</p>
+      <h2>Hoş geldin.<br><em>İlk işini</em> yap.</h2>
+      <p>Hesabını oluştur, ilk sezonuna başla. İlk görevlerin ve portfolyo işin seni bekliyor.</p>
       <div class="belt-dots"><i class="now"></i><i></i><i></i><i></i></div>
     </div>
   </aside>
@@ -105,7 +105,7 @@ a{color:var(--coral)}
     </div>
 
     <h1 id="title">Tekrar hoş geldin</h1>
-    <p class="sub" id="subtitle">İdmanların kaldığın yerden devam ediyor.</p>
+    <p class="sub" id="subtitle">Görevlerin kaldığın yerden devam ediyor.</p>
 
     <form id="authForm" novalidate>
       <div class="field" id="nameField" style="display:none">
@@ -153,7 +153,7 @@ function setMode(m){
   $('tabLogin').classList.toggle('active', !signup);
   $('tabSignup').classList.toggle('active', signup);
   $('title').textContent = signup ? 'Yola çık' : 'Tekrar hoş geldin';
-  $('subtitle').textContent = signup ? 'Hesabını oluştur, beyaz kuşağını kuşan.' : 'İdmanların kaldığın yerden devam ediyor.';
+  $('subtitle').textContent = signup ? 'Hesabını oluştur, ilk sezonuna başla.' : 'Görevlerin kaldığın yerden devam ediyor.';
   $('nameField').style.display = signup ? 'block' : 'none';
   $('trackField').classList.toggle('show', signup);
   $('password').autocomplete = signup ? 'new-password' : 'current-password';

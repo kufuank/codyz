@@ -41,7 +41,7 @@ Videolar `Range` istekleriyle sarıldığı için yayın ortamı **206 Partial C
 Post metinleri → [POST_METINLERI.md](POST_METINLERI.md) · Reels kurgu planı → [REELS_STORYBOARD.md](REELS_STORYBOARD.md) · Görsel üretim promptları → [HIGGSFIELD_PROMPTLARI.md](HIGGSFIELD_PROMPTLARI.md)
 
 ## Backend (Supabase)
-Tablolar: `profiles`, `tasks`; view: `leaderboard`. Kayıtta trigger otomatik profil + 4 idman kurar. Tüm tablolarda RLS açık.
+Tablolar: `profiles`, `tasks`; view: `leaderboard`. Kayıtta trigger otomatik profil + 4 görev kurar. Tüm tablolarda RLS açık.
 
 ## Yerel çalıştırma
 ```bash

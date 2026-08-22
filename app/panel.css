@@ -128,7 +128,7 @@ img,svg{display:block;max-width:100%}
 .stat__d{font-size:.74rem;font-weight:600;font-family:'Sora';display:inline-flex;align-items:center;gap:3px}
 .stat__d.up{color:var(--ok)}.stat__d.down{color:var(--coral)}
 
-/* İdman */
+/* Görevler */
 .task{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer}
 .task:last-child{border-bottom:none}
 .task__chk{width:24px;height:24px;border-radius:8px;border:1.8px solid var(--line-2);flex:none;display:grid;place-items:center;color:transparent;transition:background .2s,border-color .2s,color .2s;background:transparent}
@@ -139,8 +139,8 @@ img,svg{display:block;max-width:100%}
 .task.done .task__t{color:var(--tx-3);text-decoration:line-through}
 .task__m{font-size:.76rem;color:var(--tx-3);display:flex;gap:10px;margin-top:2px}
 .task__xp{font-family:'Sora';font-weight:700;font-size:.78rem;color:var(--gold);flex:none}
-.idman__bar{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:16px}
-.idman__bar i{display:block;height:100%;background:linear-gradient(90deg,var(--coral),var(--gold));border-radius:99px;transition:width .5s var(--ease)}
+.gorev__bar{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden;margin-bottom:16px}
+.gorev__bar i{display:block;height:100%;background:linear-gradient(90deg,var(--coral),var(--gold));border-radius:99px;transition:width .5s var(--ease)}
 .empty{color:var(--tx-3);font-size:.88rem;padding:20px 0;text-align:center}
 
 /* Canlı ders */
@@ -149,14 +149,14 @@ img,svg{display:block;max-width:100%}
 .live__badge .blip{width:8px;height:8px;border-radius:50%;background:var(--coral);animation:blip 1.6s infinite}
 @keyframes blip{0%,100%{opacity:1}50%{opacity:.25}}
 .live h3{font-size:1.15rem;font-weight:700;margin:12px 0 4px}
-.live__usta{display:flex;align-items:center;gap:9px;color:var(--tx-2);font-size:.84rem;margin-top:10px}
-.live__usta .ua{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));display:grid;place-items:center;font-family:'Sora';font-weight:700;font-size:.7rem;color:#fff}
+.live__mentor{display:flex;align-items:center;gap:9px;color:var(--tx-2);font-size:.84rem;margin-top:10px}
+.live__mentor .ua{width:26px;height:26px;border-radius:8px;background:linear-gradient(135deg,var(--violet),var(--violet-deep));display:grid;place-items:center;font-family:'Sora';font-weight:700;font-size:.7rem;color:#fff}
 .countdown{display:flex;gap:8px;margin:16px 0}
 .countdown div{flex:1;text-align:center;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 4px}
 .countdown b{font-family:'Sora';font-weight:800;font-size:1.4rem;display:block;line-height:1;font-variant-numeric:tabular-nums}
 .countdown span{font-size:.66rem;color:var(--tx-3);letter-spacing:.1em;text-transform:uppercase}
 
-/* Şaheser */
+/* Portfolyo işi */
 .master__top{display:flex;align-items:flex-start;gap:16px}
 .master__thumb{width:84px;height:84px;border-radius:14px;flex:none;overflow:hidden;border:1px solid var(--line-2);background:radial-gradient(circle at 30% 30%,var(--violet),var(--ink));display:grid;place-items:center;color:#fff}
 .master__steps{display:flex;flex-direction:column;gap:11px;margin-top:18px}
@@ -167,7 +167,7 @@ img,svg{display:block;max-width:100%}
 .mstep.now{color:var(--tx)}.mstep.todo{color:var(--tx-3)}
 .mstep.done span{color:var(--tx-2)}
 
-/* Club / lonca */
+/* Stüdyo */
 .rank{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
 .rank:last-child{border-bottom:none}
 .rank__n{font-family:'Sora';font-weight:800;width:22px;color:var(--tx-3);font-size:.9rem}
@@ -178,12 +178,12 @@ img,svg{display:block;max-width:100%}
 .rank__xp{font-family:'Sora';font-weight:700;font-size:.82rem;color:var(--gold)}
 .rank.me{background:var(--surface-2);border-radius:12px;padding:11px 12px;margin:4px -12px 0;border-bottom:none}
 
-/* Ustalar */
-.usta-row{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--line)}
-.usta-row:last-child{border-bottom:none}
-.usta-row .ua{width:36px;height:36px;border-radius:10px;flex:none;display:grid;place-items:center;font-family:'Sora';font-weight:700;color:#fff;position:relative}
-.usta-row .ua .on{position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border-radius:50%;border:2px solid var(--surface)}
-.usta-row .nm{flex:1}.usta-row .nm b{font-weight:600;font-size:.86rem;display:block}.usta-row .nm small{color:var(--tx-3);font-size:.74rem}
+/* Mentorlar */
+.mentor-row{display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid var(--line)}
+.mentor-row:last-child{border-bottom:none}
+.mentor-row .ua{width:36px;height:36px;border-radius:10px;flex:none;display:grid;place-items:center;font-family:'Sora';font-weight:700;color:#fff;position:relative}
+.mentor-row .ua .on{position:absolute;bottom:-2px;right:-2px;width:11px;height:11px;border-radius:50%;border:2px solid var(--surface)}
+.mentor-row .nm{flex:1}.mentor-row .nm b{font-weight:600;font-size:.86rem;display:block}.mentor-row .nm small{color:var(--tx-3);font-size:.74rem}
 
 /* Mascot */
 .mascot{position:relative;overflow:hidden;background:linear-gradient(160deg,var(--surface-2),var(--surface));display:flex;gap:16px;align-items:center}
