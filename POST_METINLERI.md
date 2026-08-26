@@ -1,109 +1,191 @@
-# Kodjitsu — Instagram Post Metinleri (6 eğitim paketi)
+# Kodjitsu — Instagram Post Metinleri (7 eğitim paketi)
 
-> Kullanım: her post ilgili kurs kapağıyla (`assets/kurslar/*-9x16.webp`) ya da hero klibiyle paylaşılır.
-> Karakter sınırı 2.200; ilk ~125 karakter "…devamı" öncesi görünen kısımdır — kanca hep orada.
-> **Ders sayıları ve yaş bantları taslaktır**, müfredat kesinleşince güncellenmeli.
-> Kariyer paragrafları bilinçli olarak **maaş, iş garantisi veya uydurma istatistik içermez** —
-> velinin "altın bilezik" içgörüsüne dokunur ama söz vermez. Bu çizgi korunmalı.
+> **Kopyala-yapıştıra hazır.** Her postun altındaki blok olduğu gibi alınabilir.
+> Görsel: ilgili kurs kapağı (`assets/kurslar/*-9x16.webp`) ya da hero klibi.
+> Yazım kuralları: `.claude/skills/kodjitsu-reklam-dili/SKILL.md` · Sözlük: `MARKA_DILI.md`
+>
+> **İlk satır kancadır** ve 125 karakterin altındadır (Instagram orada "…devamı" ile keser).
+> Hashtag en fazla 5, emoji tek. Metinlerde uzun çizgi (—) yok, "geleceğe yatırım" gibi klişe yok,
+> maaş ve iş garantisi sözü yok. Bu çizgi korunmalı.
+
+## Kullanılan sabit veriler
+
+| Veri | Değer | Kaynak |
+|---|---|---|
+| Sezon | 12 hafta · 12 canlı ders · 60 dk | `EGITIM_KATALOGU.md` |
+| Grup | 6 kişi | `FIYATLANDIRMA.md` Senaryo B |
+| Sezon fiyatı | ₺9.600 | aynı |
+| Mentor | Sezon boyunca değişmez; değişirse kalan ders iadesi | `RAKIP_ANALIZI.md` §5.2 |
+| Sezon sonu | Portfolyo işi + Gösterim Günü + bitirme belgesi | `EGITIM_KATALOGU.md` §6 |
+
+⚠️ **İki nokta onay bekliyor:**
+1. **Minecraft yaş bandı** aşağıda `8-13` yazıldı. Karar verilmedi, değiştirilebilir.
+2. **Sitedeki ders sayıları eski** (Roblox 40, Python 40, Unity 32, Blender 28, C# 36, Matematik 24).
+   Yeni mimaride 1 sezon = 12 ders. `index.html` güncellenmeli, yoksa site ile post çelişir.
 
 ---
 
 ## 1 · Roblox & Lua
-**Kanca:** Çocuğunuz Roblox'ta saatler geçiriyor. Peki o oyunu kendisi yapsa?
 
-Ekran süresini tartışmak yerine yönünü değiştiriyoruz. Roblox Studio'da Lua diliyle çocuk artık oynayan değil, kuran taraf oluyor: haritayı tasarlıyor, kuralları yazıyor, oyunu yayınlıyor ve ilk oyuncularını topluyor.
+```
+Çocuğunuz Roblox'ta oynamayı zaten biliyor. Biz oyunu yapmayı öğretiyoruz.
 
-Ne öğreniyor: değişken, döngü, koşul ve olay mantığı — hepsini sevdiği oyunun içinde.
-Ne çıkıyor: yayınlanmış, arkadaşlarının oynayabildiği kendi oyunu.
+Aynı ekran, aynı oyun, farklı taraf. Roblox Studio'da Lua diliyle haritayı kendi tasarlıyor, kuralları kendi yazıyor. Sonra yayınlıyor ve ilk oyuncularını topluyor.
 
-Yarına ne kalıyor: Bugün oyun kuran çocuk, yarın bunu yapan insanların mesleği olduğunu görüyor — oyun geliştirici, seviye tasarımcısı, yazılımcı. Roblox'un kendi geliştirici ekosistemi var; üretmeye erken başlayan çocuk daha lise çağında yayınlanmış işlerden oluşan bir portföyle geziyor. Eskiler "altın bilezik" derdi; bugünün bileziği kod yazabilmek.
+Sezon 12 hafta. Haftada bir canlı ders, 6 kişilik grup, mentoru sezon boyunca değişmiyor.
 
-🥋 8–14 yaş · online canlı ders · küçük grup
-👉 Ücretsiz tanışma dersi için profildeki link
+Sonunda elinde arkadaşlarının oynayabildiği kendi oyunu oluyor. Gösterim Günü'nde onu size kendisi anlatıyor.
 
-#kodjitsu #roblox #robloxstudio #çocuklariçinkodlama #kodlama #lua #oyunkodlama #stem #onlineeğitim #çocukgelişimi #ekransüresi #yazılım
+Bir de şu var. Bugün oyun kuran çocuk bunun bir meslek olduğunu erken görüyor. Eskiler altın bilezik derdi, bugünkü bilezik biraz da bu.
 
----
+8-13 yaş • 12 ders • fiyatı sitede yazıyor
+👉 Ücretsiz tanışma dersi için profildeki link. Sonrasında kimse sizi aramıyor.
 
-## 2 · Python
-**Kanca:** Blok kodlamayı aştıysa sıradaki adım belli: gerçek kod.
-
-Sürükle-bırak bloklar iyi bir başlangıç, ama bir yerden sonra dar geliyor. Python'la çocuk profesyonellerin kullandığı dile geçiyor: yazdığı her satırın sonucunu anında görüyor, hatasını kendi buluyor, çözümü kendi kuruyor.
-
-Ne öğreniyor: metin tabanlı programlama, veri, fonksiyon, kütüphane kullanımı.
-Ne çıkıyor: kendi oyunundan sanal asistanına 10 proje.
-
-Yarına ne kalıyor: Python bugün yapay zekâdan veri analizine, otomasyondan bilimsel araştırmaya kadar en yaygın kullanılan dillerden biri. Yani çocuğunuz tek bir mesleğe değil, birçok mesleğin ortak diline hazırlanıyor — mühendislik de okusa, tıp da, ekonomi de bu beceri yanında gidiyor. Bir zanaat gibi: öğrenildiğinde elde kalıyor.
-
-🥋 13+ yaş · online canlı ders · küçük grup
-👉 Ücretsiz tanışma dersi için profildeki link
-
-#kodjitsu #python #kodlama #çocuklariçinkodlama #yazılım #programlama #stem #onlineeğitim #gelecekmeslekleri #pythonöğreniyorum
+#kodjitsu #roblox #çocuklariçinkodlama #kodlama #onlineeğitim
+```
 
 ---
 
-## 3 · Unity
-**Kanca:** Oyun yapmak bir hobiden fazlası: Unity dünyanın en çok kullanılan oyun motoru.
+## 2 · Minecraft
 
-Roblox'ta kurmayı öğrenen çocuk, Unity'de profesyonel araca geçiyor. Sahneyi kendisi tasarlıyor, fiziği ayarlıyor, karakterini C# ile kodluyor ve oyununu gerçekten çalışan bir dosya olarak dışa aktarıyor.
+```
+Minecraft'ı yasaklamak işe yaramıyor. Biz onu ders saatine çevirdik.
 
-Ne öğreniyor: oyun motoru mantığı, 2B/3B sahne kurulumu, fizik ve seviye tasarımı.
-Ne çıkıyor: telefonda ya da bilgisayarda açılabilen kendi oyunu.
+Çocuk zaten blok koyuyor, ev kuruyor, dünya kuruyor. Eksik olan tek şey, o dünyanın kurallarını yazabilmek.
 
-Yarına ne kalıyor: Unity yalnız oyunda değil; simülasyon, mimari görselleştirme, eğitim yazılımı ve AR/VR projelerinde de kullanılıyor. Türkiye'de oyun stüdyoları ciddi bir sektör hâline geldi ve bu işte diplomadan önce portföye bakılıyor. Çocuğunuz daha okul sıralarındayken gösterebileceği işler biriktiriyor — kapıyı çalarken elinde bir şey olması demek bu.
+Bu sezonda komutlarla çalışmayı, kendi mini oyununu kurmayı ve yaptığı şeyi başkasının oynayabileceği hâle getirmeyi öğreniyor. Blok koymaktan sistem kurmaya geçiyor.
 
-🥋 12+ yaş · online canlı ders · küçük grup
+12 hafta, haftada bir saat canlı ders, 6 kişilik grup. Mentoru dönem ortasında değişmiyor.
+
+Ekran süresi tartışmasını bitirmiyoruz, sadece o sürenin ne işe yaradığını değiştiriyoruz.
+
+8-13 yaş • 12 ders • fiyatı sitede yazıyor
 👉 Ücretsiz tanışma dersi için profildeki link
 
-#kodjitsu #unity #oyungeliştirme #gamedev #kodlama #çocuklariçinkodlama #csharp #stem #onlineeğitim #dijitalbeceri
+#kodjitsu #minecraft #çocuklariçinkodlama #ekransüresi #onlineeğitim
+```
 
 ---
 
-## 4 · Blender
-**Kanca:** Hayal ettiği karakteri çizmekle kalmasın — döndürsün, ışıklandırsın, canlandırsın.
+## 3 · Python
 
-Blender, sinema ve oyun sektörünün kullandığı ücretsiz 3B tasarım programı. Çocuk burada hem sanatçı hem teknisyen oluyor: modelini kuruyor, kaplamasını yapıyor, sahneyi ışıklandırıyor ve hareket veriyor.
+```
+"Yapay zekâ kod yazıyor, Python öğrenmesi boşuna" diyorsanız yarısında haklısınız.
 
-Ne öğreniyor: 3B modelleme, kaplama ve ışık, temel animasyon, sabırla iterasyon.
-Ne çıkıyor: render alınmış kendi 3B sahnesi ve kısa animasyonu.
+Kod yazmak gerçekten ucuzladı. Ama yapay zekâ kendinden emin bir şekilde yanlış kod da yazıyor, ve temeli bilmeyen çocuk o hatayı göremiyor.
 
-Yarına ne kalıyor: 3B tasarım bugün reklamdan mimariye, oyundan ürün görselleştirmeye kadar geniş bir alanda iş üretiyor ve bu işlerin çoğu uzaktan, proje bazlı yapılabiliyor. Yani yeteneğini geliştiren biri kendi işini kurabiliyor, evinden dünyaya iş yapabiliyor. Çizim yeteneği olan çocuk için bu, hobiyi mesleğe çeviren köprü.
+Python'da tam olarak bunu öğretiyoruz. Çocuk kodu yazıyor, çalıştırıyor, kırıldığında nerede kırıldığını buluyor. Her derste on dakika şuna ayrılıyor: yapay zekâ ne yaptı, nerede yanıldı, ben ne kattım.
 
-🥋 11+ yaş · online canlı ders · küçük grup
+Sezon sonunda elinde çalışan bir projesi oluyor. Kendi fikri, kendi kodu.
+
+Değişen şey dil. Kalan şey mantık.
+
+13+ yaş • 12 ders • 6 kişilik grup • ₺9.600 / sezon
 👉 Ücretsiz tanışma dersi için profildeki link
 
-#kodjitsu #blender #3dtasarım #3danimasyon #dijitalsanat #çocuklariçinkodlama #yaratıcılık #stem #onlineeğitim #tasarım
+#kodjitsu #python #yapayzeka #kodlama #onlineeğitim
+```
 
 ---
 
-## 5 · C# & .NET
-**Kanca:** Kod yazmayı öğrendi. Sıra düzenli, sağlam ve büyüyebilen kod yazmakta.
+## 4 · Unity
 
-C#, oyun motorlarından kurumsal yazılıma kadar her yerde kullanılan bir dil. Bu pakette çocuk yazılımı bir mühendislik disiplini olarak öğreniyor: projeyi parçalara ayırmayı, isimlendirmeyi, hatayı yakalamayı ve başkasının okuyabileceği kod yazmayı.
+```
+12 hafta sonunda telefonunuza kurulabilen bir oyunu olacak. Kendi yaptığı.
 
-Ne öğreniyor: nesne yönelimli düşünme, veri yapıları, proje mimarisi, temiz kod.
-Ne çıkıyor: kendi masaüstü uygulaması ya da oyun projesi.
+Roblox'ta oyun kurmayı öğrenen çocuk için sıradaki adım Unity. Profesyonellerin kullandığı motor, gerçek fizik, gerçek sahne tasarımı ve C# ile yazılmış kendi karakter kontrolü.
 
-Yarına ne kalıyor: Bu paket doğrudan mesleğe bakan paket. Bankalardan sigortaya, sanayiden kamuya kadar kurumların yazılımları bu tür dillerle yürüyor; üniversitede bilgisayar mühendisliği okuyacak çocuk derslere bir adım önde başlıyor, okumayacak olan ise elinde satılabilir bir beceriyle mezun oluyor. Altın bileziğin bugünkü karşılığı tam olarak bu.
+Sezon 12 hafta. Her hafta projenin bir parçası büyüyor, son haftaya bir şey bırakılmıyor.
 
-🥋 14+ yaş · online canlı ders · küçük grup
+Gösterim Günü'nde oyununu ailesine oynatıyor. Beğenilmek için değil, nasıl yaptığını anlatabilmek için.
+
+Unity oyunun dışında da kullanılıyor. Mimari görselleştirme, simülasyon, eğitim yazılımı. Bu işe girerken diplomadan önce portfolyoya bakılıyor, ve çocuğunuz portfolyosunu 12 yaşında kurmaya başlıyor.
+
+12+ yaş • 12 ders • 6 kişilik grup • fiyatı sitede
 👉 Ücretsiz tanışma dersi için profildeki link
 
-#kodjitsu #csharp #dotnet #yazılım #programlama #kodlama #lisedönemi #gelecekmeslekleri #stem #onlineeğitim
+#kodjitsu #unity #oyungeliştirme #kodlama #onlineeğitim
+```
 
 ---
 
-## 6 · Kodlayarak Matematik
-**Kanca:** "Matematik neden gerekli?" sorusunun cevabı ezberde değil, ekranda.
+## 5 · Blender
 
-Denklem soyut kaldığı sürece sıkıcıdır. Burada çocuk her konuyu kodla görselleştiriyor: açıyı çizdiriyor, oranı animasyona döküyor, olasılığı yüz kez denetip sonucu izliyor. Anlamadığı yer, gözüyle gördüğü an anlaşılır oluyor.
+```
+Çizmeyi seviyorsa, çizdiği şeyi döndürebildiği bir hâle getirebiliriz.
 
-Ne öğreniyor: okul müfredatındaki konuları koda dökerek kavrama, problem çözme alışkanlığı.
-Ne çıkıyor: kendi yazdığı, konuyu anlatan interaktif görselleştirmeler.
+Blender'da karakterini modelliyor, kaplamasını yapıyor, ışığını kuruyor. Sonra o karakter dönüyor, yürüyor, bir sahnenin içinde duruyor.
 
-Yarına ne kalıyor: Matematik, mühendislikten veri analizine, finanstan yapay zekâya kadar iyi kazandıran mesleklerin tamamının kapısındaki eşik. Bu derste matematikten korkmayı bırakan çocuk yalnız karnesini değil, ileride önüne çıkacak bölüm ve meslek seçeneklerini de genişletiyor. En kalıcı altın bilezik, çözebilme alışkanlığı.
+Kod bilmesi gerekmiyor. Bu paketin girişinde şart yok, elinde fare ve sabır yeterli.
 
-🥋 9–14 yaş · online canlı ders · küçük grup
+12 hafta, haftada bir canlı ders, 6 kişilik grup. Sezon sonunda render alınmış kendi sahnesi oluyor, isterse basıp odasına asıyor.
+
+Animasyon, oyun, reklam, mimari görselleştirme. 3B üretim yapan insanların işe alınırken gösterdiği şey diploma değil, yaptığı iş. O işi biriktirmeye erken başlamanın bir zararı yok.
+
+11+ yaş • 12 ders • ön koşul yok • fiyatı sitede
 👉 Ücretsiz tanışma dersi için profildeki link
 
-#kodjitsu #matematik #kodlama #çocuklariçinkodlama #matematiközel #okulbaşarısı #stem #onlineeğitim #öğrenmeyiöğren #çocukgelişimi
+#kodjitsu #blender #3dmodelleme #dijitalsanat #onlineeğitim
+```
+
+---
+
+## 6 · C# & .NET
+
+```
+Oyun yapmaktan sıkıldıysa sırada gerçek yazılım var.
+
+C# oyunla da yazılıyor, bankanın sistemiyle de. Bu sezonda çocuk nesne yönelimli düşünmeyi, kodu başkasının okuyabileceği şekilde yazmayı ve bir projeyi baştan sona kurmayı öğreniyor.
+
+Burası biraz daha ciddi. 14 yaş ve üstü için, ve bir miktar sabır istiyor. Karşılığında elinde çalışan, kurulabilen kendi uygulaması oluyor.
+
+12 hafta, 6 kişilik grup, mentoru sezon boyunca aynı kişi. Adını ve ne iş yaptığını kayıttan önce siteden görüyorsunuz.
+
+Yazılım tarafında işe alım hâlâ büyük ölçüde "ne yaptın" sorusuyla ilerliyor. Lise bitmeden bu soruya cevabı olan çocuk sayısı az.
+
+14+ yaş • 12 ders • 6 kişilik grup • ₺9.600 / sezon
+👉 Ücretsiz tanışma dersi için profildeki link
+
+#kodjitsu #csharp #yazılım #kodlama #onlineeğitim
+```
+
+---
+
+## 7 · Kodlayarak Matematik
+
+```
+Matematikten kaçıyorsa sorun matematik olmayabilir. Göremiyor olabilir.
+
+Parabolü defterde çizmek başka, kodla çizip katsayıyı değiştirdiğinde eğrinin canlı canlı büküldüğünü görmek başka. Bu pakette her konu ekranda görünür hâle geliyor.
+
+Okul müfredatına paralel ilerliyor. Yerine geçmiyor, üstüne biniyor. Çocuk aynı konuyu ikinci kez, bu sefer eliyle kurarak görüyor.
+
+12 hafta, haftada bir saat, 6 kişilik grup. Haftada bir saatin ders çalışmasından çaldığı bir şey yok, aksine geri veriyor.
+
+Not sözü vermiyoruz. Sadece şunu biliyoruz: anladığı şeyden kaçan çocuk az.
+
+9-14 yaş • 12 ders • okul müfredatına paralel • fiyatı sitede
+👉 Ücretsiz tanışma dersi için profildeki link
+
+#kodjitsu #matematik #kodlama #çocuklariçinkodlama #onlineeğitim
+```
+
+---
+
+## Yayın sırası önerisi
+
+Araştırmadaki mevsimsellik ve ilk kohort kararına göre (`PAZAR_ARASTIRMASI.md` §7.3,
+`EGITIM_KATALOGU.md` §5):
+
+| Sıra | Paket | Neden |
+|---|---|---|
+| 1 | **Roblox** | Çocuk ilgisi hazır, `roblox` araması 61/61 ayda dolu ve yazın zirvede |
+| 2 | **Minecraft** | Aynı damar, ilk kohortun ikinci ürünü |
+| 3 | **Kodlayarak Matematik** | Eylül dönem başı, "Başarı Odaklı" veli segmenti |
+| 4 | **Python** | AI itirazını karşılayan post, en çok tartışma getirir |
+| 5 | **Unity** | Roblox postunu görenlere üst basamak |
+| 6 | **Blender** | Kod istemeyen çocuk velisine giriş kapısı |
+| 7 | **C# & .NET** | En dar kitle, en sona |
+
+Haftada iki post, aralarında öğrenci işi ve veli SSS içeriği. Reels erişim getirir,
+carousel ikna eder (`INSTAGRAM_KAMPANYASI.md` §4).
