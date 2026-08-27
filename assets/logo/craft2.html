@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kodjitsu — "AI tamamlıyor" logo konsepti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+body{margin:0;font-family:system-ui,sans-serif}
+section{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;padding:40px 20px;min-height:44vh}
+.dark{background:#0E0B09;color:#F6F2E9}
+.light{background:#F6F2E9;color:#15110E}
+small{opacity:.5;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+
+/* ---- Wordmark: cody + imleç + ghost z ---- */
+.wm{display:inline-flex;align-items:baseline;font-family:'Space Grotesk',sans-serif;font-weight:600;letter-spacing:-0.02em;line-height:1}
+.wm .solid{color:var(--fg)}
+.wm .caret{width:.055em;height:.66em;background:var(--accent);margin:0 .045em 0 .06em;border-radius:99px;
+  align-self:baseline;transform:translateY(.045em)}
+.wm .ghost{color:var(--accent);opacity:.58}
+.dark .wm{--fg:#F6F2E9;--accent:#7C6BFF}
+.light .wm{--fg:#15110E;--accent:#5A4BE6}
+.w-xl{font-size:96px}.w-md{font-size:34px}.w-sm{font-size:21px}
+
+/* mono varyant */
+.wm.mono{font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:-0.05em}
+
+/* ---- İkon: köşeli parantez + ghost z ---- */
+.icon{display:inline-grid;place-items:center;background:#15110E;border:1px solid rgba(246,242,233,.14);border-radius:26%}
+.icon span{font-family:'JetBrains Mono',monospace;font-weight:600;display:flex;align-items:center}
+.icon .bar{width:.15em;height:.72em;background:#F6F2E9;border-radius:99px;margin-right:.16em;display:inline-block}
+.icon .c2{color:#7C6BFF;opacity:.55}
+.i-lg{width:120px;height:120px;font-size:52px}
+.i-md{width:64px;height:64px;font-size:28px}
+.i-sm{width:28px;height:28px;font-size:12px;border-radius:8px}
+
+.rowx{display:flex;gap:26px;align-items:center;flex-wrap:wrap;justify-content:center}
+.navmock{display:flex;align-items:center;gap:20px;background:#181410;border:1px solid rgba(246,242,233,.12);border-radius:14px;padding:13px 20px;width:min(94%,600px)}
+.navmock .links{margin-left:auto;display:flex;gap:14px;font-size:11px;color:rgba(244,239,230,.6)}
+.navmock .cta{background:#FF6A3D;color:#15110E;font-weight:700;font-size:11px;padding:6px 12px;border-radius:99px}
+</style>
+</head>
+<body>
+
+<section class="dark">
+  <small>Ana kimlik · "AI tamamlıyor" — cody yazılmış, z öneride</small>
+  <div class="wm w-xl"><span class="solid">cody</span><span class="caret"></span><span class="ghost">z</span></div>
+  <div class="rowx">
+    <div class="wm w-md"><span class="solid">cody</span><span class="caret"></span><span class="ghost">z</span></div>
+    <div class="wm w-sm"><span class="solid">cody</span><span class="caret"></span><span class="ghost">z</span></div>
+  </div>
+</section>
+
+<section class="light">
+  <small>Açık zemin + mono (kod editörü) varyantı</small>
+  <div class="wm w-xl"><span class="solid">cody</span><span class="caret"></span><span class="ghost">z</span></div>
+  <div class="wm mono w-md"><span class="solid">cody</span><span class="caret"></span><span class="ghost">z</span></div>
+</section>
+
+<section class="dark">
+  <small>İkon: imleç + ghost z · üç boyut</small>
+  <div class="rowx">
+    <div class="icon i-lg"><span><i class="bar"></i><span class="c2">z</span></span></div>
+    <div class="icon i-md"><span><i class="bar"></i><span class="c2">z</span></span></div>
+    <div class="icon i-sm"><span><i class="bar"></i><span class="c2">z</span></span></div>
+  </div>
+  <div class="navmock">
+    <div class="wm w-sm"><span class="solid">cody</span><span class="caret"></span><span class="ghost">z</span></div>
+    <span class="links">İki okul · Kurslar · Paketler</span>
+    <span class="cta">Tanışma dersi</span>
+  </div>
+</section>
+
+</body>
+</html>

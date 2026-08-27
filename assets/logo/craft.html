@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kodjitsu — el çizimi logo taslağı</title>
+<style>
+body{margin:0;font-family:system-ui,sans-serif}
+.half{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:34px;min-height:48vh}
+.light{background:#F6F2E9;color:#15110E}
+.dark{background:#0E0B09;color:#F6F2E9}
+small{opacity:.55;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.rowx{display:flex;align-items:center;gap:40px;flex-wrap:wrap;justify-content:center}
+svg{display:block}
+</style>
+</head>
+<body>
+
+<!-- ================= WORDMARK ÇİZİMİ =================
+     Grid: baseline y=120 · x-height y=50 · stroke 15 · round caps
+     Harfler monoline stroke; z = katlanmış kuşak (dolgu poligon)
+-->
+<template id="wordmarkT">
+<svg viewBox="0 0 480 165" width="380" class="wm">
+  <g fill="none" stroke="var(--ink-c)" stroke-width="15" stroke-linecap="round">
+    <!-- c : sağa açık daire -->
+    <path d="M 83.7 64.9 A 35 35 0 1 0 83.7 105.1" />
+    <!-- o -->
+    <circle cx="145" cy="85" r="35" />
+    <!-- d : daire + sağ dik (ascender) -->
+    <circle cx="235" cy="85" r="35" />
+    <path d="M 270 30 L 270 120" />
+    <!-- y : u + kuyruk -->
+    <path d="M 305 50 L 305 88 A 20 20 0 0 0 345 88" />
+    <path d="M 345 50 L 345 126 A 18 18 0 0 1 312 137" />
+  </g>
+  <!-- z : katlanmış kuşak kurdelesi -->
+  <g>
+    <rect x="375" y="50" width="66" height="24" fill="var(--belt)" />
+    <polygon points="441,50 441,74 375,120 375,96" fill="var(--belt)" />
+    <rect x="375" y="96" width="66" height="24" fill="var(--belt)" />
+    <polygon points="441,74 441,86 428,74" fill="var(--belt-fold)" />
+    <polygon points="375,96 375,84 388,96" fill="var(--belt-fold)" />
+  </g>
+</svg>
+</template>
+
+<section class="half light" style="--ink-c:#15110E;--belt:#FF6A3D;--belt-fold:#D9542B">
+  <small>Krem zemin · mürekkep + mercan kuşak</small>
+  <div class="rowx" id="rowLight"></div>
+</section>
+
+<section class="half dark" style="--ink-c:#F6F2E9;--belt:#FF6A3D;--belt-fold:#D9542B">
+  <small>Mürekkep zemin · krem + mercan kuşak</small>
+  <div class="rowx" id="rowDark"></div>
+</section>
+
+<section class="half dark" style="--ink-c:#F6F2E9">
+  <small>İkon (favicon) + kuşak renk sistemi</small>
+  <div class="rowx" id="rowIcons"></div>
+</section>
+
+<section class="half dark" style="--ink-c:#F6F2E9;--belt:#FF6A3D;--belt-fold:#D9542B;min-height:34vh">
+  <small>Küçük boyut testi · gerçek nav bağlamı</small>
+  <div style="display:flex;align-items:center;gap:22px;background:#181410;border:1px solid rgba(246,242,233,.12);border-radius:14px;padding:12px 20px;width:min(92%,560px)">
+    <span id="navLogo"></span>
+    <span style="margin-left:auto;display:flex;gap:14px;font-size:11px;color:rgba(244,239,230,.6)">İki okul · Kurslar · Paketler</span>
+    <span style="background:#FF6A3D;color:#15110E;font-weight:700;font-size:11px;padding:6px 12px;border-radius:99px">Tanışma dersi</span>
+  </div>
+  <div style="display:flex;gap:18px;align-items:center">
+    <span id="tinyLogo"></span>
+    <span id="tinyIcon"></span>
+  </div>
+</section>
+
+<script>
+// wordmark'ı iki zemine bas
+["rowLight","rowDark"].forEach(function(id){
+  var t=document.getElementById('wordmarkT').content.cloneNode(true);
+  document.getElementById(id).appendChild(t);
+});
+// küçük boyut testleri
+function wm(w){var t=document.getElementById('wordmarkT').content.cloneNode(true);t.querySelector('svg').setAttribute('width',w);return t;}
+document.getElementById('navLogo').appendChild(wm(96));
+document.getElementById('tinyLogo').appendChild(wm(64));
+document.getElementById('tinyIcon').innerHTML='<svg viewBox="0 0 120 120" width="24"><rect x="2" y="2" width="116" height="116" rx="28" fill="#15110E" stroke="rgba(246,242,233,.2)" stroke-width="3"/><g transform="translate(27,29)"><rect x="0" y="0" width="66" height="20" fill="#FF6A3D"/><polygon points="66,0 66,20 0,62 0,42" fill="#FF6A3D"/><rect x="0" y="42" width="66" height="20" fill="#FF6A3D"/></g></svg>';
+// ikon: yuvarlak kare + kuşak-z (4 kuşak rengi)
+var belts=[["#F6F2E9","#D9D2C0"],["#FF6A3D","#D9542B"],["#7C6BFF","#5A4BE6"],["#F2A93B","#CE8A22"]];
+var iconRow=document.getElementById('rowIcons');
+belts.forEach(function(b){
+  var d=document.createElement('div');
+  d.innerHTML =
+   '<svg viewBox="0 0 120 120" width="86">'+
+   '<rect x="2" y="2" width="116" height="116" rx="28" fill="#15110E" stroke="rgba(246,242,233,.14)" stroke-width="2"/>'+
+   '<g transform="translate(27,29)">'+
+   '<rect x="0" y="0" width="66" height="20" fill="'+b[0]+'"/>'+
+   '<polygon points="66,0 66,20 0,62 0,42" fill="'+b[0]+'"/>'+
+   '<rect x="0" y="42" width="66" height="20" fill="'+b[0]+'"/>'+
+   '<polygon points="66,20 66,30 54,20" fill="'+b[1]+'"/>'+
+   '<polygon points="0,42 0,32 12,42" fill="'+b[1]+'"/>'+
+   '</g></svg>';
+  iconRow.appendChild(d);
+});
+</script>
+</body>
+</html>

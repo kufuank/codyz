@@ -14,10 +14,45 @@ INSTAGRAM_KAMPANYASI.md
 MARKA_DILI.md
 EGITIM_KATALOGU.md
 FIYAT_MODELI.xlsx
+SITE_STORYBOARD.md
+DEVIR_PROMPT.md
 arastirma-ham/
+
+# Sahne master kareleri — 3-4 MB/adet, public repo'ya girmesin.
+# Optimize .jpg sürümleri takip edilir, ham .png'ler yerelde durur.
+assets/sahne/*.png
+
+# Ham video masterlari (14 MB/klip). Siteye giden sey bunlar degil:
+# birlestirilip -g 6 -crf 24 ile 8-12 MB'a inen rail dosyalari commit'lenir.
+assets/sahne/test/*.mp4
+assets/sahne/karakter/*.mp4
+assets/sahne/klip/*.mp4
+assets/sahne/**/*-master.mp4
 
 # OS / araç döküntüleri
 Thumbs.db
 .DS_Store
 desktop.ini
 *.log
+
+# --- Sahne uretim ara ciktilari: 580+ MB, public repo'ya girmez ---
+# Siteye giden tek video assets/sahne/rail/hero-28.mp4 ve poster'i.
+assets/sahne/v2/
+assets/sahne/v3/
+assets/sahne/v4/
+assets/sahne/v5/
+assets/sahne/klip/
+assets/sahne/klip5/
+assets/sahne/kontrol5/
+assets/sahne/zincir/
+assets/sahne/web/
+assets/sahne/web2/
+assets/sahne/dunya/
+assets/sahne/karakter/
+assets/sahne/test/
+assets/sahne/rail/ders-rail.mp4
+assets/sahne/rail/kod-rail.mp4
+assets/sahne/rail/list.txt
+
+# Eski prototip, siteye girmesin
+slider.html

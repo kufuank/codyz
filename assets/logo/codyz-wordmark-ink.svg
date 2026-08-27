@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 165">
+  <!-- Codyz wordmark · açık zemin sürümü · el çizimi monoline + kuşak-z -->
+  <g fill="none" stroke="#15110E" stroke-width="15" stroke-linecap="round">
+    <path d="M 83.7 64.9 A 35 35 0 1 0 83.7 105.1" />
+    <circle cx="145" cy="85" r="35" />
+    <circle cx="235" cy="85" r="35" />
+    <path d="M 270 30 L 270 120" />
+    <path d="M 305 50 L 305 88 A 20 20 0 0 0 345 88" />
+    <path d="M 345 50 L 345 126 A 18 18 0 0 1 312 137" />
+  </g>
+  <g>
+    <rect x="375" y="50" width="66" height="24" fill="#FF6A3D" />
+    <polygon points="441,50 441,74 375,120 375,96" fill="#FF6A3D" />
+    <rect x="375" y="96" width="66" height="24" fill="#FF6A3D" />
+    <polygon points="441,74 441,86 428,74" fill="#D9542B" />
+    <polygon points="375,96 375,84 388,96" fill="#D9542B" />
+  </g>
+</svg>
