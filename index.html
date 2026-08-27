@@ -558,7 +558,8 @@ p{margin:0}
   addEventListener('resize', sizeRail);
 
   const clamp = (v,a,b) => v < a ? a : v > b ? b : v;
-  const smoothstep = (a,b,x) => { const t = clamp((x-a)/(b-a),0,1); return t*t*(3-2*t); };
+  /* kart gecis egrisi: easeInOutSine (isim tarihsel, egri sinüs) */
+  const smoothstep = (a,b,x) => { const t = clamp((x-a)/(b-a),0,1); return .5 - .5*Math.cos(Math.PI*t); };
   const segAt = (vh) => { for (const s of SEG) if (vh < s.vh1) return s; return SEG[SEG.length-1]; };
 
   /* ----------------------------------------------------------
@@ -620,9 +621,34 @@ p{margin:0}
     const seg = SEG.find(s => s.stop === i);
     return seg.vh0 + (seg.kind === 'plato' ? seg.vh * .3 : seg.vh * .55);
   };
+  /* ----------------------------------------------------------
+     durak gecis animasyonu — tarayicinin smooth scroll'u yerine
+     kendi kaydirmamiz: sure ayarlanabilir, egri easeInOutSine.
+     Komsu durak GECIS_TABAN ms, her ek durak +GECIS_EK ms.
+     Saat yalniz scrollY'yi surer; dunya yine scroll'dan okunur.
+     ---------------------------------------------------------- */
+  const GECIS_TABAN = 650, GECIS_EK = 320, GECIS_TAVAN = 1500;
+  const easeInOutSine = (t) => .5 - .5 * Math.cos(Math.PI * t);
+  let kayAnim = 0;
+  const kaydir = (hedefY, sure) => {
+    cancelAnimationFrame(kayAnim);
+    if (sure <= 0 || matchMedia('(prefers-reduced-motion: reduce)').matches) { scrollTo(0, hedefY); return; }
+    const bas = scrollY, fark = hedefY - bas, t0 = performance.now();
+    const adim = (simdi) => {
+      const t = Math.min(1, (simdi - t0) / sure);
+      scrollTo(0, bas + fark * easeInOutSine(t));
+      if (t < 1) kayAnim = requestAnimationFrame(adim);
+    };
+    kayAnim = requestAnimationFrame(adim);
+  };
+  /* kullanici araya girerse animasyon el cektirir */
+  ['wheel', 'touchstart', 'pointerdown'].forEach(ev =>
+    addEventListener(ev, () => cancelAnimationFrame(kayAnim), { passive: true }));
+
   const gitDurak = (i) => {
     i = clamp(i, 0, DURAK.length - 1);
-    scrollTo({ top: hedefVhOf(i) / 100 * innerHeight, behavior: 'smooth' });
+    const sure = Math.min(GECIS_TAVAN, GECIS_TABAN + GECIS_EK * Math.abs(i - aktifDurak));
+    kaydir(hedefVhOf(i) / 100 * innerHeight, sure);
   };
   window.kjGit = gitDurak;  // CTA bağlama script'i kullanıyor
   let aktifDurak = 0;
