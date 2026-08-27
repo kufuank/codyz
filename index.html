@@ -125,13 +125,45 @@ p{margin:0}
   border:1px solid rgba(15,15,15,.08);display:none;white-space:pre}
 .hud.on{display:block}
 
+/* ============================================================
+   MOBIL — ekran ikiye bolunur:
+   ustte video bandi, altta beyaz metin paneli.
+   16:9 videoyu dar ekrana "cover" ile doldurmak kompozisyonu
+   kirpiyordu; band yuksekligi sabitlenip object-position ile
+   karakterlerin oldugu sol ucte bir kadrajda tutuluyor.
+   ============================================================ */
 @media (max-width:860px){
-  .stage::after{background:linear-gradient(180deg,transparent 0%,transparent 32%,rgba(255,255,255,.9) 60%,#fff 100%)}
-  .station{top:auto;bottom:9vh;right:var(--gut);left:var(--gut);width:auto}
+  :root{--band:52svh}
+  .stage{bottom:auto;height:var(--band)}
+  .stage video{object-position:26% 42%;transform:scale(1.02) translate(0,0)}
+  /* dikey perde: bandin altini beyaza baglar */
+  .stage::after{background:linear-gradient(180deg,
+    rgba(255,255,255,0) 0%,rgba(255,255,255,0) 62%,
+    rgba(255,255,255,.72) 86%,#fff 100%)}
+  /* metin paneli: bandin altinda, tam genislik */
+  .layer{top:var(--band);bottom:0;height:auto;perspective:none}
+  .station{position:absolute;inset:0;width:auto;top:0;right:0;left:0;bottom:0;
+    display:flex;flex-direction:column;justify-content:flex-start;
+    padding:clamp(14px,4vw,22px) var(--gut) 96px;overflow:hidden}
+  .station h1{font-size:clamp(1.9rem,1.2rem + 4.4vw,2.7rem)}
+  .station h2{font-size:clamp(1.6rem,1rem + 4vw,2.3rem)}
+  .lede,.story{font-size:clamp(.94rem,.9rem + .5vw,1.05rem);margin-top:.7rem;line-height:1.45}
+  .eyebrow{margin-bottom:.55rem}
+  .meta{margin-top:.8rem;gap:.3rem}
+  .price{margin-top:.7rem;font-size:1.6rem}
+  .tags{margin-top:.7rem}
+  .cta{margin-top:.9rem;gap:.5rem}
+  .btn{font-size:.88rem;padding:.75em 1.2em}
   .hint{display:none}
-  .stops{bottom:20px}
-  .nav{bottom:18px;flex-direction:row}
-  .mark{top:18px}
+  .stops{bottom:18px;left:var(--gut)}
+  .nav{bottom:14px;right:14px;flex-direction:row;gap:6px}
+  .nav button{width:34px;height:34px}
+  .mark{top:14px;font-size:1.5rem}
+  .mark::before{left:-18px;top:-18px;width:calc(100% + 58px);height:calc(100% + 46px)}
+}
+@media (max-width:860px) and (max-height:660px){
+  :root{--band:44svh}
+  .station{padding-top:10px}
 }
 @media (prefers-reduced-motion:reduce){.hint svg{animation:none}}
 </style>
@@ -139,7 +171,7 @@ p{margin:0}
 <body>
 
 <div class="stage">
-  <video id="rail" src="assets/sahne/rail/hero-28.mp4" poster="assets/sahne/rail/hero-poster.jpg"
+  <video id="rail" poster="assets/sahne/rail/hero-poster.jpg"
          muted playsinline preload="auto" disablepictureinpicture></video>
 </div>
 
@@ -301,6 +333,18 @@ p{margin:0}
   const stopsEl = document.getElementById('stops');
   const stations = [...document.querySelectorAll('.station')];
 
+  /* dar ekranda daha hafif kopya: 8.0 MB yerine 3.7 MB */
+  function secKaynak() {
+    const istenen = (innerWidth <= 860)
+      ? 'assets/sahne/rail/hero-28-mobil.mp4'
+      : 'assets/sahne/rail/hero-28.mp4';
+    if (video.getAttribute('src') === istenen) return;
+    const t = video.currentTime || 0;
+    video.setAttribute('src', istenen);
+    video.load();
+    video.addEventListener('loadedmetadata', () => { try { video.currentTime = t; } catch (e) {} }, { once:true });
+  }
+
   /* video sonu metadata'dan okunur — 28 sn varsayimini duzeltir */
   const fixEnd = () => {
     const fin = SEG[SEG.length - 1];
@@ -308,6 +352,7 @@ p{margin:0}
   };
   if (video.readyState >= 1) fixEnd();
   video.addEventListener('loadedmetadata', fixEnd);
+  secKaynak();
 
   const sizeRail = () => {
     railEl.style.height = (TOTAL_VH / 100 * window.innerHeight + window.innerHeight) + 'px';
@@ -333,15 +378,27 @@ p{margin:0}
     };
   });
 
+  /* mobilde kart bandin altinda tam genislikte durur: yandan degil
+     asagidan girer, ufka cekilme yerine yukari suzulerek cikar. */
+  const mqMobil = matchMedia('(max-width:860px)');
+  let mobil = mqMobil.matches;
+  mqMobil.addEventListener('change', e => { mobil = e.matches; secKaynak(); });
+
   function paintText(vh) {
     for (const st of STATIONS) {
       const gir = st.gir ? smoothstep(st.gir[0], st.gir[1], vh) : 1;
       const cik = st.cik ? smoothstep(st.cik[0], st.cik[1], vh) : 0;
-      st.el.style.opacity   = String(gir * (1 - cik));
-      st.el.style.transform =
-        `translateY(-50%) translateX(${58*(1-gir)}vw) rotateY(${-14*(1-gir)}deg) ` +
-        `translateZ(${-1400*cik}px) scale(${1 - .18*cik})`;
-      st.el.style.filter    = `blur(${10*(1-gir) + 14*cik}px)`;
+      st.el.style.opacity = String(gir * (1 - cik));
+      if (mobil) {
+        st.el.style.transform =
+          `translateY(${26*(1-gir) - 18*cik}px) scale(${1 - .04*cik})`;
+        st.el.style.filter = `blur(${4*(1-gir) + 5*cik}px)`;
+      } else {
+        st.el.style.transform =
+          `translateY(-50%) translateX(${58*(1-gir)}vw) rotateY(${-14*(1-gir)}deg) ` +
+          `translateZ(${-1400*cik}px) scale(${1 - .18*cik})`;
+        st.el.style.filter = `blur(${10*(1-gir) + 14*cik}px)`;
+      }
     }
   }
 
