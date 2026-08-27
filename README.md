@@ -1,56 +1,88 @@
 # Kodjitsu — Online AI & Kodlama Okulu
 
 > **Marka notu:** Proje Ağustos 2026'da **Codyz → Kodjitsu** olarak yeniden adlandırıldı.
-> Ad, tüm görsel/video varlıklardaki "Kodjitsu Eğitimi" başlığıyla hizalıdır. Ayrıntı: [MARKA_GECISI.md](MARKA_GECISI.md)
+> Ayrıntı: [MARKA_GECISI.md](MARKA_GECISI.md)
 
-**Canlı önizleme:** https://kufuank.github.io/codyz/
-> GitHub Pages şu an `reels-storyboard` dalından yayınlanıyor (PR #1 henüz birleşmedi).
-> PR main'e birleşince Pages kaynağı `main` olarak geri alınmalı; aksi halde dal silinirse site düşer.
+**Canlı:** https://kodjitsu.com
+GitHub Pages, `main` dalının kökünden yayınlanıyor. HTTPS zorunlu, sertifika otomatik yenileniyor.
+Alan adı repodaki `CNAME` dosyasıyla bağlı — **o dosya silinirse site düşer.**
 
-Statik site + öğrenci paneli MVP. Build adımı yok; saf HTML/CSS/JS + Supabase.
+Statik site. Build adımı yok; saf HTML/CSS/JS + Supabase.
 
 ## Yapı
-- `index.html` — landing. Hero, **scroll ile sarılan video reel'i**: 6 eğitim paketi sırayla tanıtılır
-- `dashboard.html` — panel tasarım mockup'ı (statik önizleme)
-- `app/` — **çalışan MVP**
-  - `index.html` — giriş / kayıt
-  - `panel.html` + `panel.css` — veriye bağlı öğrenci paneli
-  - `config.js` — Supabase istemcisi (publishable key; RLS korumalı)
-- `assets/` — sumi-e marka görselleri
-  - `assets/kurslar/` — kurs kapakları: `*-9x16.webp` (reels/story), `*-16x9.webp` (web + video poster)
-  - `assets/video/` — hero reel'inin 16:9 klipleri (Kling 3.0, sessiz, ~5 sn)
-- `scripts/serve.js` — yerel statik sunucu (video `Range` desteğiyle; scrub için gerekli)
 
-## Hero reel'i nasıl çalışır
-`index.html` içindeki `.reel` bölümü 6 segmentlik uzun bir scroll alanıdır (`--seg` × 6 + 1 ekran):
+| Dosya | Ne |
+|---|---|
+| `index.html` | **Ana sayfa.** Scroll ile sürülen tek video hero'su, 6 durak |
+| `eski-site.html` | Önceki koyu temalı site. Arşiv, bağlantı verilmiyor |
+| `dashboard.html` | Panel tasarım mockup'ı (statik) |
+| `app/` | Çalışan MVP: giriş/kayıt + veriye bağlı öğrenci paneli (Supabase) |
+| `assets/sahne/rail/` | Hero videosu, mobil kopyası ve poster karesi |
+| `scripts/serve.js` | Yerel statik sunucu — video `Range` desteğiyle, scrub için şart |
 
-1. Scroll ilerlemesi 0–1 aralığına indirgenir, 6'ya bölünür → aktif paket indeksi + segment içi konum.
-2. Aktif pakete ait video görünür olur; segment içi konum videonun `currentTime`'ına yazılır → **scroll ileri/geri sarar**.
-3. Metin paneli, ilerleme çizgileri ve `01/06` sayacı aynı indeksle güncellenir.
-4. **Mobil / dokunmatik / `prefers-reduced-motion`**: scrub kapanır, aktif klip sessiz döngüde oynar (poster görseli her zaman ilk kare olarak yüklüdür).
-5. Sekme gizliyken `requestAnimationFrame` durduğu için bekleyen kare id ile izlenir; sayfa görünür olunca ölçüm sıfırlanır.
+## Hero nasıl çalışır
 
-Videolar `Range` istekleriyle sarıldığı için yayın ortamı **206 Partial Content** desteklemelidir (Netlify/Cloudflare/Pages varsayılan olarak destekler).
+Arka planda **elle kurgulanmış tek bir 28 saniyelik video** var. Her 4. saniye bir **durak**:
+
+| sn | Durak |
+|---|---|
+| 0–4 | Açılış — Kodjitsu nedir |
+| 8 | Oyun dersleri — Roblox · Minecraft · Unity |
+| 12 | Yazılım — Python · C# |
+| 16 | Tasarım — Blender · Meshy.ai |
+| 20 | Kodla Matematik |
+| 24–28 | İçerik Üretici Okulu |
+
+Motor iki parçadan ibaret: bir eşleme fonksiyonu ve bir `lerp`.
+
+1. Scroll yüksekliği segmentlere bölünür (`SEG` tablosu): açılış taraması, ardından her durak için
+   *geçiş* + *plato*, sonda final taraması. Toplam **995vh**.
+2. Segment içi oran videonun `currentTime`'ına yazılır. **Dünyayı yalnız scroll sürer** —
+   `performance.now()` ya da herhangi bir saat terimi yok. Scroll durunca video da durur.
+3. Kartlar aynı vh ekseninden türeyen pencerelerle girer/çıkar; masaüstünde yandan gelip ufka
+   çekilir, mobilde aşağıdan gelip yukarı süzülür.
+
+**Videonun anahtar kare sıklığı kritik.** Kaynak dosyada 28 saniyede yalnızca 23 anahtar kare vardı;
+scroll'da rastgele bir saniyeye atlarken tarayıcı takılıyordu. Yayındaki kopya `-g 12` ile yeniden
+kodlandı (saniyede 2 anahtar kare). Videoyu değiştirirsen aynı şekilde kodla:
+
+```bash
+ffmpeg -i kaynak.mp4 -an -vf scale=1440:-2 -c:v libx264 -profile:v high -pix_fmt yuv420p \
+  -crf 26 -g 12 -keyint_min 12 -sc_threshold 0 -movflags +faststart hero-28.mp4
+```
+
+Videolar `Range` istekleriyle sarıldığı için yayın ortamı **206 Partial Content** desteklemelidir
+(GitHub Pages / Netlify / Cloudflare destekliyor).
+
+## Mobil
+
+860px altında ekran ikiye bölünür: üstte sabit video bandı (52svh, alçak ekranlarda 44svh),
+altta beyaz metin paneli. 16:9 videoyu dar ekrana `cover` ile doldurmak kompozisyonu kırpıyordu;
+bant yüksekliği sabitlenip `object-position` ile karakterler kadrajda tutuluyor.
+
+Dar ekrana ayrı ve hafif kopya servis edilir (**3,7 MB**; masaüstü 8,0 MB). Kaynak viewport'a göre
+JS ile seçilir, geçişte bulunulan saniye korunur.
+
+> ⚠️ **iOS Safari'de scroll ile video tarama henüz gerçek cihazda test edilmedi.** Takılırsa
+> çözüm hazır: mobilde taramayı bırakıp durak durak sabit karelere düşmek.
 
 ## Eğitim paketleri
-- **Kodlama:** Roblox & Lua · Python · Unity · Blender · C# & .NET · Kodlayarak Matematik
-- **Çocuklar için AI (yeni):** Görsel AI · İşitsel AI · Agentic AI → [AI_DERS_PAKETLERI.md](AI_DERS_PAKETLERI.md)
 
-## Pazarlama
-Şu an odak **Instagram**: sayfa kurulumu, içerik takvimi ve reklam planı → [INSTAGRAM_PLANI.md](INSTAGRAM_PLANI.md)
-Post metinleri → [POST_METINLERI.md](POST_METINLERI.md) · Reels kurgu planı → [REELS_STORYBOARD.md](REELS_STORYBOARD.md) · Görsel üretim promptları → [HIGGSFIELD_PROMPTLARI.md](HIGGSFIELD_PROMPTLARI.md)
+**Kodlama:** Roblox · Minecraft · Unity · Python · C# · Kodlayarak Matematik
+**AI:** İçerik Üretici Okulu (AI destekli kurgu/video/sinema)
 
 ## Backend (Supabase)
-Tablolar: `profiles`, `tasks`; view: `leaderboard`. Kayıtta trigger otomatik profil + 4 görev kurar. Tüm tablolarda RLS açık.
+
+Tablolar: `profiles`, `tasks`; view: `leaderboard`. Kayıtta trigger otomatik profil + 4 görev kurar.
+Tüm tablolarda RLS açık.
+
+> Alan adı bağlandı: Supabase → Authentication → **Site URL ve Redirect URLs `https://kodjitsu.com`
+> olarak güncellenmeli.** Sürtünmesiz kayıt için "Confirm email" kapalı tutuluyor.
 
 ## Yerel çalıştırma
+
 ```bash
 node scripts/serve.js
 ```
-`http://localhost:5180` → landing · `http://localhost:5180/app/` → giriş ekranı
 
-## Deploy (ücretsiz)
-Saf statik olduğu için herhangi bir statik host'a gider (GitHub Pages / Netlify / Cloudflare Pages). Giriş ekranı: `/app/`.
-
-> Not: Sürtünmesiz kayıt için Supabase → Authentication → Email → "Confirm email" kapatılmalı.
-> Özel alan adına geçince Supabase Auth → Site URL + Redirect URLs güncellenmeli (alan adı kararı bekliyor, bkz. MARKA_GECISI.md).
+`http://localhost:5180` → ana sayfa · `http://localhost:5180/app/` → giriş ekranı
