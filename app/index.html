@@ -40,11 +40,7 @@ a{color:var(--coral)}
 .belt-dots i.now{background:var(--gold)}.belt-dots i.done{background:var(--coral)}
 
 /* form */
-.form{padding:clamp(26px,4vw,40px);display:flex;flex-direction:column}
-.tabs{display:flex;gap:4px;background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:4px;margin-bottom:24px}
-.tabs button{flex:1;border:none;background:none;color:var(--tx-2);font-family:'Sora';font-weight:600;font-size:.9rem;
-  padding:9px;border-radius:99px;cursor:pointer;transition:background .2s,color .2s}
-.tabs button.active{background:var(--surface-2);color:var(--tx)}
+.form{padding:clamp(26px,4vw,40px);display:flex;flex-direction:column;justify-content:center}
 .form h1{font-size:1.5rem;font-weight:700}
 .form .sub{color:var(--tx-3);font-size:.88rem;margin:6px 0 22px}
 .field{margin-bottom:15px}
@@ -53,15 +49,6 @@ a{color:var(--coral)}
   padding:12px 14px;color:var(--tx);font-size:.94rem;outline:none;transition:border-color .2s,box-shadow .2s}
 .field input:focus{border-color:var(--violet);box-shadow:0 0 0 3px rgba(124,107,255,.18)}
 .field input::placeholder{color:var(--tx-3)}
-.track{display:none;gap:10px;margin-bottom:15px}
-.track.show{display:flex}
-.track label{flex:1;cursor:pointer;position:relative}
-.track input{position:absolute;opacity:0;pointer-events:none}
-.track .opt{display:block;height:100%;border:1px solid var(--line-2);border-radius:12px;padding:12px;text-align:center;transition:border-color .2s,background .2s}
-.track .opt b{font-family:'Sora';font-weight:600;font-size:.9rem;display:block}
-.track .opt small{color:var(--tx-3);font-size:.74rem}
-.track input:checked + .opt{border-color:var(--coral);background:rgba(255,106,61,.08)}
-.track label:last-child input:checked + .opt{border-color:var(--gold);background:rgba(242,169,59,.08)}
 .btn{margin-top:8px;width:100%;border:none;cursor:pointer;font-family:'Sora';font-weight:700;font-size:.96rem;
   background:var(--coral);color:var(--ink);padding:13px;border-radius:12px;transition:transform .15s var(--ease),opacity .2s;display:flex;align-items:center;justify-content:center;gap:8px}
 .btn:hover{transform:translateY(-1px)}
@@ -94,31 +81,16 @@ a{color:var(--coral)}
     </div>
     <div>
       <h2>Hoş geldin.<br><em>İlk işini</em> yap.</h2>
-      <p>Hesabını oluştur, ilk sezonuna başla. İlk görevlerin ve portfolyo işin seni bekliyor.</p>
+      <p>Giriş yap; görevlerin ve portfolyo işin kaldığı yerden devam etsin.</p>
       <div class="belt-dots"><i class="now"></i><i></i><i></i><i></i></div>
     </div>
   </aside>
 
   <main class="form">
-    <div class="tabs" role="tablist">
-      <button id="tabLogin" class="active" role="tab">Giriş</button>
-      <button id="tabSignup" role="tab">Kayıt ol</button>
-    </div>
-
     <h1 id="title">Tekrar hoş geldin</h1>
     <p class="sub" id="subtitle">Görevlerin kaldığın yerden devam ediyor.</p>
 
     <form id="authForm" novalidate>
-      <div class="field" id="nameField" style="display:none">
-        <label for="name">Ad</label>
-        <input id="name" type="text" autocomplete="name" placeholder="Adın" />
-      </div>
-
-      <div class="track" id="trackField">
-        <label><input type="radio" name="track" value="kasif" checked /><span class="opt"><b>Kodlama Okulu</b><small>Kâşif · çocuk yaratıcılığı</small></span></label>
-        <label><input type="radio" name="track" value="kurucu" /><span class="opt"><b>Yapay Zeka Okulu</b><small>Kurucu · kurumsal</small></span></label>
-      </div>
-
       <div class="field">
         <label for="email">E-posta</label>
         <input id="email" type="email" autocomplete="email" inputmode="email" placeholder="ornek@eposta.com" required />
@@ -132,7 +104,7 @@ a{color:var(--coral)}
       <div class="msg" id="msg" role="alert" aria-live="polite"></div>
     </form>
 
-    <p class="foot">Devam ederek Kodjitsu Stüdyo topluluk kurallarını kabul edersin.</p>
+    <p class="foot">Hesabın yok mu? <a href="../kayit/">Ön kayıt bırak</a>, hesabını kayıt sonrasında biz açalım.</p>
   </main>
 </div>
 
@@ -140,7 +112,6 @@ a{color:var(--coral)}
 import { supabase } from './config.js';
 
 const $ = (id) => document.getElementById(id);
-let mode = 'login';
 
 // Zaten girişliyse panele
 (async () => {
@@ -148,22 +119,8 @@ let mode = 'login';
   if (session) location.replace('./panel.html');
 })();
 
-function setMode(m){
-  mode = m;
-  const signup = m === 'signup';
-  $('tabLogin').classList.toggle('active', !signup);
-  $('tabSignup').classList.toggle('active', signup);
-  $('title').textContent = signup ? 'Yola çık' : 'Tekrar hoş geldin';
-  $('subtitle').textContent = signup ? 'Hesabını oluştur, ilk sezonuna başla.' : 'Görevlerin kaldığın yerden devam ediyor.';
-  $('nameField').style.display = signup ? 'block' : 'none';
-  $('trackField').classList.toggle('show', signup);
-  $('password').autocomplete = signup ? 'new-password' : 'current-password';
-  $('submitBtn').querySelector('.lbl').textContent = signup ? 'Hesabımı oluştur' : 'Giriş yap';
-  hideMsg();
-}
-$('tabLogin').onclick = () => setMode('login');
-$('tabSignup').onclick = () => setMode('signup');
-
+// Kayıt akışı arayüzden kaldırıldı: öğrenci hesapları /kayit sonrasında
+// Kodjitsu tarafından açılır. Bu ekran yalnız giriş yapar.
 function showMsg(text, type){ const m=$('msg'); m.textContent=text; m.className='msg show '+type; }
 function hideMsg(){ $('msg').className='msg'; }
 function loading(on){ const b=$('submitBtn'); b.disabled=on; b.classList.toggle('loading',on); }
@@ -177,29 +134,12 @@ $('authForm').addEventListener('submit', async (e) => {
   loading(true);
 
   try{
-    if (mode === 'signup'){
-      const full_name = $('name').value.trim() || email.split('@')[0];
-      const track = document.querySelector('input[name="track"]:checked').value;
-      const { data, error } = await supabase.auth.signUp({
-        email, password,
-        options: { data: { full_name, track } }
-      });
-      if (error) throw error;
-      if (data.session){
-        location.replace('./panel.html');           // e-posta onayı kapalıysa direkt panele
-      } else {
-        showMsg('Hesabın oluşturuldu. Girişi tamamlamak için e-postandaki onay bağlantısına tıkla, sonra giriş yap.', 'ok');
-        setTimeout(()=>setMode('login'), 400);
-      }
-    } else {
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) throw error;
-      location.replace('./panel.html');
-    }
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+    location.replace('./panel.html');
   } catch(err){
     const map = {
       'Invalid login credentials':'E-posta ya da şifre hatalı.',
-      'User already registered':'Bu e-posta zaten kayıtlı. Giriş yapmayı dene.',
       'Email not confirmed':'E-postan henüz onaylanmadı. Gelen kutunu kontrol et.'
     };
     showMsg(map[err.message] || ('Bir şey ters gitti: '+err.message), 'err');
