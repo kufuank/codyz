@@ -304,16 +304,23 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
   tekliYap($('cinsiyet'));
   tekliYap($('ilgi'));
 
-  /* ana sayfadan gelen on secim: eski program adlari ilgi alanina eslenir */
-  const istenen = new URLSearchParams(location.search).get('program');
-  if (istenen) {
-    const esleme = {
-      'Oyun Yapımcısı': 'Yazılım', 'Yazılımcı': 'Yazılım',
-      'Tasarımcı': 'Tasarım', 'İçerik Üretici Okulu': 'Tasarım',
-      'Kodla Matematik': 'Matematik'
-    };
-    const hedef = esleme[istenen] || istenen;
-    const kutu = [...$('ilgi').querySelectorAll('input')].find(i => i.value === hedef);
+  /* ana sayfadan gelen on secim: ?kurs= kurs cipini, ?program= (eski) ilgi alanini isaretler */
+  const q = new URLSearchParams(location.search);
+  const istenen = q.get('program');
+  const kursIstenen = q.get('kurs');
+  const ilgiEsleme = {
+    'Oyun Yapımcısı': 'Yazılım', 'Yazılımcı': 'Yazılım', 'Tasarımcı': 'Tasarım',
+    'İçerik Üretici Okulu': 'Tasarım', 'Kodla Matematik': 'Matematik',
+    'Roblox': 'Yazılım', 'Minecraft': 'Yazılım', 'Python': 'Yazılım', 'Unity': 'Yazılım',
+    'Matematik': 'Matematik', 'Grafik Tasarım': 'Tasarım'
+  };
+  if (kursIstenen) {
+    const kutu = [...$('kurslar').querySelectorAll('input')].find(i => i.value === kursIstenen);
+    if (kutu) kutu.checked = true;
+  }
+  const hedefIlgi = ilgiEsleme[kursIstenen] || ilgiEsleme[istenen] || istenen;
+  if (hedefIlgi) {
+    const kutu = [...$('ilgi').querySelectorAll('input')].find(i => i.value === hedefIlgi);
     if (kutu) kutu.checked = true;
   }
 
@@ -364,7 +371,7 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
           programs:           kurslar.length ? kurslar : null,
           days:               gunler,
           hours:              saatler,
-          source:             'kayit-sayfa' + (istenen ? ':' + istenen : '')
+          source:             'kayit-sayfa' + (kursIstenen ? ':' + kursIstenen : istenen ? ':' + istenen : '')
         })
       });
       clearTimeout(tid);
