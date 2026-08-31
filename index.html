@@ -871,5 +871,28 @@ p{margin:0}
   });
 })();
 </script>
+
+<script>
+/* canli ziyaretci nabzi: 40 sn'de bir sid upsert (admin panelindeki sayac).
+   PII yok; last_seen'i sunucu trigger'i yazar, istemci saati kullanilmaz. */
+(() => {
+  const SUPA = 'https://vbkjkpkogccspccecase.supabase.co';
+  const KEY  = 'sb_publishable_PwGfmvY9t9QXSPR5bZKBVA_9Gs1QJ5x';
+  const sid = (crypto.randomUUID ? crypto.randomUUID() : 's' + Date.now() + Math.random().toString(36).slice(2, 10));
+  const nabiz = () => {
+    if (document.hidden) return;
+    fetch(SUPA + '/rest/v1/site_presence', {
+      method: 'POST',
+      headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json',
+        Prefer: 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify({ sid, page: location.pathname }),
+      keepalive: true
+    }).catch(() => {});
+  };
+  nabiz();
+  setInterval(nabiz, 40000);
+  addEventListener('visibilitychange', () => { if (!document.hidden) nabiz(); });
+})();
+</script>
 </body>
 </html>

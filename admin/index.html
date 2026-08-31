@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kodjitsu · Yönetim</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/marka/favicon-32.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#0E0B09;--surface:#181410;--surface-2:#211B16;
+  --line:rgba(246,242,233,.10);--line-2:rgba(246,242,233,.16);
+  --coral:#FF6A3D;--gold:#F2A93B;--ok:#5FBF8E;
+  --tx:#F4EFE6;--tx-2:rgba(244,239,230,.66);--tx-3:rgba(244,239,230,.40);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box}
+body{margin:0;min-height:100svh;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);
+  font-size:.95rem;line-height:1.55;-webkit-font-smoothing:antialiased;
+  background-image:radial-gradient(900px 600px at 85% -10%,rgba(124,107,255,.10),transparent 60%),radial-gradient(700px 500px at -10% 110%,rgba(255,106,61,.10),transparent 55%)}
+h1,h2,h3{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em}
+.mark{font-family:'Sora';font-weight:800;font-size:1.5rem;letter-spacing:-.03em;color:var(--tx);text-decoration:none}
+.mark .z{color:var(--coral)}
+
+/* ---------- giriş ---------- */
+.giris{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:24px}
+.giris-kart{width:min(400px,100%);background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:32px}
+.giris-kart .tag{color:var(--tx-3);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;font-family:'Sora';font-weight:600;margin-top:4px}
+.giris-kart h1{font-size:1.35rem;margin-top:22px}
+.field{margin-top:14px}
+.field label{display:block;font-family:'Sora';font-weight:600;font-size:.76rem;color:var(--tx-2);margin-bottom:6px}
+.field input,.field select{width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:11px;
+  padding:11px 13px;color:var(--tx);font:inherit;font-size:.92rem;outline:none;transition:border-color .2s}
+.field input:focus,.field select:focus{border-color:var(--coral)}
+.btn{width:100%;margin-top:18px;border:none;cursor:pointer;font-family:'Sora';font-weight:700;font-size:.94rem;
+  background:var(--coral);color:#15110E;padding:12px;border-radius:11px;transition:transform .15s var(--ease),opacity .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn:disabled{opacity:.55;cursor:wait;transform:none}
+.msg{margin-top:14px;padding:10px 13px;border-radius:11px;font-size:.84rem;display:none;line-height:1.4}
+.msg.show{display:block}
+.msg.err{background:rgba(255,106,61,.12);border:1px solid rgba(255,106,61,.4);color:#ffb69e}
+.msg.ok{background:rgba(95,191,142,.12);border:1px solid rgba(95,191,142,.4);color:#a6e0c4}
+
+/* ---------- panel ---------- */
+.panel{display:none;max-width:1280px;margin:0 auto;padding:22px clamp(14px,3vw,36px) 60px}
+.panel.acik{display:block}
+.ust{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:6px 0 20px}
+.ust .sag{display:flex;align-items:center;gap:10px}
+.pil{font-family:'Sora';font-weight:600;font-size:.78rem;color:var(--tx-2);background:var(--surface);
+  border:1px solid var(--line);border-radius:99px;padding:.5em 1em;cursor:pointer;transition:color .2s,border-color .2s}
+.pil:hover{color:var(--tx);border-color:var(--line-2)}
+.izgara{display:grid;grid-template-columns:280px 1fr;gap:18px;align-items:start}
+.kart{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+.kart h2{font-size:1rem;display:flex;align-items:center;gap:.5em}
+.kart h2 .nokta{width:8px;height:8px;border-radius:99px;background:var(--coral);flex:none}
+
+/* canlı sayaç */
+.canli .sayi{font-family:'Sora';font-weight:800;font-size:3.4rem;letter-spacing:-.04em;line-height:1;margin-top:14px}
+.canli .alt{color:var(--tx-3);font-size:.8rem;margin-top:6px}
+.canli .nokta{background:var(--ok);animation:nabiz 2s infinite}
+@keyframes nabiz{0%,100%{opacity:1}50%{opacity:.35}}
+
+/* liste */
+.sekmeler{display:flex;gap:6px;margin:14px 0 12px}
+.sekme{font-family:'Sora';font-weight:600;font-size:.8rem;color:var(--tx-2);background:none;
+  border:1px solid var(--line);border-radius:99px;padding:.45em 1em;cursor:pointer}
+.sekme.aktif{background:var(--surface-2);color:var(--tx);border-color:var(--line-2)}
+.tablo-kap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.84rem}
+th{font-family:'Sora';font-weight:600;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--tx-3);
+  text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+td{padding:9px 10px;border-bottom:1px solid var(--line);color:var(--tx-2);vertical-align:top}
+tr.satir{cursor:pointer}
+tr.satir:hover td{color:var(--tx)}
+tr.detay td{background:var(--surface-2);color:var(--tx-2);font-size:.82rem;line-height:1.7}
+tr.detay b{color:var(--tx);font-weight:600}
+.bos{color:var(--tx-3);padding:18px 6px;font-size:.86rem}
+.rozet{display:inline-block;background:var(--surface-2);border:1px solid var(--line);border-radius:99px;
+  padding:.15em .7em;font-size:.72rem;margin:1px 2px 1px 0;white-space:nowrap}
+
+/* profil formu */
+.form-izgara{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.tam{grid-column:1 / -1}
+.sifre-satir{display:flex;gap:8px;align-items:flex-end}
+.sifre-satir .field{flex:1}
+.uret{flex:none;font-family:'Sora';font-weight:600;font-size:.76rem;color:var(--tx-2);background:var(--surface-2);
+  border:1px solid var(--line);border-radius:11px;padding:11px 14px;cursor:pointer}
+.uret:hover{color:var(--tx)}
+.kimlik{display:none;margin-top:14px;padding:14px;border-radius:12px;background:rgba(95,191,142,.08);
+  border:1px solid rgba(95,191,142,.35);font-size:.86rem;line-height:1.8}
+.kimlik.show{display:block}
+.kimlik code{background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:.15em .5em;color:var(--tx)}
+
+@media (max-width:960px){
+  .izgara{grid-template-columns:1fr}
+  .form-izgara{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- ---------- GİRİŞ ---------- -->
+<div class="giris" id="girisEkrani">
+  <div class="giris-kart">
+    <a class="mark" href="../">kod<span class="z">jitsu</span></a>
+    <div class="tag">Yönetim paneli</div>
+    <h1>Giriş</h1>
+    <form id="girisForm">
+      <div class="field">
+        <label for="gKullanici">Kullanıcı adı</label>
+        <input id="gKullanici" type="text" autocomplete="username" required autocapitalize="none" />
+      </div>
+      <div class="field">
+        <label for="gSifre">Şifre</label>
+        <input id="gSifre" type="password" autocomplete="current-password" required />
+      </div>
+      <button class="btn" id="girisBtn" type="submit">Giriş yap</button>
+      <div class="msg" id="girisMsg" role="alert"></div>
+    </form>
+  </div>
+</div>
+
+<!-- ---------- PANEL ---------- -->
+<main class="panel" id="panel">
+  <div class="ust">
+    <div>
+      <a class="mark" href="../">kod<span class="z">jitsu</span></a>
+      <span style="color:var(--tx-3);font-size:.75rem;font-family:'Sora';font-weight:600;margin-left:8px;letter-spacing:.18em;text-transform:uppercase">Yönetim</span>
+    </div>
+    <div class="sag">
+      <button class="pil" id="yenileBtn">Yenile</button>
+      <button class="pil" id="cikisBtn">Çıkış</button>
+    </div>
+  </div>
+
+  <div class="izgara">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <!-- canlı ziyaretçi -->
+      <div class="kart canli">
+        <h2><span class="nokta"></span>Şu an sitede</h2>
+        <div class="sayi" id="canliSayi">–</div>
+        <div class="alt" id="canliAlt">ölçülüyor…</div>
+      </div>
+
+      <!-- profil oluşturma -->
+      <div class="kart">
+        <h2><span class="nokta"></span>Öğrenci + veli profili</h2>
+        <form id="profilForm">
+          <div class="form-izgara">
+            <div class="field tam">
+              <label for="pAd">Öğrenci adı soyadı</label>
+              <input id="pAd" type="text" required minlength="2" maxlength="80" />
+            </div>
+            <div class="field tam">
+              <label for="pEposta">Öğrenci e-postası (giriş için)</label>
+              <input id="pEposta" type="email" required maxlength="254" placeholder="ogrenci@eposta.com" />
+            </div>
+            <div class="tam sifre-satir">
+              <div class="field">
+                <label for="pSifre">Şifre</label>
+                <input id="pSifre" type="text" required minlength="6" maxlength="64" autocomplete="off" />
+              </div>
+              <button type="button" class="uret" id="sifreUret">Üret</button>
+            </div>
+            <div class="field tam">
+              <label for="pOkul">Okul</label>
+              <select id="pOkul">
+                <option value="kasif">Kodlama Okulu</option>
+                <option value="kurucu">Yapay Zeka Okulu</option>
+              </select>
+            </div>
+            <div class="field tam">
+              <label for="pVeliAd">Veli adı soyadı</label>
+              <input id="pVeliAd" type="text" required minlength="2" maxlength="120" />
+            </div>
+            <div class="field">
+              <label for="pVeliTel">Veli telefonu</label>
+              <input id="pVeliTel" type="tel" required maxlength="24" placeholder="05xx xxx xx xx" />
+            </div>
+            <div class="field">
+              <label for="pVeliEposta">Veli e-postası</label>
+              <input id="pVeliEposta" type="email" maxlength="254" placeholder="zorunlu değil" />
+            </div>
+          </div>
+          <button class="btn" id="profilBtn" type="submit">Profili oluştur</button>
+          <div class="msg" id="profilMsg" role="alert"></div>
+          <div class="kimlik" id="kimlik"></div>
+        </form>
+      </div>
+    </div>
+
+    <!-- kayıt listesi -->
+    <div class="kart">
+      <h2><span class="nokta"></span>Kayıtlar</h2>
+      <div class="sekmeler">
+        <button class="sekme aktif" id="skOn" type="button">Ön kayıtlar</button>
+        <button class="sekme" id="skTalep" type="button">Talepler</button>
+      </div>
+      <div class="tablo-kap" id="listeKap"><div class="bos">Yükleniyor…</div></div>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+const SUPA_URL = 'https://vbkjkpkogccspccecase.supabase.co';
+const SUPA_KEY = 'sb_publishable_PwGfmvY9t9QXSPR5bZKBVA_9Gs1QJ5x';
+const ADMIN_UID = 'ad314a17-1411-4700-a001-1a2b3c4d5e6f';
+
+/* admin oturumu app/ ogrenci oturumundan ayri saklanir */
+const supa = createClient(SUPA_URL, SUPA_KEY, {
+  auth: { persistSession: true, autoRefreshToken: true, storageKey: 'kodjitsu-admin' }
+});
+
+const $ = (id) => document.getElementById(id);
+const goster = (el, text, tur) => { el.textContent = text; el.className = 'msg show ' + tur; };
+const gizle = (el) => { el.className = 'msg'; };
+
+/* ---------- oturum ---------- */
+async function panelAc() {
+  $('girisEkrani').style.display = 'none';
+  $('panel').classList.add('acik');
+  canliSay();
+  listeYukle();
+  await eskiNabizTemizle();
+}
+(async () => {
+  const { data: { session } } = await supa.auth.getSession();
+  if (session && session.user.id === ADMIN_UID) panelAc();
+})();
+
+$('girisForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  gizle($('girisMsg'));
+  const k = $('gKullanici').value.trim().toLowerCase();
+  const email = k.includes('@') ? k : (k + '@kodjitsu.com');
+  $('girisBtn').disabled = true;
+  try {
+    const { data, error } = await supa.auth.signInWithPassword({ email, password: $('gSifre').value });
+    if (error) throw error;
+    if (data.user.id !== ADMIN_UID) {
+      await supa.auth.signOut();
+      throw new Error('yetkisiz');
+    }
+    panelAc();
+  } catch (err) {
+    goster($('girisMsg'),
+      err.message === 'yetkisiz' ? 'Bu hesap yönetici değil.' : 'Kullanıcı adı ya da şifre hatalı.', 'err');
+  } finally {
+    $('girisBtn').disabled = false;
+  }
+});
+$('cikisBtn').addEventListener('click', async () => { await supa.auth.signOut(); location.reload(); });
+$('yenileBtn').addEventListener('click', () => { canliSay(); listeYukle(); });
+
+/* ---------- canlı ziyaretçi: son 75 sn'de nabız atanlar ---------- */
+async function canliSay() {
+  try {
+    const esik = new Date(Date.now() - 75000).toISOString();
+    const { count, error } = await supa
+      .from('site_presence')
+      .select('sid', { count: 'exact', head: true })
+      .gt('last_seen', esik);
+    if (error) throw error;
+    $('canliSayi').textContent = String(count ?? 0);
+    $('canliAlt').textContent = 'son güncelleme ' + new Date().toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  } catch (e) {
+    $('canliAlt').textContent = 'sayaç okunamadı';
+  }
+}
+setInterval(canliSay, 15000);
+async function eskiNabizTemizle() {
+  try {
+    const esik = new Date(Date.now() - 3600000).toISOString();
+    await supa.from('site_presence').delete().lt('last_seen', esik);
+  } catch (e) {}
+}
+
+/* ---------- kayıt listeleri ---------- */
+let sekme = 'on';
+$('skOn').addEventListener('click', () => { sekme = 'on'; sekmeCiz(); listeYukle(); });
+$('skTalep').addEventListener('click', () => { sekme = 'talep'; sekmeCiz(); listeYukle(); });
+function sekmeCiz() {
+  $('skOn').classList.toggle('aktif', sekme === 'on');
+  $('skTalep').classList.toggle('aktif', sekme === 'talep');
+}
+const tarih = (t) => new Date(t).toLocaleString('tr-TR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' });
+const kacir = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const rozetler = (dizi) => (dizi || []).map((x) => '<span class="rozet">' + kacir(x) + '</span>').join('');
+
+async function listeYukle() {
+  const kap = $('listeKap');
+  kap.innerHTML = '<div class="bos">Yükleniyor…</div>';
+  try {
+    if (sekme === 'on') {
+      const { data, error } = await supa.from('registrations').select('*').order('created_at', { ascending: false }).limit(200);
+      if (error) throw error;
+      $('skOn').textContent = 'Ön kayıtlar (' + data.length + ')';
+      if (!data.length) { kap.innerHTML = '<div class="bos">Henüz ön kayıt yok.</div>'; return; }
+      kap.innerHTML = '<table><thead><tr><th>Tarih</th><th>Öğrenci</th><th>Veli</th><th>Telefon</th><th>Şehir</th><th>Program</th></tr></thead><tbody>' +
+        data.map((r, i) =>
+          '<tr class="satir" data-i="' + i + '"><td>' + tarih(r.created_at) + '</td><td>' + kacir(r.student_first_name + ' ' + r.student_last_name) + ' · ' + r.student_age + '</td><td>' + kacir(r.parent_name) + '</td><td>' + kacir(r.parent_phone) + '</td><td>' + kacir(r.city) + '</td><td>' + rozetler(r.programs) + '</td></tr>' +
+          '<tr class="detay" hidden><td colspan="6">' +
+            '<b>E-posta:</b> ' + kacir(r.email) +
+            (r.student_gender ? ' &nbsp;·&nbsp; <b>Cinsiyet:</b> ' + kacir(r.student_gender) : '') +
+            (r.student_phone ? ' &nbsp;·&nbsp; <b>Öğrenci tel:</b> ' + kacir(r.student_phone) : '') +
+            '<br><b>Günler:</b> ' + rozetler(r.days) + ' &nbsp;<b>Saatler:</b> ' + rozetler(r.hours) +
+            (r.source ? '<br><b>Kaynak:</b> ' + kacir(r.source) : '') +
+          '</td></tr>'
+        ).join('') + '</tbody></table>';
+    } else {
+      const { data, error } = await supa.from('leads').select('*').order('created_at', { ascending: false }).limit(200);
+      if (error) throw error;
+      $('skTalep').textContent = 'Talepler (' + data.length + ')';
+      if (!data.length) { kap.innerHTML = '<div class="bos">Henüz talep yok.</div>'; return; }
+      kap.innerHTML = '<table><thead><tr><th>Tarih</th><th>Veli</th><th>Telefon</th><th>Yaş</th><th>Program</th><th>Niyet</th></tr></thead><tbody>' +
+        data.map((r, i) =>
+          '<tr class="satir" data-i="' + i + '"><td>' + tarih(r.created_at) + '</td><td>' + kacir(r.parent_name) + '</td><td>' + kacir(r.phone) + '</td><td>' + (r.child_age ?? '–') + '</td><td>' + kacir(r.program ?? '–') + '</td><td>' + kacir(r.intent ?? '–') + '</td></tr>' +
+          '<tr class="detay" hidden><td colspan="6">' +
+            (r.email ? '<b>E-posta:</b> ' + kacir(r.email) + ' &nbsp;·&nbsp; ' : '') +
+            '<b>Kaynak:</b> ' + kacir(r.source ?? '–') +
+          '</td></tr>'
+        ).join('') + '</tbody></table>';
+    }
+    kap.querySelectorAll('tr.satir').forEach((tr) => tr.addEventListener('click', () => {
+      const d = tr.nextElementSibling; d.hidden = !d.hidden;
+    }));
+  } catch (e) {
+    kap.innerHTML = '<div class="bos">Liste okunamadı. Yenile ile tekrar deneyin.</div>';
+  }
+}
+
+/* ---------- öğrenci + veli profili oluşturma ---------- */
+$('sifreUret').addEventListener('click', () => {
+  const h = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789';
+  let s = '';
+  const r = new Uint32Array(10); crypto.getRandomValues(r);
+  for (let i = 0; i < 10; i++) s += h[r[i] % h.length];
+  $('pSifre').value = s;
+});
+
+$('profilForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  gizle($('profilMsg'));
+  $('kimlik').classList.remove('show');
+  const tel = $('pVeliTel').value.replace(/\D/g, '');
+  if (tel.length < 10) { goster($('profilMsg'), 'Veli telefonu eksik görünüyor.', 'err'); return; }
+  $('profilBtn').disabled = true;
+  try {
+    /* 1) ogrenci hesabi: duz REST signup — admin oturumuna dokunmaz,
+       donen oturum saklanmaz. Trigger profili + gorevleri kurar. */
+    const r = await fetch(SUPA_URL + '/auth/v1/signup', {
+      method: 'POST',
+      headers: { apikey: SUPA_KEY, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: $('pEposta').value.trim(),
+        password: $('pSifre').value,
+        data: { full_name: $('pAd').value.trim(), track: $('pOkul').value }
+      })
+    });
+    const govde = await r.json();
+    if (!r.ok) {
+      const m = String(govde.msg || govde.error_description || govde.message || '');
+      throw new Error(/already|registered|exists/i.test(m) ? 'Bu e-posta ile zaten bir hesap var.' : 'Hesap açılamadı: ' + m);
+    }
+    const ogrenciId = govde.user ? govde.user.id : govde.id;
+    /* 2) veli kaydi (admin oturumu, RLS admin politikasi) */
+    const { error: gErr } = await supa.from('guardians').insert({
+      student_id: ogrenciId,
+      name: $('pVeliAd').value.trim(),
+      phone: $('pVeliTel').value.trim(),
+      email: $('pVeliEposta').value.trim() || null
+    });
+    if (gErr) throw new Error('Öğrenci açıldı ama veli kaydı yazılamadı: ' + gErr.message);
+    goster($('profilMsg'), 'Profil oluşturuldu.', 'ok');
+    $('kimlik').innerHTML = 'Öğrenci girişi (kodjitsu.com/app):<br>E-posta: <code>' + kacir($('pEposta').value.trim()) + '</code><br>Şifre: <code>' + kacir($('pSifre').value) + '</code>';
+    $('kimlik').classList.add('show');
+    $('profilForm').reset();
+  } catch (err) {
+    goster($('profilMsg'), err.message, 'err');
+  } finally {
+    $('profilBtn').disabled = false;
+  }
+});
+</script>
+</body>
+</html>

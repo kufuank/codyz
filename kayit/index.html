@@ -336,5 +336,27 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
   });
 })();
 </script>
+
+<script>
+/* canli ziyaretci nabzi (admin panelindeki sayac) — index.html ile ayni */
+(() => {
+  const SUPA = 'https://vbkjkpkogccspccecase.supabase.co';
+  const KEY  = 'sb_publishable_PwGfmvY9t9QXSPR5bZKBVA_9Gs1QJ5x';
+  const sid = (crypto.randomUUID ? crypto.randomUUID() : 's' + Date.now() + Math.random().toString(36).slice(2, 10));
+  const nabiz = () => {
+    if (document.hidden) return;
+    fetch(SUPA + '/rest/v1/site_presence', {
+      method: 'POST',
+      headers: { apikey: KEY, Authorization: 'Bearer ' + KEY, 'Content-Type': 'application/json',
+        Prefer: 'resolution=merge-duplicates,return=minimal' },
+      body: JSON.stringify({ sid, page: location.pathname }),
+      keepalive: true
+    }).catch(() => {});
+  };
+  nabiz();
+  setInterval(nabiz, 40000);
+  addEventListener('visibilitychange', () => { if (!document.hidden) nabiz(); });
+})();
+</script>
 </body>
 </html>
