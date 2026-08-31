@@ -2,7 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kodjitsu.com/</loc>
-    <lastmod>2026-08-28</lastmod>
+    <lastmod>2026-08-31</lastmod>
     <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://kodjitsu.com/kayit/</loc>
+    <lastmod>2026-08-31</lastmod>
+    <changefreq>monthly</changefreq>
   </url>
 </urlset>

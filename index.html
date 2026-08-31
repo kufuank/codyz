@@ -802,6 +802,11 @@ p{margin:0}
       const acc = st ? st.style.getPropertyValue('--acc').trim() : '';
       if (b.dataset.ac === 'nasil') { renk(perdeNasil, acc); ac(perdeNasil); return; }
       niyet  = b.dataset.niyet || 'tekders';
+      /* on kayit artik kendi sayfasinda: kodjitsu.com/kayit */
+      if (niyet === 'kayit') {
+        location.href = 'kayit/' + (b.dataset.program ? '?program=' + encodeURIComponent(b.dataset.program) : '');
+        return;
+      }
       kaynak = (st ? 'durak-' + (+st.dataset.stop + 1) : 'nasil') + ':' + niyet;
       const n = NIYET[niyet];
       $('formBaslik').textContent = n.h;

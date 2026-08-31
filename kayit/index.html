@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kodjitsu · Ön Kayıt</title>
+<meta name="description" content="Kodjitsu ön kayıt formu. Bilgileri bırakın, sizi arayalım; sezonu, programı ve ders saatini telefonda birlikte netleştirelim." />
+<meta name="theme-color" content="#ffffff" />
+<link rel="canonical" href="https://kodjitsu.com/kayit/" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://kodjitsu.com/kayit/" />
+<meta property="og:site_name" content="Kodjitsu" />
+<meta property="og:locale" content="tr_TR" />
+<meta property="og:title" content="Kodjitsu — Ön Kayıt" />
+<meta property="og:description" content="Formu bırakın, sizi arayalım. Ödeme şimdi değil; programı telefonda birlikte seçelim." />
+<meta property="og:image" content="https://kodjitsu.com/assets/sahne/rail/hero-poster.jpg" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/marka/favicon-32.png" />
+<link rel="apple-touch-icon" href="../assets/marka/apple-touch-icon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#0F0F0F; --ink-2:#5B5B5B;
+  --mercan:#FF5A2D; --yesil:#12B76A;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --gut:clamp(20px,5vw,56px);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:#fff;
+  font-size:clamp(1rem,.96rem + .2vw,1.06rem);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1.1}
+
+/* ---------- arka plan: 99-final sahnesi ---------- */
+.bg{position:fixed;inset:0;z-index:0;background:url("../assets/kayit/arka.webp") center/cover no-repeat}
+.bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.42) 55%,rgba(255,255,255,.62) 100%)}
+
+.mark{position:fixed;z-index:3;top:26px;left:var(--gut);font-family:'Sora';font-weight:800;
+  font-size:clamp(1.7rem,1.3rem + 1vw,2.2rem);letter-spacing:-.035em;line-height:1;color:var(--ink);text-decoration:none}
+.mark .z{color:var(--mercan)}
+.mark::before{content:"";position:absolute;left:-28px;top:-30px;width:calc(100% + 96px);height:calc(100% + 74px);
+  background:radial-gradient(ellipse at 30% 50%,rgba(255,255,255,.95) 0%,rgba(255,255,255,.8) 42%,rgba(255,255,255,0) 78%);
+  z-index:-1;pointer-events:none}
+
+/* ---------- yerleşim ---------- */
+.sayfa{position:relative;z-index:1;min-height:100svh;display:flex;justify-content:flex-end;align-items:flex-start;
+  padding:clamp(88px,14svh,120px) var(--gut) 48px}
+.kart{width:min(680px,100%);background:#fff;border-radius:26px;
+  padding:clamp(24px,4vw,40px);box-shadow:0 30px 90px -30px rgba(15,15,15,.35)}
+.kart h1{font-size:clamp(1.8rem,1.5rem + 1.4vw,2.4rem)}
+.alt{color:var(--ink-2);font-size:.95rem;line-height:1.5;margin:.6rem 0 0}
+
+.bolum{font-size:.8rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);
+  margin-top:1.8rem;display:flex;align-items:center;gap:.6em}
+.bolum::before{content:"";width:22px;height:2px;border-radius:2px;background:var(--mercan)}
+.ipucu{font-size:.78rem;color:var(--ink-2);margin:.25rem 0 0}
+
+.alanlar{margin-top:.9rem;display:flex;flex-direction:column;gap:.85rem}
+.satir2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.alan label{display:block;font-family:'Sora';font-weight:600;font-size:.78rem;color:var(--ink-2);margin-bottom:.35rem}
+.alan input,.alan select{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:#fff;
+  border:1.5px solid rgba(15,15,15,.16);border-radius:12px;padding:.68em .9em;outline:none;
+  transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
+.alan select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%235B5B5B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .9em center;padding-right:2.4em}
+.alan input:focus,.alan select:focus{border-color:var(--mercan);box-shadow:0 0 0 3px rgba(15,15,15,.07)}
+
+/* ---------- çip grupları ---------- */
+.cipler{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.7rem}
+.cip{position:relative}
+.cip input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
+.cip span{display:inline-block;font-family:'Sora';font-weight:600;font-size:.82rem;color:var(--ink);
+  padding:.5em 1em;border-radius:99px;border:1.5px solid rgba(15,15,15,.18);background:#fff;
+  transition:background .15s,border-color .15s,color .15s;user-select:none}
+.cip input:checked + span{background:var(--mercan);border-color:var(--mercan);color:#fff}
+.cip input:focus-visible + span{outline:2px solid var(--mercan);outline-offset:2px}
+.cip--kucuk span{font-size:.78rem;padding:.45em .85em}
+
+.kvkk{margin-top:.9rem;font-size:.74rem;color:var(--ink-2);line-height:1.45}
+.gonder{width:100%;margin-top:1.2rem;font-family:'Sora';font-weight:700;font-size:1rem;border-radius:999px;
+  padding:.9em 1.5em;border:1.5px solid var(--mercan);background:var(--mercan);color:#fff;cursor:pointer;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.gonder:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(0,0,0,.16)}
+.gonder:disabled{opacity:.55;cursor:wait;transform:none;box-shadow:none}
+.hata{display:none;margin-top:.9rem;padding:.65em .9em;border-radius:10px;font-size:.85rem;
+  background:rgba(255,90,45,.09);border:1px solid rgba(255,90,45,.35);color:#B23A17}
+.hata.gorunur{display:block}
+
+.sonuc{display:none;text-align:center;padding:2.2rem 0 1.4rem}
+.sonuc.gorunur{display:block}
+.sonuc .is{width:56px;height:56px;border-radius:99px;background:var(--yesil);color:#fff;display:grid;place-items:center;margin:0 auto 1.1rem}
+.sonuc h2{font-size:1.7rem;letter-spacing:-.02em}
+.sonuc p{color:var(--ink-2);margin:.6rem 0 0;font-size:.98rem}
+.sonuc a{display:inline-block;margin-top:1.4rem;color:var(--ink);font-family:'Sora';font-weight:600;font-size:.9rem;text-decoration:none;
+  padding:.6em 1.3em;border-radius:99px;border:1.5px solid rgba(15,15,15,.22)}
+.sonuc a:hover{background:rgba(15,15,15,.05)}
+
+@media (max-width:1080px){
+  .sayfa{justify-content:center}
+}
+@media (max-width:640px){
+  .sayfa{padding:76px 12px 28px}
+  .kart{border-radius:20px}
+  .satir2{grid-template-columns:1fr}
+  .satir2--sabit{grid-template-columns:1fr 1fr}
+  .mark{top:16px;font-size:1.5rem}
+  .bg{background-position:32% center}
+}
+</style>
+</head>
+<body>
+
+<div class="bg" aria-hidden="true"></div>
+<a class="mark" href="../">kod<span class="z">jitsu</span></a>
+
+<main class="sayfa">
+  <div class="kart">
+    <form id="kayit">
+      <h1>Ön kayıt</h1>
+      <p class="alt">Formu bırakın, sizi arayalım. Ödeme şimdi değil; sezonu, programı ve ders saatini telefonda birlikte netleştirelim.</p>
+
+      <h2 class="bolum">Öğrenci</h2>
+      <div class="alanlar">
+        <div class="satir2 satir2--sabit">
+          <div class="alan">
+            <label for="oAd">Adı *</label>
+            <input id="oAd" type="text" autocomplete="off" required minlength="2" maxlength="60" />
+          </div>
+          <div class="alan">
+            <label for="oSoyad">Soyadı *</label>
+            <input id="oSoyad" type="text" autocomplete="off" required minlength="2" maxlength="60" />
+          </div>
+        </div>
+        <div class="satir2 satir2--sabit">
+          <div class="alan">
+            <label for="oYas">Yaşı *</label>
+            <select id="oYas" required>
+              <option value="">Seçin</option>
+              <option>8</option><option>9</option><option>10</option><option>11</option><option>12</option>
+              <option>13</option><option>14</option><option>15</option><option>16</option>
+            </select>
+          </div>
+          <div class="alan">
+            <label>Cinsiyeti <small>(zorunlu değil)</small></label>
+            <div class="cipler" style="margin-top:0" id="cinsiyet">
+              <label class="cip"><input type="checkbox" value="Kız" /><span>Kız</span></label>
+              <label class="cip"><input type="checkbox" value="Erkek" /><span>Erkek</span></label>
+            </div>
+          </div>
+        </div>
+        <div class="alan">
+          <label for="oTel">Öğrencinin telefonu <small>(zorunlu değil)</small></label>
+          <input id="oTel" type="tel" inputmode="tel" maxlength="24" placeholder="Varsa kendi telefonu" />
+        </div>
+      </div>
+
+      <h2 class="bolum">Veli</h2>
+      <div class="alanlar">
+        <div class="alan">
+          <label for="vAd">Adınız soyadınız *</label>
+          <input id="vAd" type="text" autocomplete="name" required minlength="2" maxlength="120" />
+        </div>
+        <div class="satir2">
+          <div class="alan">
+            <label for="vTel">Telefonunuz *</label>
+            <input id="vTel" type="tel" autocomplete="tel" inputmode="tel" required maxlength="24" placeholder="05xx xxx xx xx" />
+          </div>
+          <div class="alan">
+            <label for="vSehir">Şehir *</label>
+            <input id="vSehir" type="text" autocomplete="address-level1" required minlength="2" maxlength="60" />
+          </div>
+        </div>
+        <div class="alan">
+          <label for="vEposta">E-posta *</label>
+          <input id="vEposta" type="email" autocomplete="email" required maxlength="254" placeholder="ornek@eposta.com" />
+        </div>
+      </div>
+
+      <h2 class="bolum">Program</h2>
+      <p class="ipucu">Birden çok seçebilirsiniz.</p>
+      <div class="cipler" id="programlar">
+        <label class="cip"><input type="checkbox" value="Oyun Yapımcısı" /><span>Oyun Yapımcısı</span></label>
+        <label class="cip"><input type="checkbox" value="Yazılımcı" /><span>Yazılımcı</span></label>
+        <label class="cip"><input type="checkbox" value="Tasarımcı" /><span>Tasarımcı</span></label>
+        <label class="cip"><input type="checkbox" value="Kodla Matematik" /><span>Kodla Matematik</span></label>
+        <label class="cip"><input type="checkbox" value="İçerik Üretici Okulu" /><span>İçerik Üretici Okulu</span></label>
+        <label class="cip"><input type="checkbox" value="Birlikte seçelim" /><span>Birlikte seçelim</span></label>
+      </div>
+
+      <h2 class="bolum">Uygun günler</h2>
+      <p class="ipucu">Birden çok seçebilirsiniz.</p>
+      <div class="cipler" id="gunler">
+        <label class="cip cip--kucuk"><input type="checkbox" value="Pazartesi" /><span>Pzt</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="Salı" /><span>Sal</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="Çarşamba" /><span>Çar</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="Perşembe" /><span>Per</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="Cuma" /><span>Cum</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="Cumartesi" /><span>Cmt</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="Pazar" /><span>Paz</span></label>
+      </div>
+
+      <h2 class="bolum">Saat aralığı</h2>
+      <p class="ipucu">Birden çok seçebilirsiniz.</p>
+      <div class="cipler" id="saatler">
+        <label class="cip cip--kucuk"><input type="checkbox" value="10:00–13:00" /><span>10:00–13:00</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="13:00–16:00" /><span>13:00–16:00</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="16:00–19:00" /><span>16:00–19:00</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="19:00–21:00" /><span>19:00–21:00</span></label>
+      </div>
+
+      <!-- bot tuzağı -->
+      <input type="text" id="kWeb" tabindex="-1" autocomplete="off" aria-hidden="true"
+             style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
+
+      <div class="hata" id="hata" role="alert"></div>
+      <button class="gonder" id="gonderBtn" type="submit">Ön kaydı gönder</button>
+      <p class="kvkk">Bilgileriniz yalnızca sizi aramak için kullanılır, kimseyle paylaşılmaz.</p>
+    </form>
+
+    <div class="sonuc" id="sonuc">
+      <div class="is"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></div>
+      <h2>Aldık.</h2>
+      <p>Sizi arayıp kaydı birlikte tamamlayacağız.</p>
+      <a href="../">← Ana sayfaya dön</a>
+    </div>
+  </div>
+</main>
+
+<script>
+(() => {
+  "use strict";
+
+  /* app/config.js ile ayni proje; anahtar publishable, RLS yalniz INSERT verir */
+  const SUPA_URL = 'https://vbkjkpkogccspccecase.supabase.co';
+  const SUPA_KEY = 'sb_publishable_PwGfmvY9t9QXSPR5bZKBVA_9Gs1QJ5x';
+
+  const $ = (id) => document.getElementById(id);
+  const form = $('kayit');
+  const hata = $('hata');
+  const gonderBtn = $('gonderBtn');
+  const secili = (kok) => [...kok.querySelectorAll('input:checked')].map(i => i.value);
+
+  /* cinsiyet: istege bagli tekli secim — birine basinca digeri birakir */
+  const cinsler = [...$('cinsiyet').querySelectorAll('input')];
+  cinsler.forEach(c => c.addEventListener('change', () => {
+    if (c.checked) cinsler.forEach(d => { if (d !== c) d.checked = false; });
+  }));
+
+  /* ana sayfadan gelen on secim: kayit/?program=... */
+  const istenen = new URLSearchParams(location.search).get('program');
+  if (istenen) {
+    const kutu = [...$('programlar').querySelectorAll('input')].find(i => i.value === istenen);
+    if (kutu) kutu.checked = true;
+  }
+
+  function hataGoster(m) { hata.textContent = m; hata.classList.add('gorunur'); }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    hata.classList.remove('gorunur');
+    if ($('kWeb').value) { form.style.display = 'none'; $('sonuc').classList.add('gorunur'); return; }
+
+    const programlar = secili($('programlar'));
+    const gunler = secili($('gunler'));
+    const saatler = secili($('saatler'));
+    if (!programlar.length) { hataGoster('Bir program seçin. Kararsızsanız "Birlikte seçelim" de olur.'); return; }
+    if (!gunler.length)     { hataGoster('Uygun olduğunuz günlerden en az birini seçin.'); return; }
+    if (!saatler.length)    { hataGoster('Uygun saat aralıklarından en az birini seçin.'); return; }
+    const vTel = $('vTel').value.replace(/\D/g, '');
+    if (vTel.length < 10) { hataGoster('Veli telefonu eksik görünüyor. Bir daha bakar mısınız?'); return; }
+    const oTelHam = $('oTel').value.trim();
+    if (oTelHam && oTelHam.replace(/\D/g, '').length < 10) { hataGoster('Öğrenci telefonu eksik görünüyor. Boş da bırakabilirsiniz.'); return; }
+
+    gonderBtn.disabled = true;
+    gonderBtn.textContent = 'Gönderiliyor…';
+    try {
+      const ctrl = new AbortController();
+      const tid = setTimeout(() => ctrl.abort(), 12000);
+      const r = await fetch(SUPA_URL + '/rest/v1/registrations', {
+        method: 'POST',
+        signal: ctrl.signal,
+        headers: {
+          apikey: SUPA_KEY,
+          Authorization: 'Bearer ' + SUPA_KEY,
+          'Content-Type': 'application/json',
+          Prefer: 'return=minimal'
+        },
+        body: JSON.stringify({
+          student_first_name: $('oAd').value.trim(),
+          student_last_name:  $('oSoyad').value.trim(),
+          student_age:        +$('oYas').value,
+          student_gender:     secili($('cinsiyet'))[0] || null,
+          student_phone:      oTelHam || null,
+          parent_name:        $('vAd').value.trim(),
+          parent_phone:       $('vTel').value.trim(),
+          city:               $('vSehir').value.trim(),
+          email:              $('vEposta').value.trim(),
+          programs:           programlar,
+          days:               gunler,
+          hours:              saatler,
+          source:             'kayit-sayfa' + (istenen ? ':' + istenen : '')
+        })
+      });
+      clearTimeout(tid);
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      form.style.display = 'none';
+      $('sonuc').classList.add('gorunur');
+      scrollTo(0, 0);
+    } catch (err) {
+      hataGoster('Gönderilemedi. Lütfen bir daha deneyin.');
+      gonderBtn.disabled = false;
+      gonderBtn.textContent = 'Ön kaydı gönder';
+    }
+  });
+})();
+</script>
+</body>
+</html>
