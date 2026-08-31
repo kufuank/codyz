@@ -61,7 +61,9 @@ create policy presence_admin_delete on public.site_presence
 
 -- last_seen'i sunucu saati belirler
 create or replace function public.touch_presence() returns trigger
-language plpgsql as $$
+language plpgsql
+set search_path = ''
+as $$
 begin new.last_seen := now(); return new; end $$;
 drop trigger if exists site_presence_touch on public.site_presence;
 create trigger site_presence_touch before insert or update on public.site_presence
