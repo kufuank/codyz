@@ -45,10 +45,16 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
   z-index:-1;pointer-events:none}
 
 /* ---------- yerleşim ---------- */
-.sayfa{position:relative;z-index:1;min-height:100svh;display:flex;justify-content:flex-end;align-items:flex-start;
+.sayfa{position:relative;z-index:1;min-height:100svh;display:flex;justify-content:center;align-items:flex-start;
   padding:clamp(88px,14svh,120px) var(--gut) 48px}
-.kart{width:min(680px,100%);background:#fff;border-radius:26px;
-  padding:clamp(24px,4vw,40px);box-shadow:0 30px 90px -30px rgba(15,15,15,.35)}
+/* apple camsi kart: yari saydam beyaz + arka plani bulaniklastiran cam */
+.kart{width:min(680px,100%);background:rgba(255,255,255,.58);border-radius:26px;
+  -webkit-backdrop-filter:blur(26px) saturate(1.6);backdrop-filter:blur(26px) saturate(1.6);
+  border:1px solid rgba(255,255,255,.55);
+  padding:clamp(24px,4vw,40px);box-shadow:0 30px 90px -30px rgba(15,15,15,.30)}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .kart{background:rgba(255,255,255,.93)}
+}
 .kart h1{font-size:clamp(1.8rem,1.5rem + 1.4vw,2.4rem)}
 .alt{color:var(--ink-2);font-size:.95rem;line-height:1.5;margin:.6rem 0 0}
 
@@ -60,7 +66,7 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
 .alanlar{margin-top:.9rem;display:flex;flex-direction:column;gap:.85rem}
 .satir2{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
 .alan label{display:block;font-family:'Sora';font-weight:600;font-size:.78rem;color:var(--ink-2);margin-bottom:.35rem}
-.alan input,.alan select{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:#fff;
+.alan input,.alan select{width:100%;font:inherit;font-size:.95rem;color:var(--ink);background:rgba(255,255,255,.72);
   border:1.5px solid rgba(15,15,15,.16);border-radius:12px;padding:.68em .9em;outline:none;
   transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;appearance:none}
 .alan select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%235B5B5B' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
@@ -72,7 +78,7 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
 .cip{position:relative}
 .cip input{position:absolute;inset:0;opacity:0;cursor:pointer;margin:0}
 .cip span{display:inline-block;font-family:'Sora';font-weight:600;font-size:.82rem;color:var(--ink);
-  padding:.5em 1em;border-radius:99px;border:1.5px solid rgba(15,15,15,.18);background:#fff;
+  padding:.5em 1em;border-radius:99px;border:1.5px solid rgba(15,15,15,.18);background:rgba(255,255,255,.6);
   transition:background .15s,border-color .15s,color .15s;user-select:none}
 .cip input:checked + span{background:var(--mercan);border-color:var(--mercan);color:#fff}
 .cip input:focus-visible + span{outline:2px solid var(--mercan);outline-offset:2px}
@@ -97,8 +103,14 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
   padding:.6em 1.3em;border-radius:99px;border:1.5px solid rgba(15,15,15,.22)}
 .sonuc a:hover{background:rgba(15,15,15,.05)}
 
-@media (max-width:1080px){
-  .sayfa{justify-content:center}
+/* ---------- masaustu: bolumler yatay uc kolon ---------- */
+.kolonlar{display:grid;grid-template-columns:1fr}
+@media (min-width:1100px){
+  .kart{width:min(1240px,100%)}
+  .kolonlar{grid-template-columns:1.02fr 1.02fr 1.3fr;gap:clamp(22px,3vw,46px);align-items:start}
+  .gonder{width:auto;min-width:320px;display:block;margin:1.5rem auto 0;padding:.9em 3.2em}
+  .kvkk{text-align:center}
+  .hata{max-width:640px;margin-left:auto;margin-right:auto}
 }
 @media (max-width:640px){
   .sayfa{padding:76px 12px 28px}
@@ -121,6 +133,8 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
       <h1>Ön kayıt</h1>
       <p class="alt">Formu bırakın, sizi arayalım. Ödeme şimdi değil; sezonu, programı ve ders saatini telefonda birlikte netleştirelim.</p>
 
+      <div class="kolonlar">
+      <section class="kolon">
       <h2 class="bolum">Öğrenci</h2>
       <div class="alanlar">
         <div class="satir2 satir2--sabit">
@@ -156,6 +170,8 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
         </div>
       </div>
 
+      </section>
+      <section class="kolon">
       <h2 class="bolum">Veli</h2>
       <div class="alanlar">
         <div class="alan">
@@ -178,6 +194,8 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
         </div>
       </div>
 
+      </section>
+      <section class="kolon">
       <h2 class="bolum">Program</h2>
       <p class="ipucu">Birden çok seçebilirsiniz.</p>
       <div class="cipler" id="programlar">
@@ -208,6 +226,8 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
         <label class="cip cip--kucuk"><input type="checkbox" value="13:00–16:00" /><span>13:00–16:00</span></label>
         <label class="cip cip--kucuk"><input type="checkbox" value="16:00–19:00" /><span>16:00–19:00</span></label>
         <label class="cip cip--kucuk"><input type="checkbox" value="19:00–21:00" /><span>19:00–21:00</span></label>
+      </div>
+      </section>
       </div>
 
       <!-- bot tuzağı -->
