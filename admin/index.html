@@ -301,9 +301,9 @@ async function listeYukle() {
       if (error) throw error;
       $('skOn').textContent = 'Ön kayıtlar (' + data.length + ')';
       if (!data.length) { kap.innerHTML = '<div class="bos">Henüz ön kayıt yok.</div>'; return; }
-      kap.innerHTML = '<table><thead><tr><th>Tarih</th><th>Öğrenci</th><th>Veli</th><th>Telefon</th><th>Şehir</th><th>Program</th></tr></thead><tbody>' +
+      kap.innerHTML = '<table><thead><tr><th>Tarih</th><th>Öğrenci</th><th>Veli</th><th>Telefon</th><th>Şehir</th><th>İlgi · Kurs</th></tr></thead><tbody>' +
         data.map((r, i) =>
-          '<tr class="satir" data-i="' + i + '"><td>' + tarih(r.created_at) + '</td><td>' + kacir(r.student_first_name + ' ' + r.student_last_name) + ' · ' + r.student_age + '</td><td>' + kacir(r.parent_name) + '</td><td>' + kacir(r.parent_phone) + '</td><td>' + kacir(r.city) + '</td><td>' + rozetler(r.programs) + '</td></tr>' +
+          '<tr class="satir" data-i="' + i + '"><td>' + tarih(r.created_at) + '</td><td>' + kacir(r.student_first_name + ' ' + r.student_last_name) + ' · ' + r.student_age + '</td><td>' + kacir(r.parent_name) + '</td><td>' + kacir(r.parent_phone) + '</td><td>' + kacir(r.city) + '</td><td>' + (r.interest ? '<span class="rozet" style="border-color:rgba(255,106,61,.55)">' + kacir(r.interest) + '</span>' : '') + rozetler(r.programs) + '</td></tr>' +
           '<tr class="detay" hidden><td colspan="6">' +
             '<b>E-posta:</b> ' + kacir(r.email) +
             (r.student_gender ? ' &nbsp;·&nbsp; <b>Cinsiyet:</b> ' + kacir(r.student_gender) : '') +

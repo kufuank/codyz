@@ -14,7 +14,10 @@ create table if not exists public.registrations (
   parent_phone       text not null check (char_length(btrim(parent_phone)) between 10 and 24),
   city               text not null check (char_length(btrim(city)) between 2 and 60),
   email              text not null check (position('@' in email) > 1 and char_length(email) <= 254),
-  programs           text[] not null check (array_length(programs, 1) between 1 and 6),
+  -- 31 Agu revizesi: interest zorunlu ilgi alani (Yazilim/Tasarim/Matematik),
+  -- programs artik istege bagli kurs listesi (Python, Roblox, ...)
+  interest           text check (interest is null or char_length(interest) <= 30),
+  programs           text[] check (programs is null or array_length(programs, 1) between 1 and 10),
   days               text[] not null check (array_length(days, 1) between 1 and 7),
   hours              text[] not null check (array_length(hours, 1) between 1 and 6),
   source             text check (source is null or char_length(source) <= 60)

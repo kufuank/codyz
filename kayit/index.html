@@ -185,7 +185,31 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
           </div>
           <div class="alan">
             <label for="vSehir">Şehir *</label>
-            <input id="vSehir" type="text" autocomplete="address-level1" required minlength="2" maxlength="60" />
+            <select id="vSehir" required>
+              <option value="">Seçin</option>
+              <option>Adana</option><option>Adıyaman</option><option>Afyonkarahisar</option><option>Ağrı</option>
+              <option>Aksaray</option><option>Amasya</option><option>Ankara</option><option>Antalya</option>
+              <option>Ardahan</option><option>Artvin</option><option>Aydın</option><option>Balıkesir</option>
+              <option>Bartın</option><option>Batman</option><option>Bayburt</option><option>Bilecik</option>
+              <option>Bingöl</option><option>Bitlis</option><option>Bolu</option><option>Burdur</option>
+              <option>Bursa</option><option>Çanakkale</option><option>Çankırı</option><option>Çorum</option>
+              <option>Denizli</option><option>Diyarbakır</option><option>Düzce</option><option>Edirne</option>
+              <option>Elazığ</option><option>Erzincan</option><option>Erzurum</option><option>Eskişehir</option>
+              <option>Gaziantep</option><option>Giresun</option><option>Gümüşhane</option><option>Hakkâri</option>
+              <option>Hatay</option><option>Iğdır</option><option>Isparta</option><option>İstanbul</option>
+              <option>İzmir</option><option>Kahramanmaraş</option><option>Karabük</option><option>Karaman</option>
+              <option>Kars</option><option>Kastamonu</option><option>Kayseri</option><option>Kırıkkale</option>
+              <option>Kırklareli</option><option>Kırşehir</option><option>Kilis</option><option>Kocaeli</option>
+              <option>Konya</option><option>Kütahya</option><option>Malatya</option><option>Manisa</option>
+              <option>Mardin</option><option>Mersin</option><option>Muğla</option><option>Muş</option>
+              <option>Nevşehir</option><option>Niğde</option><option>Ordu</option><option>Osmaniye</option>
+              <option>Rize</option><option>Sakarya</option><option>Samsun</option><option>Siirt</option>
+              <option>Sinop</option><option>Sivas</option><option>Şanlıurfa</option><option>Şırnak</option>
+              <option>Tekirdağ</option><option>Tokat</option><option>Trabzon</option><option>Tunceli</option>
+              <option>Uşak</option><option>Van</option><option>Yalova</option><option>Yozgat</option>
+              <option>Zonguldak</option>
+              <option>Yurt dışı</option>
+            </select>
           </div>
         </div>
         <div class="alan">
@@ -196,15 +220,23 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
 
       </section>
       <section class="kolon">
-      <h2 class="bolum">Program</h2>
-      <p class="ipucu">Birden çok seçebilirsiniz.</p>
-      <div class="cipler" id="programlar">
-        <label class="cip"><input type="checkbox" value="Oyun Yapımcısı" /><span>Oyun Yapımcısı</span></label>
-        <label class="cip"><input type="checkbox" value="Yazılımcı" /><span>Yazılımcı</span></label>
-        <label class="cip"><input type="checkbox" value="Tasarımcı" /><span>Tasarımcı</span></label>
-        <label class="cip"><input type="checkbox" value="Kodla Matematik" /><span>Kodla Matematik</span></label>
-        <label class="cip"><input type="checkbox" value="İçerik Üretici Okulu" /><span>İçerik Üretici Okulu</span></label>
-        <label class="cip"><input type="checkbox" value="Birlikte seçelim" /><span>Birlikte seçelim</span></label>
+      <h2 class="bolum">İlgi alanı</h2>
+      <p class="ipucu">Çocuğunuz en çok hangisine yakın?</p>
+      <div class="cipler" id="ilgi">
+        <label class="cip"><input type="checkbox" value="Yazılım" /><span>Yazılım</span></label>
+        <label class="cip"><input type="checkbox" value="Tasarım" /><span>Tasarım</span></label>
+        <label class="cip"><input type="checkbox" value="Matematik" /><span>Matematik</span></label>
+      </div>
+
+      <h2 class="bolum">Kurs</h2>
+      <p class="ipucu">Zorunlu değil; özellikle istediğiniz bir kurs varsa işaretleyin.</p>
+      <div class="cipler" id="kurslar">
+        <label class="cip"><input type="checkbox" value="Python" /><span>Python</span></label>
+        <label class="cip"><input type="checkbox" value="Roblox" /><span>Roblox</span></label>
+        <label class="cip"><input type="checkbox" value="Minecraft" /><span>Minecraft</span></label>
+        <label class="cip"><input type="checkbox" value="Unity" /><span>Unity</span></label>
+        <label class="cip"><input type="checkbox" value="Matematik" /><span>Matematik</span></label>
+        <label class="cip"><input type="checkbox" value="Grafik Tasarım" /><span>Grafik Tasarım</span></label>
       </div>
 
       <h2 class="bolum">Uygun günler</h2>
@@ -220,12 +252,12 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
       </div>
 
       <h2 class="bolum">Saat aralığı</h2>
-      <p class="ipucu">Birden çok seçebilirsiniz.</p>
+      <p class="ipucu">Birden çok seçebilirsiniz. Hafta içi akşam; sabah saatleri hafta sonu için.</p>
       <div class="cipler" id="saatler">
-        <label class="cip cip--kucuk"><input type="checkbox" value="10:00–13:00" /><span>10:00–13:00</span></label>
-        <label class="cip cip--kucuk"><input type="checkbox" value="13:00–16:00" /><span>13:00–16:00</span></label>
-        <label class="cip cip--kucuk"><input type="checkbox" value="16:00–19:00" /><span>16:00–19:00</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="Sabah 10:00–13:00" /><span>Sabah 10:00–13:00</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="17:00–19:00" /><span>17:00–19:00</span></label>
         <label class="cip cip--kucuk"><input type="checkbox" value="19:00–21:00" /><span>19:00–21:00</span></label>
+        <label class="cip cip--kucuk"><input type="checkbox" value="21:00–22:30" /><span>21:00–22:30</span></label>
       </div>
       </section>
       </div>
@@ -262,16 +294,26 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
   const gonderBtn = $('gonderBtn');
   const secili = (kok) => [...kok.querySelectorAll('input:checked')].map(i => i.value);
 
-  /* cinsiyet: istege bagli tekli secim — birine basinca digeri birakir */
-  const cinsler = [...$('cinsiyet').querySelectorAll('input')];
-  cinsler.forEach(c => c.addEventListener('change', () => {
-    if (c.checked) cinsler.forEach(d => { if (d !== c) d.checked = false; });
-  }));
+  /* tekli secim ciplari: birine basinca grubun digerleri birakir */
+  const tekliYap = (kok) => {
+    const kutular = [...kok.querySelectorAll('input')];
+    kutular.forEach(c => c.addEventListener('change', () => {
+      if (c.checked) kutular.forEach(d => { if (d !== c) d.checked = false; });
+    }));
+  };
+  tekliYap($('cinsiyet'));
+  tekliYap($('ilgi'));
 
-  /* ana sayfadan gelen on secim: kayit/?program=... */
+  /* ana sayfadan gelen on secim: eski program adlari ilgi alanina eslenir */
   const istenen = new URLSearchParams(location.search).get('program');
   if (istenen) {
-    const kutu = [...$('programlar').querySelectorAll('input')].find(i => i.value === istenen);
+    const esleme = {
+      'Oyun Yapımcısı': 'Yazılım', 'Yazılımcı': 'Yazılım',
+      'Tasarımcı': 'Tasarım', 'İçerik Üretici Okulu': 'Tasarım',
+      'Kodla Matematik': 'Matematik'
+    };
+    const hedef = esleme[istenen] || istenen;
+    const kutu = [...$('ilgi').querySelectorAll('input')].find(i => i.value === hedef);
     if (kutu) kutu.checked = true;
   }
 
@@ -282,12 +324,13 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
     hata.classList.remove('gorunur');
     if ($('kWeb').value) { form.style.display = 'none'; $('sonuc').classList.add('gorunur'); return; }
 
-    const programlar = secili($('programlar'));
+    const ilgiSecim = secili($('ilgi'))[0] || null;
+    const kurslar = secili($('kurslar'));
     const gunler = secili($('gunler'));
     const saatler = secili($('saatler'));
-    if (!programlar.length) { hataGoster('Bir program seçin. Kararsızsanız "Birlikte seçelim" de olur.'); return; }
-    if (!gunler.length)     { hataGoster('Uygun olduğunuz günlerden en az birini seçin.'); return; }
-    if (!saatler.length)    { hataGoster('Uygun saat aralıklarından en az birini seçin.'); return; }
+    if (!ilgiSecim)     { hataGoster('İlgi alanını seçin: yazılım, tasarım ya da matematik.'); return; }
+    if (!gunler.length) { hataGoster('Uygun olduğunuz günlerden en az birini seçin.'); return; }
+    if (!saatler.length){ hataGoster('Uygun saat aralıklarından en az birini seçin.'); return; }
     const vTel = $('vTel').value.replace(/\D/g, '');
     if (vTel.length < 10) { hataGoster('Veli telefonu eksik görünüyor. Bir daha bakar mısınız?'); return; }
     const oTelHam = $('oTel').value.trim();
@@ -315,9 +358,10 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
           student_phone:      oTelHam || null,
           parent_name:        $('vAd').value.trim(),
           parent_phone:       $('vTel').value.trim(),
-          city:               $('vSehir').value.trim(),
+          city:               $('vSehir').value,
           email:              $('vEposta').value.trim(),
-          programs:           programlar,
+          interest:           ilgiSecim,
+          programs:           kurslar.length ? kurslar : null,
           days:               gunler,
           hours:              saatler,
           source:             'kayit-sayfa' + (istenen ? ':' + istenen : '')
