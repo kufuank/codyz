@@ -38,11 +38,19 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
   background:linear-gradient(90deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.42) 55%,rgba(255,255,255,.62) 100%)}
 
 .mark{position:fixed;z-index:3;top:26px;left:var(--gut);font-family:'Sora';font-weight:800;
-  font-size:clamp(1.7rem,1.3rem + 1vw,2.2rem);letter-spacing:-.035em;line-height:1;color:var(--ink);text-decoration:none}
+  font-size:clamp(1.8rem,1.15rem + 1.75vw,2.9rem);letter-spacing:-.035em;line-height:1;color:var(--ink);text-decoration:none;
+  text-shadow:0 0 14px rgba(255,255,255,.95),0 0 34px rgba(255,255,255,.8),0 0 64px rgba(255,255,255,.55);
+  animation:markNefes 30s ease-in-out infinite}
 .mark .z{color:var(--mercan)}
-.mark::before{content:"";position:absolute;left:-28px;top:-30px;width:calc(100% + 96px);height:calc(100% + 74px);
-  background:radial-gradient(ellipse at 30% 50%,rgba(255,255,255,.95) 0%,rgba(255,255,255,.8) 42%,rgba(255,255,255,0) 78%);
-  z-index:-1;pointer-events:none}
+/* murekkep nefesi — index.html ile ayni dongu */
+@keyframes markNefes{
+  0%,87%{opacity:1;filter:blur(0);transform:translateY(0)}
+  91%{opacity:0;filter:blur(8px);transform:translateY(-8px)}
+  93.5%{opacity:0;filter:blur(8px);transform:translateY(6px)}
+  100%{opacity:1;filter:blur(0);transform:translateY(0)}
+}
+.mark:hover{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.mark{animation:none}}
 
 /* ---------- yerleşim ---------- */
 .sayfa{position:relative;z-index:1;min-height:100svh;display:flex;justify-content:center;align-items:flex-start;

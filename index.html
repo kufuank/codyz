@@ -108,12 +108,21 @@ p{margin:0}
 
 /* ---------- logo ---------- */
 .mark{position:fixed;z-index:6;top:26px;left:var(--gut);font-family:'Sora';font-weight:800;
-  font-size:clamp(1.7rem,1.3rem + 1vw,2.2rem);letter-spacing:-.035em;line-height:1}
+  font-size:clamp(1.8rem,1.15rem + 1.75vw,2.9rem);letter-spacing:-.035em;line-height:1;
+  /* eski radial elips kenari leke gibi gorunuyordu; parlama artik harfe sarili */
+  text-shadow:0 0 14px rgba(255,255,255,.95),0 0 34px rgba(255,255,255,.8),0 0 64px rgba(255,255,255,.55);
+  animation:markNefes 30s ease-in-out infinite}
 .mark .z{color:var(--mercan)}
-/* logonun arkasinda yumusak beyaz perde — kaydirma sonrasi da her karede okunur kalsin */
-.mark::before{content:"";position:absolute;left:-28px;top:-30px;width:calc(100% + 96px);height:calc(100% + 74px);
-  background:radial-gradient(ellipse at 30% 50%,rgba(255,255,255,.96) 0%,rgba(255,255,255,.82) 42%,rgba(255,255,255,0) 78%);
-  z-index:-1;pointer-events:none}
+/* murekkep nefesi: 30 sn'de bir dagilip kaybolur, yeniden yazilir.
+   Felsefe: arac gider gelir, is (sayfa) kalir. */
+@keyframes markNefes{
+  0%,87%{opacity:1;filter:blur(0);transform:translateY(0)}
+  91%{opacity:0;filter:blur(8px);transform:translateY(-8px)}
+  93.5%{opacity:0;filter:blur(8px);transform:translateY(6px)}
+  100%{opacity:1;filter:blur(0);transform:translateY(0)}
+}
+.mark:hover{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.mark{animation:none}}
 
 /* ---------- ilerleme çubuğu ---------- */
 .bar{position:fixed;z-index:5;left:0;top:0;height:3px;width:0;background:var(--mercan)}
@@ -178,7 +187,6 @@ p{margin:0}
   .nav{bottom:14px;right:14px;flex-direction:row;gap:6px}
   .nav button{width:34px;height:34px}
   .mark{top:14px;font-size:1.5rem}
-  .mark::before{left:-18px;top:-18px;width:calc(100% + 58px);height:calc(100% + 46px)}
 }
 @media (max-width:860px) and (max-height:660px){
   :root{--band:44svh}
