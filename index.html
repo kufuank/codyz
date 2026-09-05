@@ -714,6 +714,8 @@ p{margin:0}
      Saat yalniz scrollY'yi surer; dunya yine scroll'dan okunur.
      ---------------------------------------------------------- */
   const GECIS_TABAN = 650, GECIS_EK = 320, GECIS_TAVAN = 1500;
+  const MOBIL_SURE = 2000;                                   // mobilde her durak gecisi 2 sn
+  const mobilMi = () => matchMedia('(max-width: 860px)').matches;
   const easeInOutSine = (t) => .5 - .5 * Math.cos(Math.PI * t);
   let kayAnim = 0;
   const kaydir = (hedefY, sure) => {
@@ -733,7 +735,9 @@ p{margin:0}
 
   const gitDurak = (i) => {
     i = clamp(i, 0, DURAK.length - 1);
-    const sure = Math.min(GECIS_TAVAN, GECIS_TABAN + GECIS_EK * Math.abs(i - aktifDurak));
+    const sure = mobilMi()
+      ? MOBIL_SURE
+      : Math.min(GECIS_TAVAN, GECIS_TABAN + GECIS_EK * Math.abs(i - aktifDurak));
     kaydir(hedefVhOf(i) / 100 * innerHeight, sure);
   };
   window.kjGit = gitDurak;  // CTA bağlama script'i kullanıyor
@@ -757,6 +761,55 @@ p{margin:0}
       case 'End':  e.preventDefault(); gitDurak(DURAK.length - 1); break;
     }
   });
+
+  /* ----------------------------------------------------------
+     mobil: kaydirma hareketi durak durak ilerletir
+     Parmak sayfayi normal surer — video parmakla canli taranir.
+     Parmak kalkinca, kaydirmanin BASLADIGI duraktan bir sonrakine
+     (yukari) ya da oncekine (asagi) 2 sn'de gidilir: bir kaydirma =
+     bir durak, momentum yerine sabit sure. Uclarda karismaz ki
+     acilis ustu ve final taramasi dogal kaydirmayla gezilebilsin.
+     ---------------------------------------------------------- */
+  const enYakinDurak = () => {
+    let en = 0, enFark = Infinity;
+    for (let i = 0; i < DURAK.length; i++) {
+      const f = Math.abs(scrollY - hedefVhOf(i) / 100 * innerHeight);
+      if (f < enFark) { enFark = f; en = i; }
+    }
+    return en;
+  };
+
+  let dokX = 0, dokY = 0, dokT = 0, dokDurak = 0, dokGecerli = false;
+
+  addEventListener('touchstart', (e) => {
+    dokGecerli = false;
+    if (!mobilMi() || e.touches.length !== 1) return;
+    if (document.body.classList.contains('perde-acik')) return;
+    if (e.target && e.target.closest && e.target.closest('.perde')) return;
+    const t = e.touches[0];
+    dokX = t.clientX; dokY = t.clientY;
+    dokT = performance.now();
+    dokDurak = enYakinDurak();
+    dokGecerli = true;
+  }, { passive: true });
+
+  addEventListener('touchcancel', () => { dokGecerli = false; }, { passive: true });
+
+  addEventListener('touchend', (e) => {
+    if (!dokGecerli) return;
+    dokGecerli = false;
+    if (document.body.classList.contains('perde-acik')) return;
+    const t = e.changedTouches[0];
+    if (!t) return;
+    const dy = dokY - t.clientY;                  // + : yukari kaydirma → ileri
+    const dx = t.clientX - dokX;
+    if (Math.abs(dx) > Math.abs(dy)) return;      // yatay hareket bizim isimiz degil
+    const hiz = Math.abs(dy) / Math.max(performance.now() - dokT, 1);   // px/ms
+    if (Math.abs(dy) < 45 && hiz < 0.5) return;   // dokunus ya da kucuk oynama: karisma
+    const hedef = dokDurak + (dy > 0 ? 1 : -1);
+    if (hedef < 0 || hedef > DURAK.length - 1) return;   // uclarda dogal kaydirma
+    gitDurak(hedef);
+  }, { passive: true });
 
   /* ----------------------------------------------------------
      scroll → video zamanı
