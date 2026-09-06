@@ -8,6 +8,38 @@ const IZINLI = ["https://kodjitsu.com", "https://www.kodjitsu.com"];
 const ADMIN_UID = "ad314a17-1411-4700-a001-1a2b3c4d5e6f";
 const yerelMi = (o: string) => /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(o);
 
+/* Akil yurutme (reasoning) modelleri dusunce izini bazen cevabin icine
+   koyuyor. Uc katmanli savunma:
+   (1) sistem promptuna kapatma talimati,
+   (2) istekte chat_template_kwargs.thinking = false,
+   (3) gelen metinde <think> bloklarini ve Turkce olmayan dusunce
+       paragraflarini kirp. */
+const DUSUNME_KAPALI = [
+  "",
+  "BICIM KURALI: Dusunme adimlarini, plan yapmani ya da kendi kendine muhakemeni",
+  "ASLA yazma. <think> gibi etiketler kullanma. Dogrudan kullaniciya soyleyecegin",
+  "cevabi yaz ve her zaman Turkce yaz.",
+].join("\n");
+
+const TURKCE = /[çğıöşüÇĞİÖŞÜ]/;
+const DUSUNCE_BASI = /^\s*(okay|alright|first|so|let me|the user|i need|i should|we need|hmm)\b/i;
+
+function dusunceyiAt(ham: string) {
+  let m = ham
+    .replace(/<(think|thinking|reasoning|scratchpad)[^>]*>[\s\S]*?<\/\1>/gi, "")
+    .replace(/<\/?(think|thinking|reasoning|scratchpad)[^>]*>/gi, "")
+    .trim();
+  /* Bastaki paragraf Turkce degil ve dusunce agziyla basliyorsa dusunce izidir;
+     ilk Turkce paragraftan itibari cevaptir. */
+  const p = m.split(/\n\s*\n/);
+  if (p.length > 1) {
+    let i = 0;
+    while (i < p.length - 1 && !TURKCE.test(p[i]) && DUSUNCE_BASI.test(p[i])) i++;
+    if (i > 0) m = p.slice(i).join("\n\n").trim();
+  }
+  return m;
+}
+
 function basliklar(origin: string) {
   const izinli = IZINLI.includes(origin) || yerelMi(origin);
   return {
@@ -57,9 +89,9 @@ Deno.serve(async (req) => {
       }, 200, origin);
     }
 
-    /* Yonetici mi? /admin panelindeki "Test mesaji gonder" kendi oturum
-       jetonunu yollar. Dogrulanirsa asistan kapaliyken de deneme yapilabilir
-       (dogru sira: once test, sonra ac) ve gunluk sinirlar isletilmez. */
+    /* Yonetici mi? /admin panelindeki test kendi oturum jetonunu yollar.
+       Dogrulanirsa asistan kapaliyken de deneme yapilabilir ve gunluk
+       sinirlar isletilmez. */
     let yonetici = false;
     const jeton = req.headers.get("x-admin-token");
     if (jeton) {
@@ -76,9 +108,8 @@ Deno.serve(async (req) => {
     const anahtarHam = Deno.env.get("NVIDIA_API_KEY_KJ") ?? Deno.env.get("NVIDIA_API_KEY") ?? "";
     const anahtar = anahtarHam.trim().replace(/^["']|["']$/g, "");
     if (!anahtar) return cevap({ hata: "anahtar-yok" }, 503, origin);
-    // teshis: yalniz uzunluk ve bicim; anahtarin kendisi loglanmaz
     const bicimTamam = anahtar.startsWith("nvapi-") && anahtar.length > 40;
-    if (!bicimTamam) console.warn("anahtar bicimi supheli", JSON.stringify({ uzunluk: anahtar.length, nvapiMi: anahtar.startsWith("nvapi-") }));
+    if (!bicimTamam) console.warn("anahtar bicimi supheli", JSON.stringify({ uzunluk: anahtar.length }));
 
     const gelen = Array.isArray(govde.messages) ? govde.messages : [];
     const temiz = gelen
@@ -104,22 +135,30 @@ Deno.serve(async (req) => {
     }
 
     // --- modele sor ---
+    const temelGovde = {
+      model: ayar.model,
+      messages: [{ role: "system", content: ayar.system_prompt + DUSUNME_KAPALI }, ...temiz],
+      temperature: Number(ayar.temperature),
+      max_tokens: ayar.max_tokens,
+      stream: false,
+    };
     const kes = new AbortController();
     const zamanlayici = setTimeout(() => kes.abort(), 45000);
-    let yanit: Response;
-    try {
-      yanit = await fetch(NVIDIA_UC, {
+    const sor = (g: unknown) =>
+      fetch(NVIDIA_UC, {
         method: "POST",
         signal: kes.signal,
         headers: { Authorization: `Bearer ${anahtar}`, "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          model: ayar.model,
-          messages: [{ role: "system", content: ayar.system_prompt }, ...temiz],
-          temperature: Number(ayar.temperature),
-          max_tokens: ayar.max_tokens,
-          stream: false,
-        }),
+        body: JSON.stringify(g),
       });
+    let yanit: Response;
+    try {
+      // once dusunme kapali iste; model bu parametreyi bilmiyorsa parametresiz tekrarla
+      yanit = await sor({ ...temelGovde, chat_template_kwargs: { thinking: false } });
+      if (yanit.status === 400) {
+        console.warn("chat_template_kwargs reddedildi, parametresiz tekrar");
+        yanit = await sor(temelGovde);
+      }
     } finally {
       clearTimeout(zamanlayici);
     }
@@ -128,15 +167,15 @@ Deno.serve(async (req) => {
       const detay = (await yanit.text()).slice(0, 400);
       console.error("nvidia hatasi", yanit.status, detay);
       const ipucu = yanit.status === 401
-        ? (bicimTamam ? "Anahtar reddedildi. NVIDIA'da geçerli mi bakın."
-                      : "Gizli değişkenin içindeki değer bir API anahtarı gibi durmuyor: nvapi- ile başlamalı.")
-        : yanit.status === 404 ? "Model adı bulunamadı. Model alanını kontrol edin."
+        ? (bicimTamam ? "Anahtar reddedildi, NVIDIA tarafinda gecerli mi bakin."
+                      : "Gizli degiskendeki deger anahtar gibi durmuyor: nvapi- ile baslamali.")
+        : yanit.status === 404 ? "Model adi bulunamadi. Model alanini kontrol edin."
         : "";
       return cevap({ hata: "model", durum: yanit.status, detay, ipucu }, 502, origin);
     }
     const sonuc = await yanit.json();
     const mesaj = sonuc?.choices?.[0]?.message;
-    const metin = (mesaj?.content ?? "").trim();
+    const metin = dusunceyiAt(mesaj?.content ?? "");
     if (!metin) return cevap({ hata: "bos-yanit" }, 502, origin);
 
     // kayit (admin panelinden okunur)

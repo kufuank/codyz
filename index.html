@@ -1168,10 +1168,19 @@ p{margin:0}
 
   let gecmis = [], mesgul = false, karsilama = '', acildi = false;
 
+  /* model bazen markdown yaziyor: yildizlar duz metin olarak gorunmesin.
+     Once HTML kacisi, sonra yalniz kalin/italik — enjeksiyon yolu yok. */
+  const kacir = (s) => s.replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const bicimle = (s) => kacir(s)
+    .replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>')
+    .replace(/(^|[\s(])\*([^*\n]+)\*(?=[\s).,!?:;]|$)/g, '$1<em>$2</em>')
+    .replace(/^\s*[-*]\s+/gm, '• ');
+
   const ekle = (metin, tur) => {
     const d = document.createElement('div');
     d.className = 'sb-m ' + tur;
-    d.textContent = metin;
+    if (tur === 'bot') d.innerHTML = bicimle(metin); else d.textContent = metin;
     akis.appendChild(d);
     akis.scrollTop = akis.scrollHeight;
     return d;
