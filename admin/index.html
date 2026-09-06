@@ -551,13 +551,16 @@ $('ajanTest').addEventListener('click', async () => {
   const b = $('ajanTest'); const eski = b.textContent;
   b.textContent = 'Soruluyor…'; b.disabled = true;
   try {
+    /* yonetici jetonu: asistan kapaliyken de test edilebilsin */
+    const { data: { session } } = await supa.auth.getSession();
     const r = await fetch(AJAN_UC, {
-      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-admin-token': session ? session.access_token : '' },
       body: JSON.stringify({ action: 'chat', sid: 'admin-test', messages: [{ role: 'user', content: 'Merhaba, kısaca kendini tanıtır mısın?' }] })
     });
     const v = await r.json().catch(() => ({}));
     if (r.ok && v.reply) goster($('ajanMsg'), 'Model yanıtı: ' + v.reply, 'ok');
-    else goster($('ajanMsg'), (AJAN_HATA[v.hata] || 'Yanıt alınamadı.') + (v.detay ? ' — ' + v.detay : ''), 'err');
+    else goster($('ajanMsg'), (AJAN_HATA[v.hata] || 'Yanıt alınamadı.') + (v.ipucu ? ' ' + v.ipucu : '') + (v.detay ? ' — ' + v.detay : ''), 'err');
   } catch (err) {
     goster($('ajanMsg'), 'Bağlanılamadı: ' + (err.message || err), 'err');
   } finally { b.textContent = eski; b.disabled = false; }

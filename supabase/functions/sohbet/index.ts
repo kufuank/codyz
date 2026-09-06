@@ -1,17 +1,18 @@
 // Kodjitsu sohbet asistani — NVIDIA (OpenAI uyumlu) vekili.
-// Model anahtari YALNIZ burada: NVIDIA_API_KEY gizli degiskeni.
+// Model anahtari YALNIZ burada: NVIDIA_API_KEY_KJ (yedek: NVIDIA_API_KEY).
 // Istemci anahtari hic gormez; ayarlar agent_config tablosundan okunur.
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 const NVIDIA_UC = "https://integrate.api.nvidia.com/v1/chat/completions";
 const IZINLI = ["https://kodjitsu.com", "https://www.kodjitsu.com"];
+const ADMIN_UID = "ad314a17-1411-4700-a001-1a2b3c4d5e6f";
 const yerelMi = (o: string) => /^http:\/\/(localhost|127\.0\.0\.1):\d+$/.test(o);
 
 function basliklar(origin: string) {
   const izinli = IZINLI.includes(origin) || yerelMi(origin);
   return {
     "Access-Control-Allow-Origin": izinli ? origin : IZINLI[0],
-    "Access-Control-Allow-Headers": "content-type",
+    "Access-Control-Allow-Headers": "content-type, x-admin-token",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Vary": "Origin",
     "Content-Type": "application/json; charset=utf-8",
@@ -56,10 +57,28 @@ Deno.serve(async (req) => {
       }, 200, origin);
     }
 
+    /* Yonetici mi? /admin panelindeki "Test mesaji gonder" kendi oturum
+       jetonunu yollar. Dogrulanirsa asistan kapaliyken de deneme yapilabilir
+       (dogru sira: once test, sonra ac) ve gunluk sinirlar isletilmez. */
+    let yonetici = false;
+    const jeton = req.headers.get("x-admin-token");
+    if (jeton) {
+      const u = await fetch(`${SUPA}/auth/v1/user`, {
+        headers: { apikey: SRV, Authorization: `Bearer ${jeton}` },
+      }).then((r) => (r.ok ? r.json() : null)).catch(() => null);
+      yonetici = u?.id === ADMIN_UID;
+    }
+
     // --- sohbet ---
-    if (ayar.enabled !== true) return cevap({ hata: "kapali" }, 503, origin);
-    const anahtar = Deno.env.get("NVIDIA_API_KEY");
+    if (ayar.enabled !== true && !yonetici) return cevap({ hata: "kapali" }, 503, origin);
+
+    // yapistirirken kacan bosluk/tirnak 401 sebebi olur: kirp
+    const anahtarHam = Deno.env.get("NVIDIA_API_KEY_KJ") ?? Deno.env.get("NVIDIA_API_KEY") ?? "";
+    const anahtar = anahtarHam.trim().replace(/^["']|["']$/g, "");
     if (!anahtar) return cevap({ hata: "anahtar-yok" }, 503, origin);
+    // teshis: yalniz uzunluk ve bicim; anahtarin kendisi loglanmaz
+    const bicimTamam = anahtar.startsWith("nvapi-") && anahtar.length > 40;
+    if (!bicimTamam) console.warn("anahtar bicimi supheli", JSON.stringify({ uzunluk: anahtar.length, nvapiMi: anahtar.startsWith("nvapi-") }));
 
     const gelen = Array.isArray(govde.messages) ? govde.messages : [];
     const temiz = gelen
@@ -74,13 +93,15 @@ Deno.serve(async (req) => {
     const ipHash = ip ? await sha(ip + SRV) : null;
     const gunBasi = new Date(Date.now() - 864e5).toISOString();
 
-    // gunluk sinirlar: once bu ziyaretci, sonra site geneli
-    if (ipHash) {
-      const r = await db(`chat_log?select=id&role=eq.user&ip_hash=eq.${ipHash}&created_at=gt.${gunBasi}&limit=${ayar.daily_limit}`);
-      if (((await r.json()) as unknown[]).length >= ayar.daily_limit) return cevap({ hata: "gunluk-sinir" }, 429, origin);
+    // gunluk sinirlar: once bu ziyaretci, sonra site geneli (yonetici testi haric)
+    if (!yonetici) {
+      if (ipHash) {
+        const r = await db(`chat_log?select=id&role=eq.user&ip_hash=eq.${ipHash}&created_at=gt.${gunBasi}&limit=${ayar.daily_limit}`);
+        if (((await r.json()) as unknown[]).length >= ayar.daily_limit) return cevap({ hata: "gunluk-sinir" }, 429, origin);
+      }
+      const t = await db(`chat_log?select=id&role=eq.user&created_at=gt.${gunBasi}&limit=${ayar.total_limit}`);
+      if (((await t.json()) as unknown[]).length >= ayar.total_limit) return cevap({ hata: "site-sinir" }, 429, origin);
     }
-    const t = await db(`chat_log?select=id&role=eq.user&created_at=gt.${gunBasi}&limit=${ayar.total_limit}`);
-    if (((await t.json()) as unknown[]).length >= ayar.total_limit) return cevap({ hata: "site-sinir" }, 429, origin);
 
     // --- modele sor ---
     const kes = new AbortController();
@@ -106,7 +127,12 @@ Deno.serve(async (req) => {
     if (!yanit.ok) {
       const detay = (await yanit.text()).slice(0, 400);
       console.error("nvidia hatasi", yanit.status, detay);
-      return cevap({ hata: "model", durum: yanit.status, detay }, 502, origin);
+      const ipucu = yanit.status === 401
+        ? (bicimTamam ? "Anahtar reddedildi. NVIDIA'da geçerli mi bakın."
+                      : "Gizli değişkenin içindeki değer bir API anahtarı gibi durmuyor: nvapi- ile başlamalı.")
+        : yanit.status === 404 ? "Model adı bulunamadı. Model alanını kontrol edin."
+        : "";
+      return cevap({ hata: "model", durum: yanit.status, detay, ipucu }, 502, origin);
     }
     const sonuc = await yanit.json();
     const mesaj = sonuc?.choices?.[0]?.message;
