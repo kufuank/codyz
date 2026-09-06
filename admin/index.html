@@ -98,6 +98,28 @@ tr.detay b{color:var(--tx);font-weight:600}
   .izgara{grid-template-columns:1fr}
   .form-izgara{grid-template-columns:1fr}
 }
+
+/* ---------- asistan ayarlari ---------- */
+.genis{margin-top:18px}
+.form-izgara5{display:grid;grid-template-columns:repeat(5,1fr);gap:0 14px}
+.field textarea{width:100%;background:var(--bg);border:1px solid var(--line-2);border-radius:11px;
+  padding:11px 13px;color:var(--tx);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.82rem;
+  line-height:1.6;outline:none;resize:vertical;transition:border-color .2s}
+.field textarea:focus{border-color:var(--coral)}
+.field .ipuc{font-size:.7rem;color:var(--tx-3);margin:5px 0 0;line-height:1.45}
+.anahtar{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;margin-top:2px}
+.anahtar label{display:flex;align-items:center;gap:.45rem;font-family:'Sora';font-weight:600;font-size:.82rem;
+  color:var(--tx-2);cursor:pointer}
+.anahtar input[type=checkbox]{width:16px;height:16px;accent-color:var(--coral);cursor:pointer}
+.dugmeler{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:16px}
+.dugmeler .btn{width:auto;margin:0;padding:11px 26px}
+.log{margin-top:12px;max-height:300px;overflow:auto;display:flex;flex-direction:column;gap:8px}
+.log-m{padding:8px 11px;border-radius:10px;font-size:.82rem;line-height:1.5;border:1px solid var(--line);
+  white-space:pre-wrap;overflow-wrap:anywhere}
+.log-m.user{background:var(--surface-2);color:var(--tx)}
+.log-m.assistant{background:rgba(255,106,61,.06);color:var(--tx-2);border-color:rgba(255,106,61,.22)}
+.log-m .zaman{display:block;font-size:.66rem;color:var(--tx-3);margin-bottom:3px;font-family:'Sora';font-weight:600}
+@media (max-width:960px){ .form-izgara5{grid-template-columns:1fr 1fr} }
 </style>
 </head>
 <body>
@@ -202,6 +224,81 @@ tr.detay b{color:var(--tx);font-weight:600}
       <div class="tablo-kap" id="listeKap"><div class="bos">Yükleniyor…</div></div>
     </div>
   </div>
+
+  <!-- asistan ayarlari -->
+  <div class="kart genis">
+    <h2><span class="nokta"></span>Sohbet asistanı</h2>
+    <form id="ajanForm">
+      <div class="anahtar">
+        <label><input type="checkbox" id="aAcik" /> Asistan sitede açık</label>
+        <span class="ipuc" id="aDurum" style="font-size:.72rem"></span>
+      </div>
+
+      <div class="form-izgara" style="margin-top:12px">
+        <div class="field">
+          <label for="aAd">Asistan adı</label>
+          <input id="aAd" type="text" maxlength="40" />
+        </div>
+        <div class="field">
+          <label for="aPlaceholder">Yazma alanı metni</label>
+          <input id="aPlaceholder" type="text" maxlength="80" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="aGreeting">Karşılama mesajı</label>
+        <textarea id="aGreeting" rows="2" maxlength="400"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="aPrompt">Sistem promptu</label>
+        <textarea id="aPrompt" rows="16" maxlength="12000"></textarea>
+        <p class="ipuc">Asistanın kim olduğu, neyi bilip neyi bilmediği, nasıl konuşacağı. Ziyaretçiye gönderilmez, sunucuda kalır.</p>
+      </div>
+
+      <div class="form-izgara5">
+        <div class="field">
+          <label for="aModel">Model</label>
+          <input id="aModel" type="text" list="modelListesi" maxlength="80" />
+          <datalist id="modelListesi">
+            <option value="nvidia/nemotron-3-super-120b-a12b"></option>
+            <option value="nvidia/nemotron-3.5-lightning-30b-a3b"></option>
+            <option value="nvidia/nemotron-nano-3-30b-a3b"></option>
+            <option value="nvidia/llama-3.1-nemotron-70b-instruct"></option>
+            <option value="mistralai/mistral-large-2-instruct"></option>
+            <option value="google/gemma-4-31b-it"></option>
+            <option value="deepseek-ai/deepseek-v4-flash-0731"></option>
+            <option value="openai/gpt-oss-20b"></option>
+          </datalist>
+        </div>
+        <div class="field">
+          <label for="aSicaklik">Sıcaklık</label>
+          <input id="aSicaklik" type="number" min="0" max="2" step="any" />
+        </div>
+        <div class="field">
+          <label for="aMaxToken">Yanıt uzunluğu</label>
+          <input id="aMaxToken" type="number" min="64" max="4096" />
+        </div>
+        <div class="field">
+          <label for="aGunluk">Kişi başı / gün</label>
+          <input id="aGunluk" type="number" min="1" max="500" />
+        </div>
+        <div class="field">
+          <label for="aToplam">Site geneli / gün</label>
+          <input id="aToplam" type="number" min="10" max="20000" />
+        </div>
+      </div>
+      <p class="ipuc">Sıcaklık düşükse tutarlı, yüksekse yaratıcı konuşur (0.6 iyi bir başlangıç). Günlük sınırlar maliyet freni.</p>
+
+      <div class="dugmeler">
+        <button class="btn" id="ajanKaydet" type="submit" style="width:auto">Ayarları kaydet</button>
+        <button class="pil" id="ajanTest" type="button">Test mesajı gönder</button>
+        <button class="pil" id="ajanLog" type="button">Sohbetleri getir</button>
+      </div>
+      <div class="msg" id="ajanMsg" role="alert"></div>
+      <div class="log" id="ajanLogKap"></div>
+    </form>
+  </div>
 </main>
 
 <script type="module">
@@ -225,6 +322,7 @@ async function panelAc() {
   $('girisEkrani').style.display = 'none';
   $('panel').classList.add('acik');
   canliSay();
+  ajanYukle();
   listeYukle();
   await eskiNabizTemizle();
 }
@@ -255,7 +353,7 @@ $('girisForm').addEventListener('submit', async (e) => {
   }
 });
 $('cikisBtn').addEventListener('click', async () => { await supa.auth.signOut(); location.reload(); });
-$('yenileBtn').addEventListener('click', () => { canliSay(); listeYukle(); });
+$('yenileBtn').addEventListener('click', () => { canliSay(); listeYukle(); ajanYukle(); });
 
 /* ---------- canlı ziyaretçi: son 75 sn'de nabız atanlar ---------- */
 async function canliSay() {
@@ -385,6 +483,97 @@ $('profilForm').addEventListener('submit', async (e) => {
   } finally {
     $('profilBtn').disabled = false;
   }
+});
+
+/* ---------- sohbet asistani ayarlari ---------- */
+const AJAN_UC = SUPA_URL + '/functions/v1/sohbet';
+const AJAN_HATA = {
+  'kapali': 'Asistan kapalı. Önce "Asistan sitede açık" kutusunu işaretleyip kaydedin.',
+  'anahtar-yok': 'NVIDIA anahtarı tanımlı değil. Supabase → Edge Functions → Secrets bölümüne NVIDIA_API_KEY ekleyin.',
+  'gunluk-sinir': 'Günlük kişi sınırına takıldı.',
+  'site-sinir': 'Site geneli günlük sınıra takıldı.',
+  'bos-yanit': 'Model boş yanıt döndü. Başka bir model deneyin.',
+  'ayar-yok': 'Ayar satırı bulunamadı.',
+  'sunucu': 'Sunucu hatası.'
+};
+
+async function ajanYukle() {
+  const { data, error } = await supa.from('agent_config').select('*').eq('id', 1).single();
+  if (error || !data) { goster($('ajanMsg'), 'Ayarlar okunamadı.', 'err'); return; }
+  $('aAcik').checked = data.enabled === true;
+  $('aAd').value = data.bot_name || '';
+  $('aPlaceholder').value = data.placeholder || '';
+  $('aGreeting').value = data.greeting || '';
+  $('aPrompt').value = data.system_prompt || '';
+  $('aModel').value = data.model || '';
+  $('aSicaklik').value = data.temperature;
+  $('aMaxToken').value = data.max_tokens;
+  $('aGunluk').value = data.daily_limit;
+  $('aToplam').value = data.total_limit;
+  ajanDurumYaz();
+}
+function ajanDurumYaz() {
+  $('aDurum').textContent = $('aAcik').checked
+    ? 'Ziyaretçiler sağ alttaki sohbet balonunu görüyor.'
+    : 'Kapalı: ziyaretçi sohbet balonunu görmüyor.';
+}
+$('aAcik').addEventListener('change', ajanDurumYaz);
+
+$('ajanForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  gizle($('ajanMsg'));
+  const btn = $('ajanKaydet');
+  btn.disabled = true;
+  try {
+    const { error } = await supa.from('agent_config').update({
+      enabled: $('aAcik').checked,
+      bot_name: $('aAd').value.trim(),
+      placeholder: $('aPlaceholder').value.trim(),
+      greeting: $('aGreeting').value.trim(),
+      system_prompt: $('aPrompt').value,
+      model: $('aModel').value.trim(),
+      temperature: Number($('aSicaklik').value),
+      max_tokens: Number($('aMaxToken').value),
+      daily_limit: Number($('aGunluk').value),
+      total_limit: Number($('aToplam').value),
+      updated_at: new Date().toISOString()
+    }).eq('id', 1);
+    if (error) throw error;
+    goster($('ajanMsg'), 'Ayarlar kaydedildi.', 'ok');
+    ajanDurumYaz();
+  } catch (err) {
+    goster($('ajanMsg'), 'Kaydedilemedi: ' + (err.message || err), 'err');
+  } finally { btn.disabled = false; }
+});
+
+$('ajanTest').addEventListener('click', async () => {
+  gizle($('ajanMsg'));
+  const b = $('ajanTest'); const eski = b.textContent;
+  b.textContent = 'Soruluyor…'; b.disabled = true;
+  try {
+    const r = await fetch(AJAN_UC, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'chat', sid: 'admin-test', messages: [{ role: 'user', content: 'Merhaba, kısaca kendini tanıtır mısın?' }] })
+    });
+    const v = await r.json().catch(() => ({}));
+    if (r.ok && v.reply) goster($('ajanMsg'), 'Model yanıtı: ' + v.reply, 'ok');
+    else goster($('ajanMsg'), (AJAN_HATA[v.hata] || 'Yanıt alınamadı.') + (v.detay ? ' — ' + v.detay : ''), 'err');
+  } catch (err) {
+    goster($('ajanMsg'), 'Bağlanılamadı: ' + (err.message || err), 'err');
+  } finally { b.textContent = eski; b.disabled = false; }
+});
+
+$('ajanLog').addEventListener('click', async () => {
+  const kap = $('ajanLogKap');
+  kap.innerHTML = '<div class="bos">Yükleniyor…</div>';
+  const { data, error } = await supa.from('chat_log').select('*').order('created_at', { ascending: false }).limit(60);
+  if (error) { kap.innerHTML = '<div class="bos">Okunamadı.</div>'; return; }
+  if (!data.length) { kap.innerHTML = '<div class="bos">Henüz sohbet yok.</div>'; return; }
+  kap.innerHTML = data.map(m =>
+    '<div class="log-m ' + (m.role === 'user' ? 'user' : 'assistant') + '">' +
+      '<span class="zaman">' + (m.role === 'user' ? 'Ziyaretçi' : 'Asistan') + ' · ' + tarih(m.created_at) + '</span>' +
+      kacir(m.content) +
+    '</div>').join('');
 });
 </script>
 </body>
