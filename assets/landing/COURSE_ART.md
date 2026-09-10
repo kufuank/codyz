@@ -1,0 +1,25 @@
+# Course illustrations
+
+Generated with built-in imagegen. Character/style reference: python-hero.jpg.
+JPEG delivery copies retain the generated compositions; quality 85.
+
+## roblox-hero.jpg
+
+Create one new Kodjitsu course website illustration, landscape 3:2. The supplied reference is ONLY a character and watercolor ink style reference. Preserve same brown haired boy and ponytail girl chibi identities, navy and coral solid outfits with plain belts used as clothing only. Premium hand painted watercolor with sumi-e brush shadows, mostly white paper background, sparse cherry blossom corners. Peaceful focused learning, not combat. Center all subjects with generous margins, no cropping. No text or letters, no watermark, no rainbow or rainbow stripes, no spectrum gradient, no colored rank ladder, no floor grids. The two children build a Roblox-style obstacle course on a laptop. Simple blocky toy-like avatar and three coral platforms emerge as a small miniature scene above the screen. Warm coral and navy accents. A small finish flag makes the goal clear. Show the whole laptop and children.
+
+## minecraft-hero.jpg
+
+Create one new Kodjitsu course website illustration, landscape 3:2. The supplied reference is ONLY a character and watercolor ink style reference. Preserve same brown haired boy and ponytail girl chibi identities, navy and coral solid outfits with plain belts used as clothing only. Premium hand painted watercolor with sumi-e brush shadows, mostly white paper background, sparse cherry blossom corners. Peaceful focused learning, not combat. Center all subjects with generous margins, no cropping. No text or letters, no watermark, no rainbow or rainbow stripes, no spectrum gradient, no colored rank ladder, no floor grids. The two children collaborate building a miniature Minecraft-inspired voxel house with blocky trees on a desk, a laptop nearby displays matching block shapes. Restrained moss green and warm stone blocks, navy and coral clothes. No snakes. Creative building lesson scene.
+
+## unity-hero.jpg
+
+Create one new Kodjitsu course website illustration, landscape 3:2. The supplied reference is ONLY a character and watercolor ink style reference. Preserve same brown haired boy and ponytail girl chibi identities, navy and coral solid outfits with plain belts used as clothing only. Premium hand painted watercolor with sumi-e brush shadows, mostly white paper background, sparse cherry blossom corners. Peaceful focused learning, not combat. Center all subjects with generous margins, no cropping. No text or letters, no watermark, no rainbow or rainbow stripes, no spectrum gradient, no colored rank ladder, no floor grids. The children develop a 3D game at a laptop, with a small floating low-poly island, a tiny friendly robot protagonist and a golden collectible above the computer as a miniature visualization. One child adjusts the scene while the other points to the robot path. Navy, warm gold, coral accents. No snakes. Clear distinct 3D game design subject.
+
+## matematik-hero.jpg
+
+Create one new Kodjitsu course website illustration, landscape 3:2. The supplied reference is ONLY a character and watercolor ink style reference. Preserve same brown haired boy and ponytail girl chibi identities, navy and coral solid outfits with plain belts used as clothing only. Premium hand painted watercolor with sumi-e brush shadows, mostly white paper background, sparse cherry blossom corners. Peaceful focused learning, not combat. Center all subjects with generous margins, no cropping. No text or letters, no watermark, no rainbow or rainbow stripes, no spectrum gradient, no colored rank ladder, no floor grids. The children explore mathematics at a desk: arranging wooden triangles into a square, a small balance scale with equal stacks of counters, a notebook and a laptop showing simple circles. Restrained teal, navy, coral accents. Math made tangible. No floating code scrolls or snakes. No graph or floor grid. No letters or numbers.
+
+## grafik-tasarim-hero.jpg
+
+Create one new Kodjitsu course website illustration, landscape 3:2. The supplied reference is ONLY a character and watercolor ink style reference. Preserve same brown haired boy and ponytail girl chibi identities, navy and coral solid outfits with plain belts used as clothing only. Premium hand painted watercolor with sumi-e brush shadows, mostly white paper background, sparse cherry blossom corners. Peaceful focused learning, not combat. Center all subjects with generous margins, no cropping. No text or letters, no watermark, no rainbow or rainbow stripes, no spectrum gradient, no colored rank ladder, no floor grids. The children design a poster together using a drawing tablet and laptop at a desk. The screen shows a bold graphic composition of two circles and one abstract flower, no text. A matching printed poster and pencil tools beside them. Restrained purple, navy, coral accents, color swatches limited to two colors. No snakes. Emphasize graphic composition and making a visual project.
+

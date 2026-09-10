@@ -11,6 +11,6 @@ function updatePrice() {
 }
 calculator.addEventListener('change', updatePrice);
 updatePrice();
-document.querySelector('#run').addEventListener('click', () => {
-  document.querySelector('#code-output').textContent = 'Benim ilk oyunum';
+document.querySelector('#run').addEventListener('click', (event) => {
+  document.querySelector('#code-output').textContent = event.currentTarget.dataset.result || 'Benim ilk oyunum';
 });

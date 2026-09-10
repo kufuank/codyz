@@ -81,6 +81,18 @@ Tüm tablolarda RLS açık.
 
 ## Yerel çalıştırma
 
+### Kurs sayfaları
+
+`kurslar/` altında Python, Roblox, Minecraft, Unity, Matematik ve Grafik Tasarım için
+statik landing page bulunur. Ortak stiller `kurslar/kurs.css`, fiyat hesaplayıcı ve
+ders örneği etkileşimi `kurslar/kurs.js` içindedir. Görseller Git ile takip edilen
+`assets/landing/` klasöründedir; `assets/sahne/v3/` yayınlanmaz.
+
+Python dışındaki beş sayfanın içerikleri `scripts/course-pages.js` içindedir.
+İçerik değişikliğinden sonra `node scripts/course-pages.js` çalıştırılıp üretilen
+HTML dosyaları da commit edilir. Bu yardımcı script Python sayfasının düzenini
+şablon olarak kullanır; GitHub Pages üzerinde build adımı gerekmez.
+
 ```bash
 node scripts/serve.js
 ```
