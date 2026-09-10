@@ -244,7 +244,9 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
         <label class="cip"><input type="checkbox" value="Minecraft" /><span>Minecraft</span></label>
         <label class="cip"><input type="checkbox" value="Unity" /><span>Unity</span></label>
         <label class="cip"><input type="checkbox" value="Matematik" /><span>Matematik</span></label>
-        <label class="cip"><input type="checkbox" value="Grafik Tasarım" /><span>Grafik Tasarım</span></label>
+        <label class="cip"><input type="checkbox" value="Tasarım" /><span>Tasarım</span></label>
+        <label class="cip"><input type="checkbox" value="FunTech" /><span>FunTech</span></label>
+        <label class="cip"><input type="checkbox" value="Soft Skills" /><span>Soft Skills</span></label>
       </div>
 
       <h2 class="bolum">Uygun günler</h2>
@@ -315,12 +317,16 @@ h1,h2{font-family:'Sora',sans-serif;margin:0;letter-spacing:-.02em;line-height:1
   /* ana sayfadan gelen on secim: ?kurs= kurs cipini, ?program= (eski) ilgi alanini isaretler */
   const q = new URLSearchParams(location.search);
   const istenen = q.get('program');
-  const kursIstenen = q.get('kurs');
+  /* eski baglantilar: ?kurs=Grafik Tasarım -> Tasarım */
+  const kursTakma = { 'Grafik Tasarım': 'Tasarım' };
+  const kursHam = q.get('kurs');
+  const kursIstenen = kursHam ? (kursTakma[kursHam] || kursHam) : null;
   const ilgiEsleme = {
     'Oyun Yapımcısı': 'Yazılım', 'Yazılımcı': 'Yazılım', 'Tasarımcı': 'Tasarım',
     'İçerik Üretici Okulu': 'Tasarım', 'Kodla Matematik': 'Matematik',
     'Roblox': 'Yazılım', 'Minecraft': 'Yazılım', 'Python': 'Yazılım', 'Unity': 'Yazılım',
-    'Matematik': 'Matematik', 'Grafik Tasarım': 'Tasarım'
+    'Matematik': 'Matematik', 'Tasarım': 'Tasarım', 'Grafik Tasarım': 'Tasarım',
+    'FunTech': 'Yazılım', 'Soft Skills': 'Yazılım'
   };
   if (kursIstenen) {
     const kutu = [...$('kurslar').querySelectorAll('input')].find(i => i.value === kursIstenen);

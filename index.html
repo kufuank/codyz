@@ -11,8 +11,8 @@
 <meta property="og:url" content="https://kodjitsu.com/" />
 <meta property="og:site_name" content="Kodjitsu" />
 <meta property="og:locale" content="tr_TR" />
-<meta property="og:title" content="Kodjitsu — Araç değişir, iş kalır." />
-<meta property="og:description" content="12 hafta sonunda çocuğunuzun elinde kendi işi olur. Kurs değil, program." />
+<meta property="og:title" content="Kodjitsu — Çocuklar için kodlama, tasarım ve yapay zekâ okulu" />
+<meta property="og:description" content="8–16 yaş için canlı, küçük gruplu dersler. Çocuğunuz oyun, yazılım, tasarım ve yapay zekâyla kendi işini üretir." />
 <meta property="og:image" content="https://kodjitsu.com/assets/sahne/rail/hero-poster.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://kodjitsu.com/assets/sahne/rail/hero-poster.jpg" />
@@ -123,6 +123,21 @@ p{margin:0}
 }
 .mark:hover{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.mark{animation:none}}
+
+/* ---------- açılış: başlangıç kursu bölümleri ---------- */
+.bolumler{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1.6rem;pointer-events:auto}
+.bolum{display:flex;flex-direction:column;gap:4px;padding:1.05em 1.15em;border-radius:18px;
+  text-decoration:none;color:var(--ink);border:1.5px solid rgba(15,15,15,.14);
+  background:rgba(255,255,255,.78);backdrop-filter:blur(8px);
+  transition:border-color .22s ease,transform .22s ease,box-shadow .22s ease}
+.bolum:hover{border-color:var(--acc);transform:translateY(-3px);box-shadow:0 14px 30px -22px rgba(15,15,15,.5)}
+.bolum__et{font-family:'Sora';font-weight:700;font-size:.68rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--acc)}
+.bolum b{font-family:'Sora';font-weight:800;font-size:1.35rem;letter-spacing:-.025em;line-height:1.1}
+.bolum__alt{font-size:.86rem;color:var(--ink-2);line-height:1.45}
+.bolum__git{margin-top:.35rem;font-family:'Sora';font-weight:700;font-size:.82rem;color:var(--acc)}
+@media(max-width:860px){.bolumler{grid-template-columns:1fr;gap:10px;margin-top:1.2rem}
+  .bolum{padding:.9em 1em}.bolum b{font-size:1.2rem}}
 
 /* ---------- ilerleme çubuğu ---------- */
 .bar{position:fixed;z-index:5;left:0;top:0;height:3px;width:0;background:var(--mercan)}
@@ -385,11 +400,24 @@ p{margin:0}
 <a class="login" href="app/">Giriş</a>
 
 <div class="layer">
-  <!-- DURAK 1 · 0–4 sn · AÇILIŞ — Kodjitsu nedir -->
+  <!-- DURAK 1 · 0–4 sn · AÇILIŞ — başlangıç kursları -->
   <section class="station" data-stop="0" style="--acc:#0F0F0F">
     <span class="eyebrow">Kodjitsu · 8–16 yaş</span>
-    <h1>Araç değişir,<br>iş kalır.</h1>
-    <p class="lede">Kodjitsu; çocuğunuzun oyun, yazılım, tasarım ve yapay zekâyla kendi işini ürettiği bir okul. Canlı derste kendi yapar; elinde işi kalır.</p>
+    <h1>Nereden<br>başlanır?</h1>
+    <div class="bolumler">
+      <a class="bolum" href="kurslar/funtech/" style="--acc:#FF5A2D">
+        <span class="bolum__et">Başlangıç · 60 dk</span>
+        <b>FunTech</b>
+        <span class="bolum__alt">Teknolojiyle ilk tanışma. Bilgisayarı güvenle kullanır, bir fikri adım adım kurar.</span>
+        <span class="bolum__git">Ayrıntılı bilgi →</span>
+      </a>
+      <a class="bolum" href="kurslar/softskill/" style="--acc:#B07500">
+        <span class="bolum__et">Seviye 2–4 · 60 dk</span>
+        <b>Soft Skills</b>
+        <span class="bolum__alt">Fikrini anlatmayı, dinlemeyi ve takımla çalışmayı öğrenir; sunum yapar.</span>
+        <span class="bolum__git">Ayrıntılı bilgi →</span>
+      </a>
+    </div>
     <div class="cta">
       <a class="btn" style="--acc:#0F0F0F" href="kayit/">Kayıt ol</a>
       <button class="btn btn--ghost" data-ac="nasil">Nasıl işliyor?</button>
@@ -512,7 +540,7 @@ p{margin:0}
   <!-- DURAK 6 · 24 sn · KURS — Grafik Tasarım -->
   <section class="station" data-stop="5" style="--acc:#7C3AED">
     <span class="eyebrow">Kurs · Tasarım</span>
-    <h2>Grafik Tasarım</h2>
+    <h2>Tasarım</h2>
     <p class="story">Afişten oyun kapağına, dijital çizimden kendi markasına. Çocuk görsel dilini kurar; portfolyosu birikir.</p>
     <div class="hesap">
       <div class="hesap-grup" data-rol="sinif">
@@ -531,9 +559,9 @@ p{margin:0}
       <div class="hesap-alt"><div class="hesap-toplam"></div><div class="hesap-detay"></div></div>
     </div>
     <div class="cta">
-      <a class="btn" href="kayit/?kurs=Grafik%20Tasarım">Kayıt ol</a>
-      <a class="btn btn--ghost" href="kurslar/grafik-tasarim/">Ayrıntılı bilgi</a>
-      <button class="btn btn--ghost" data-ac="form" data-niyet="tekders" data-program="Grafik Tasarım">Ücretsiz tanışma dersi</button>
+      <a class="btn" href="kayit/?kurs=Tasarım">Kayıt ol</a>
+      <a class="btn btn--ghost" href="kurslar/tasarim/">Ayrıntılı bilgi</a>
+      <button class="btn btn--ghost" data-ac="form" data-niyet="tekders" data-program="Tasarım">Ücretsiz tanışma dersi</button>
     </div>
   </section>
 </div>
@@ -592,7 +620,9 @@ p{margin:0}
               <option>Python</option>
               <option>Unity</option>
               <option>Matematik</option>
-              <option>Grafik Tasarım</option>
+              <option>Tasarım</option>
+              <option>FunTech</option>
+              <option>Soft Skills</option>
               <option value="kararsiz">Birlikte seçelim</option>
             </select>
           </div>
