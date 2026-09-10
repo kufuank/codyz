@@ -23,3 +23,29 @@ Create one new Kodjitsu course website illustration, landscape 3:2. The supplied
 
 Create one new Kodjitsu course website illustration, landscape 3:2. The supplied reference is ONLY a character and watercolor ink style reference. Preserve same brown haired boy and ponytail girl chibi identities, navy and coral solid outfits with plain belts used as clothing only. Premium hand painted watercolor with sumi-e brush shadows, mostly white paper background, sparse cherry blossom corners. Peaceful focused learning, not combat. Center all subjects with generous margins, no cropping. No text or letters, no watermark, no rainbow or rainbow stripes, no spectrum gradient, no colored rank ladder, no floor grids. The children design a poster together using a drawing tablet and laptop at a desk. The screen shows a bold graphic composition of two circles and one abstract flower, no text. A matching printed poster and pencil tools beside them. Restrained purple, navy, coral accents, color swatches limited to two colors. No snakes. Emphasize graphic composition and making a visual project.
 
+
+## funtech-hero.jpg
+
+Higgsfield · nano_banana_pro · referans: python-hero.jpg. Create one new Kodjitsu course website illustration, landscape 3:2. The supplied reference is ONLY a character and watercolor ink style reference. Preserve same brown haired boy and ponytail girl chibi identities, navy and coral solid outfits with plain belts used as clothing only. Premium hand painted watercolor with sumi-e brush shadows, mostly white paper background, sparse cherry blossom corners. Peaceful focused learning, not combat. Center all subjects with generous margins, no cropping. No text or letters, no watermark, no rainbow or rainbow stripes, no spectrum gradient, no colored rank ladder, no floor grids. First steps with technology for the youngest learners: the two children sit at a low desk exploring a laptop and a tablet together, arranging a few large simple coral and navy shapes into a friendly pattern on the screen, a computer mouse and a small stack of paper beside them. Curious and gentle beginner mood. Restrained coral, navy and soft sky blue accents. No snakes, no code scrolls, no game blocks.
+
+## softskill-hero.jpg
+
+Higgsfield · nano_banana_pro · referans: python-hero.jpg. Create one new Kodjitsu course website illustration, landscape 3:2. The supplied reference is ONLY a character and watercolor ink style reference. Preserve same brown haired boy and ponytail girl chibi identities, navy and coral solid outfits with plain belts used as clothing only. Premium hand painted watercolor with sumi-e brush shadows, mostly white paper background, sparse cherry blossom corners. Peaceful focused learning, not combat. Center all subjects with generous margins, no cropping. No text or letters, no watermark, no rainbow or rainbow stripes, no spectrum gradient, no colored rank ladder, no floor grids. Communication and teamwork lesson: the girl stands presenting beside a small easel board showing three simple abstract shapes, while the boy sits listening attentively and raising his hand to speak. Two empty rounded speech bubbles float above them, completely blank with no text inside. Warm, encouraging, respectful classroom mood. Restrained coral, navy and soft teal accents. No laptops, no snakes, no game blocks.
+
+---
+
+## Paylaşılabilir kurs kartları
+
+`node scripts/kurs-kartlari.js` → her kurs için 2 sayfa (1080×1350, 4:5):
+`assets/kartlar/<slug>.png` kapak kartı + `<slug>-detay.png` ders detayı.
+Hepsi tek dosyada: `assets/kartlar/Kodjitsu-Kurs-Katalogu.pdf` (14 sayfa).
+Kart tipografisi site ile aynı (Sora + Inter); fontlar `assets/fonts/kart-fontlari.css`
+içinde base64 gömülüdür, basım ağdan bağımsızdır. Kart metinleri script içinde tanımlıdır.
+
+Kurs bilgileri (yaş, ders adedi, araçlar, projeler) "Kurslarımız" dokümanından alınır;
+doküman Kodland kaynaklı olduğu için metinler kopyalanmaz, Kodjitsu diliyle yeniden yazılır.
+Dokümanda ayrıntısı olmayan kurslar script içinde `taslak: true` ile işaretlidir.
+
+Yatay form: `assets/kartlar/yatay/<slug>-yatay.png` (2560×1440, 16:9) — kapak ve detay
+bilgisinin tamamı tek karede. Hepsi: `yatay/Kodjitsu-Kurs-Katalogu-Yatay.pdf` (7 sayfa).
+İçeriği yoğun kurslarda sağ sütun `zoom` ile otomatik sığdırılır.
